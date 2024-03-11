@@ -1,0 +1,143 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 65.8.248.122:443...
+* Connected to api.todoist.com (65.8.248.122) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.2 (IN), TLS header, Finished (20):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [4992 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* TLSv1.2 (OUT), TLS header, Finished (20):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* Using Stream ID: 1 (easy handle 0x55b27419ceb0)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+> POST /rest/v2/projects HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.81.0
+> accept: */*
+> authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
+> content-type: application/json
+> content-length: 28
+> 
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* We are completely uploaded and fine
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [124 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 200 
+< content-type: application/json
+< content-length: 307
+< date: Mon, 11 Mar 2024 22:32:11 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=818992a05c2f4a358f671f315b04a462; Expires=Thu, 09-Mar-2034 22:32:10 GMT; Secure; Path=/; SameSite=None
+< set-cookie: tduser=v4.public.eyJ1c2VyX2lkIjogNDg0Njk0MjEsICJleHAiOiAiMjAyNC0wMy0yNVQyMjozMjoxMSswMDowMCJ9XHbAkCzRPTFpFbgLI5buk763Jk5YKa1EFHpe-7XFUw4C7X9TwXQ9YwYacTM68YzFFTTlrD6QyuOpQ9cldLNVAg; Domain=.todoist.com; Expires=Mon, 25-Mar-2024 22:32:11 GMT; Max-Age=1209600; Secure; HttpOnly; Path=/
+< set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:11 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 51f43f7212ad8e67ae9503b19380b67c.cloudfront.net (CloudFront)
+< x-amz-cf-pop: MIA3-C5
+< x-amz-cf-id: h0QJio6l-rmc_szkNncBw1K_2lqseOsT8qxIYuwtCEPrMR0e2AcEmA==
+< 
+{ [307 bytes data]
+100   335  100   307  100    28    377     34 --:--:-- --:--:-- --:--:--   412
+* Connection #0 to host api.todoist.com left intact
+HTTP/2 200 
+content-type: application/json
+content-length: 307
+date: Mon, 11 Mar 2024 22:32:11 GMT
+access-control-allow-credentials: false
+access-control-allow-origin: *
+cache-control: no-cache
+referrer-policy: strict-origin-when-cross-origin
+server: gunicorn
+set-cookie: csrf=818992a05c2f4a358f671f315b04a462; Expires=Thu, 09-Mar-2034 22:32:10 GMT; Secure; Path=/; SameSite=None
+set-cookie: tduser=v4.public.eyJ1c2VyX2lkIjogNDg0Njk0MjEsICJleHAiOiAiMjAyNC0wMy0yNVQyMjozMjoxMSswMDowMCJ9XHbAkCzRPTFpFbgLI5buk763Jk5YKa1EFHpe-7XFUw4C7X9TwXQ9YwYacTM68YzFFTTlrD6QyuOpQ9cldLNVAg; Domain=.todoist.com; Expires=Mon, 25-Mar-2024 22:32:11 GMT; Max-Age=1209600; Secure; HttpOnly; Path=/
+set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:11 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+x-cache: Miss from cloudfront
+via: 1.1 51f43f7212ad8e67ae9503b19380b67c.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-C5
+x-amz-cf-id: h0QJio6l-rmc_szkNncBw1K_2lqseOsT8qxIYuwtCEPrMR0e2AcEmA==
+
+{
+	"id": "2330077031",
+	"parent_id": null,
+	"order": 4,
+	"color": "charcoal",
+	"name": "New Project 10123",
+	"comment_count": 0,
+	"is_shared": false,
+	"is_favorite": false,
+	"is_inbox_project": false,
+	"is_team_inbox": false,
+	"url": "https://todoist.com/showProject?id=2330077031",
+	"view_style": "list"
+}

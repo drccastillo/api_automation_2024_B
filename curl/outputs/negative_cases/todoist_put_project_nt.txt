@@ -1,0 +1,526 @@
+Note: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 65.8.248.122:443...
+* Connected to api.todoist.com (65.8.248.122) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.2 (IN), TLS header, Finished (20):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [4992 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* TLSv1.2 (OUT), TLS header, Finished (20):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* Using Stream ID: 1 (easy handle 0x5627380b9eb0)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+> POST /rest/v2/projects/INVALID_PROJECT_ID HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.81.0
+> accept: */*
+> authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
+> content-type: application/json
+> content-length: 37
+> 
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* We are completely uploaded and fine
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [124 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 400 
+< content-type: text/plain; charset=utf-8
+< content-length: 22
+< date: Mon, 11 Mar 2024 22:32:38 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=fa5a0daf501f4289ba4a8198eff9ed06; Expires=Thu, 09-Mar-2034 22:32:38 GMT; Secure; Path=/; SameSite=None
+< set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:38 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Error from cloudfront
+< via: 1.1 e6bae4d10173db66ba5ca34e39baf8fa.cloudfront.net (CloudFront)
+< x-amz-cf-pop: MIA3-C5
+< x-amz-cf-id: g2GFFenSroF43ejMGcIWyQLJfLN8W6oQ9GHMx5jvn-7Q1S4QzvO-nQ==
+< 
+{ [22 bytes data]
+100    59  100    22  100    37     39     66 --:--:-- --:--:-- --:--:--   105
+* Connection #0 to host api.todoist.com left intact
+HTTP/2 400 
+content-type: text/plain; charset=utf-8
+content-length: 22
+date: Mon, 11 Mar 2024 22:32:38 GMT
+access-control-allow-credentials: false
+access-control-allow-origin: *
+cache-control: no-cache
+referrer-policy: strict-origin-when-cross-origin
+server: gunicorn
+set-cookie: csrf=fa5a0daf501f4289ba4a8198eff9ed06; Expires=Thu, 09-Mar-2034 22:32:38 GMT; Secure; Path=/; SameSite=None
+set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:38 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+x-cache: Error from cloudfront
+via: 1.1 e6bae4d10173db66ba5ca34e39baf8fa.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-C5
+x-amz-cf-id: g2GFFenSroF43ejMGcIWyQLJfLN8W6oQ9GHMx5jvn-7Q1S4QzvO-nQ==
+
+Invalid argument valueNote: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 65.8.248.122:443...
+* Connected to api.todoist.com (65.8.248.122) port 443 (#0)
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0* ALPN, offering h2
+* ALPN, offering http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.2 (IN), TLS header, Finished (20):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [4992 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* TLSv1.2 (OUT), TLS header, Finished (20):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* Using Stream ID: 1 (easy handle 0x55979e996eb0)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+> POST /rest/v2/projects/2330077050 HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.81.0
+> accept: */*
+> authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
+> content-type: application/json
+> content-length: 2
+> 
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* We are completely uploaded and fine
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [124 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 400 
+< content-type: text/plain; charset=utf-8
+< content-length: 63
+< date: Mon, 11 Mar 2024 22:32:38 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=1d8a5fb8993648cb8c96636cae316861; Expires=Thu, 09-Mar-2034 22:32:38 GMT; Secure; Path=/; SameSite=None
+< set-cookie: tduser=v4.public.eyJ1c2VyX2lkIjogNDg0Njk0MjEsICJleHAiOiAiMjAyNC0wMy0yNVQyMjozMjozOCswMDowMCJ9ksq1-QuJRPD60dj0I9N6UbYHRRmLDlZOWNciJ4FD_sUahcdstC0U8sxzQBcHUJHwSUtev6YyhfLYKyURs1eNAQ; Domain=.todoist.com; Expires=Mon, 25-Mar-2024 22:32:38 GMT; Max-Age=1209600; Secure; HttpOnly; Path=/
+< set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:38 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Error from cloudfront
+< via: 1.1 e6bae4d10173db66ba5ca34e39baf8fa.cloudfront.net (CloudFront)
+< x-amz-cf-pop: MIA3-C5
+< x-amz-cf-id: yP1ZNGx9Zq9EOKCsMUJcETy5o6EZ1-uq5eO9EJG2xJpNR3YxvZWZLQ==
+< 
+{ [63 bytes data]
+100    65  100    63  100     2    123      3 --:--:-- --:--:-- --:--:--   127
+* Connection #0 to host api.todoist.com left intact
+HTTP/2 400 
+content-type: text/plain; charset=utf-8
+content-length: 63
+date: Mon, 11 Mar 2024 22:32:38 GMT
+access-control-allow-credentials: false
+access-control-allow-origin: *
+cache-control: no-cache
+referrer-policy: strict-origin-when-cross-origin
+server: gunicorn
+set-cookie: csrf=1d8a5fb8993648cb8c96636cae316861; Expires=Thu, 09-Mar-2034 22:32:38 GMT; Secure; Path=/; SameSite=None
+set-cookie: tduser=v4.public.eyJ1c2VyX2lkIjogNDg0Njk0MjEsICJleHAiOiAiMjAyNC0wMy0yNVQyMjozMjozOCswMDowMCJ9ksq1-QuJRPD60dj0I9N6UbYHRRmLDlZOWNciJ4FD_sUahcdstC0U8sxzQBcHUJHwSUtev6YyhfLYKyURs1eNAQ; Domain=.todoist.com; Expires=Mon, 25-Mar-2024 22:32:38 GMT; Max-Age=1209600; Secure; HttpOnly; Path=/
+set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:38 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+x-cache: Error from cloudfront
+via: 1.1 e6bae4d10173db66ba5ca34e39baf8fa.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-C5
+x-amz-cf-id: yP1ZNGx9Zq9EOKCsMUJcETy5o6EZ1-uq5eO9EJG2xJpNR3YxvZWZLQ==
+
+At least one of name, color or is_favorite fields should be setNote: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 65.8.248.122:443...
+* Connected to api.todoist.com (65.8.248.122) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.2 (IN), TLS header, Finished (20):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [4992 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* TLSv1.2 (OUT), TLS header, Finished (20):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* Using Stream ID: 1 (easy handle 0x55b2c603deb0)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+> POST /rest/v2/projects/2330077050 HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.81.0
+> accept: */*
+> authorization: Bearer INVALID_TOKEN
+> content-length: 37
+> content-type: application/x-www-form-urlencoded
+> 
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* We are completely uploaded and fine
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [124 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 401 
+< content-type: text/plain; charset=utf-8
+< content-length: 9
+< date: Mon, 11 Mar 2024 22:32:39 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=53a4ede9dfe6466f8afa122f69b1f071; Expires=Thu, 09-Mar-2034 22:32:39 GMT; Secure; Path=/; SameSite=None
+< set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:39 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Error from cloudfront
+< via: 1.1 53df790f50283121a495841b9963ea24.cloudfront.net (CloudFront)
+< x-amz-cf-pop: MIA3-C5
+< x-amz-cf-id: 13rxx5QJKqucW0eeeH3-R0OU8HSpTZzsqbh_4Wr2t6DCOO9dFdYI7A==
+< 
+{ [9 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+100    46  100     9  100    37     14     61 --:--:-- --:--:-- --:--:--    76100    46  100     9  100    37     14     61 --:--:-- --:--:-- --:--:--    76
+* Connection #0 to host api.todoist.com left intact
+HTTP/2 401 
+content-type: text/plain; charset=utf-8
+content-length: 9
+date: Mon, 11 Mar 2024 22:32:39 GMT
+access-control-allow-credentials: false
+access-control-allow-origin: *
+cache-control: no-cache
+referrer-policy: strict-origin-when-cross-origin
+server: gunicorn
+set-cookie: csrf=53a4ede9dfe6466f8afa122f69b1f071; Expires=Thu, 09-Mar-2034 22:32:39 GMT; Secure; Path=/; SameSite=None
+set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:39 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+x-cache: Error from cloudfront
+via: 1.1 53df790f50283121a495841b9963ea24.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-C5
+x-amz-cf-id: 13rxx5QJKqucW0eeeH3-R0OU8HSpTZzsqbh_4Wr2t6DCOO9dFdYI7A==
+
+ForbiddenNote: Unnecessary use of -X or --request, POST is already inferred.
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 65.8.248.122:443...
+* Connected to api.todoist.com (65.8.248.122) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+*  CAfile: /etc/ssl/certs/ca-certificates.crt
+*  CApath: /etc/ssl/certs
+* TLSv1.0 (OUT), TLS header, Certificate Status (22):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+} [512 bytes data]
+* TLSv1.2 (IN), TLS header, Certificate Status (22):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+{ [122 bytes data]
+* TLSv1.2 (IN), TLS header, Finished (20):
+{ [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+{ [19 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+{ [4992 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+{ [264 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+{ [36 bytes data]
+* TLSv1.2 (OUT), TLS header, Finished (20):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+} [1 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+} [36 bytes data]
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multiplexing
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* Using Stream ID: 1 (easy handle 0x56503ec77eb0)
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+> POST /rest/v2/projects/2330077050 HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.81.0
+> accept: */*
+> authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
+> content-type: application/json
+> content-length: 37
+> 
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* We are completely uploaded and fine
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+{ [124 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+* TLSv1.2 (OUT), TLS header, Supplemental data (23):
+} [5 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+< HTTP/2 200 
+< content-type: application/json
+< content-length: 316
+< date: Mon, 11 Mar 2024 22:32:40 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=a56783af168f4cac8d93c28bee142333; Expires=Thu, 09-Mar-2034 22:32:39 GMT; Secure; Path=/; SameSite=None
+< set-cookie: tduser=v4.public.eyJ1c2VyX2lkIjogNDg0Njk0MjEsICJleHAiOiAiMjAyNC0wMy0yNVQyMjozMjo0MCswMDowMCJ9-Jy6Yj0RZ4xraE5VAqq-ks6Ky63MpW9jfAlDYupcsXImK622NyW6L6lhccsd9HK4sgSm-cGgbQ0spU2JLlsGAg; Domain=.todoist.com; Expires=Mon, 25-Mar-2024 22:32:40 GMT; Max-Age=1209600; Secure; HttpOnly; Path=/
+< set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:40 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 83e0cde0838dfbbd5f585d5a8b60be2e.cloudfront.net (CloudFront)
+< x-amz-cf-pop: MIA3-C5
+< x-amz-cf-id: pHJhTnk2ufIsLSNaeoSQfrAHN7pAXxH045G6PBmzYFokBBpG2tfSZg==
+< 
+{ [316 bytes data]
+* TLSv1.2 (IN), TLS header, Supplemental data (23):
+{ [5 bytes data]
+100   353  100   316  100    37    535     62 --:--:-- --:--:-- --:--:--   598
+* Connection #0 to host api.todoist.com left intact
+HTTP/2 200 
+content-type: application/json
+content-length: 316
+date: Mon, 11 Mar 2024 22:32:40 GMT
+access-control-allow-credentials: false
+access-control-allow-origin: *
+cache-control: no-cache
+referrer-policy: strict-origin-when-cross-origin
+server: gunicorn
+set-cookie: csrf=a56783af168f4cac8d93c28bee142333; Expires=Thu, 09-Mar-2034 22:32:39 GMT; Secure; Path=/; SameSite=None
+set-cookie: tduser=v4.public.eyJ1c2VyX2lkIjogNDg0Njk0MjEsICJleHAiOiAiMjAyNC0wMy0yNVQyMjozMjo0MCswMDowMCJ9-Jy6Yj0RZ4xraE5VAqq-ks6Ky63MpW9jfAlDYupcsXImK622NyW6L6lhccsd9HK4sgSm-cGgbQ0spU2JLlsGAg; Domain=.todoist.com; Expires=Mon, 25-Mar-2024 22:32:40 GMT; Max-Age=1209600; Secure; HttpOnly; Path=/
+set-cookie: todoistd="/CUdA09psYiwY7pwgn9sRGC/RQQ=?"; Domain=.todoist.com; Expires=Tue, 11-Mar-2025 22:32:40 GMT; Max-Age=31536000; Secure; HttpOnly; Path=/; SameSite=None
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+vary: Accept-Encoding
+x-cache: Miss from cloudfront
+via: 1.1 83e0cde0838dfbbd5f585d5a8b60be2e.cloudfront.net (CloudFront)
+x-amz-cf-pop: MIA3-C5
+x-amz-cf-id: pHJhTnk2ufIsLSNaeoSQfrAHN7pAXxH045G6PBmzYFokBBpG2tfSZg==
+
+{
+	"id": "2330077050",
+	"parent_id": null,
+	"order": 4,
+	"color": "charcoal",
+	"name": "Updated Project Name 15876",
+	"comment_count": 0,
+	"is_shared": false,
+	"is_favorite": false,
+	"is_inbox_project": false,
+	"is_team_inbox": false,
+	"url": "https://todoist.com/showProject?id=2330077050",
+	"view_style": "list"
+}

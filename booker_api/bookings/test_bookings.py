@@ -63,15 +63,14 @@ class TestBookings:
         assert response["status_code"] == 200
         LOGGER.debug("list booking %s", self.bookings_list)
 
-    def test_delete_booking(self, create_booking, log_test_names):
+    def test_delete_booking(self, create_booking_wo_delete, log_test_names):
         """
         Test delete booking
         """
         LOGGER.info("Test delete booking")
-        url_delete_booking = f"{self.url_booker_bookings}/{create_booking}"
-        LOGGER.info("booking Id to be deleted : %s", create_booking)
+        url_delete_booking = f"{self.url_booker_bookings}/{create_booking_wo_delete}"
+        LOGGER.info("booking Id to be deleted : %s", create_booking_wo_delete)
         response = self.rest_client.request("delete", url_delete_booking)
-
         assert response["status_code"] == 201
 
 

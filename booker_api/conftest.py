@@ -9,6 +9,28 @@ from utils.logger import get_logger
 LOGGER = get_logger(__name__, logging.DEBUG)
 
 
+
+
+@pytest.fixture()
+def create_booking_wo_delete():
+    booking_id = None
+    rest_client = RestClient()
+    LOGGER.info("Fixture create booking")
+    body_booking = {
+        "firstname": "Jim from Fixture",
+        "lastname": "Brown from Fixture",
+        "totalprice": 111,
+        "depositpaid": "true",
+        "bookingdates": {"checkin": "2023-01-01", "checkout": "2024-01-01"},
+        "additionalneeds": "Breakfast from Fixture",
+    }
+    url_booker_bookings = f"{url_booker}/booking"
+    response = rest_client.request("post", url_booker_bookings, body=body_booking)
+    if response["status_code"] == 200:
+        booking_id = response["body"]["bookingid"]
+
+    return booking_id
+
 @pytest.fixture()
 def create_booking():
     booking_id = None

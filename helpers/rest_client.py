@@ -1,5 +1,6 @@
 import json
 import logging
+
 import requests
 
 from config.config import headers_booker
@@ -53,10 +54,10 @@ class RestClient:
 
         except requests.exceptions.HTTPError as http_error:
             LOGGER.error("HTTP Error: %s", http_error)
-            response_dict["status_code"] = response.status_code if response else None
+            #response_dict["status_code"] = response.status_code if response else None
         except requests.exceptions.RequestException as request_error:
             LOGGER.error("Request Error: %s", request_error)
-            response_dict["status_code"] = response.status_code if response else None
+            #response_dict["status_code"] = response.status_code if response else None
         finally:
             if response:
                 response.close()

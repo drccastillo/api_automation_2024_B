@@ -17,7 +17,7 @@ class TestBookings:
         cls.rest_client = RestClient()
         cls.url_booker_bookings = f"{url_booker}/booking"
         response = cls.rest_client.request("get", cls.url_booker_bookings)
-        cls.booking_id = response.json()[0]["bookingid"]
+        cls.booking_id = response["body"][0]["bookingid"]
         LOGGER.debug("Booking ID: %s", cls.booking_id)
         cls.bookings_list = []
 
@@ -28,7 +28,7 @@ class TestBookings:
         LOGGER.info("Test get all bookings")
         response = self.rest_client.request("get", self.url_booker_bookings)
 
-        assert response.status_code == 200
+        assert response["status_code"] == 200
 
     def test_get_booking(self, log_test_names):
         """
@@ -38,7 +38,7 @@ class TestBookings:
         url_get_booking = f"{self.url_booker_bookings}/{self.booking_id}"
         response = self.rest_client.request("get", url_get_booking)
 
-        assert response.status_code == 200
+        assert response["status_code"] == 200
 
     def test_create_booking(self, log_test_names):
         """
@@ -57,13 +57,12 @@ class TestBookings:
             "additionalneeds" : "Breakfast from test"
         }
         response = self.rest_client.request("post", self.url_booker_bookings, body=body_booking)
-        if response.status_code == 200:
-            self.bookings_list.append(response.json()["bookingid"])
+        if response["status_code"] == 200:
+            self.bookings_list.append(response["body"]["bookingid"])
 
-        assert response.status_code == 200
+        assert response["status_code"] == 200
         LOGGER.debug("list booking %s", self.bookings_list)
 
-     ##
     def test_delete_booking(self, create_booking, log_test_names):
         """
         Test delete booking
@@ -73,7 +72,8 @@ class TestBookings:
         LOGGER.info("booking Id to be deleted : %s", create_booking)
         response = self.rest_client.request("delete", url_delete_booking)
 
-        assert response.status_code == 204
+        assert response["status_code"] == 201
+
 
     def test_update_project(self, create_booking, log_test_names):
         """
@@ -98,7 +98,7 @@ class TestBookings:
         # call to endpoint:
         response = self.rest_client.request("put", url_update_booking, body=body_update_booking)
 
-        assert response.status_code == 200           
+        assert response["status_code"] == 200           
 
     @classmethod
     def teardown_class(cls):
@@ -110,5 +110,5 @@ class TestBookings:
         for booking_id in cls.bookings_list:
             url_delete_booking = f"{cls.url_booker_bookings}/{booking_id}"
             response = cls.rest_client.request("delete", url_delete_booking)
-            if response.status_code == 201:
+            if response["status_code"] == 201:
                 LOGGER.info("booking Id deleted : %s", booking_id)

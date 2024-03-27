@@ -4,6 +4,7 @@
 test_logger.py
     test file to test configuration of logger file levels
 """
+
 import logging
 import unittest
 
@@ -16,6 +17,7 @@ class TestLogger(unittest.TestCase):
     """
     Class to test get logger method
     """
+
     def test_logging(self):
         """
         Method to show log levels

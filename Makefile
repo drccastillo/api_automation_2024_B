@@ -9,7 +9,7 @@ test:
 	python -m pytest -v booker_api/bookings/test_bookings.py
 
 format:
-	black *.py
+	python -m black **/*.py
 
 lint:
 	pylint unittests/test_logger.py

@@ -1,0 +1,22 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/report/"
+    },
+    "response": {
+        "body": {
+            "report": [
+                {
+                    "start": "2022-02-01",
+                    "end": "2022-02-05",
+                    "title": "James Dean - Room: 101"
+                }
+            ]
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

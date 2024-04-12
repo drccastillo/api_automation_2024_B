@@ -1,0 +1,16 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/auth/login"
+    },
+    "response": {
+        "body": {
+            "msg": "No body content"
+        }
+    },
+    "headers": {
+        "Content-Length": "0",
+        "Set-Cookie": "token=q60ybbQ7gThjECPw; Path=/"
+    },
+    "status_code": 200
+}

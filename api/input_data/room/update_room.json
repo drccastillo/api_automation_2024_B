@@ -1,0 +1,26 @@
+{
+    "request": {
+        "method": "PUT",
+        "url": "/room/{roomid}"
+    },
+    "response": {
+        "body": {
+            "roomid": 3,
+            "roomName": "4994",
+            "type": "Suite",
+            "accessible": true,
+            "image": "https://blog.postman.com/wp-content/uploads/2014/07/logo.png",
+            "description": "This is room 101, dare you enter?",
+            "features": [
+                "WiFi",
+                "Safe"
+            ],
+            "roomPrice": 100
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 202
+}

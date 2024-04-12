@@ -1,0 +1,23 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/booking/summary?roomid={roomid}"
+    },
+    "response": {
+        "body": {
+            "bookings": [
+                {
+                    "bookingDates": {
+                        "checkin": "2022-02-01",
+                        "checkout": "2022-02-05"
+                    }
+                }
+            ]
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

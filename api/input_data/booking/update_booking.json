@@ -1,0 +1,27 @@
+{
+    "request": {
+        "method": "PUT",
+        "url": "/booking/{bookingid}"
+    },
+    "response": {
+        "body": {
+            "bookingid": 60,
+            "booking": {
+                "bookingid": 60,
+                "roomid": 110,
+                "firstname": "James",
+                "lastname": "Dean",
+                "depositpaid": true,
+                "bookingdates": {
+                    "checkin": "2020-02-01",
+                    "checkout": "2020-02-05"
+                }
+            }
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

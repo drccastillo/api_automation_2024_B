@@ -1,0 +1,16 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/message/count"
+    },
+    "response": {
+        "body": {
+            "count": 2
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

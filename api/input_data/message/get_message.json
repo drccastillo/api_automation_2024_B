@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/message/{messageid}"
+    },
+    "response": {
+        "body": {
+            "messageid": 1,
+            "name": "James Dean",
+            "email": "james@email.com",
+            "phone": "01402 619211",
+            "subject": "Booking enquiry",
+            "description": "I would like to book a room at your place"
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

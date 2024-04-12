@@ -1,0 +1,244 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+  - url: http://localhost:8080
+paths:
+  /room/{roomId}:
+    get:
+      tags:
+        - Room
+      summary: /room/:roomId - GetRoom
+      description: A simple GET request that returns you the details of a specific room. To get different room details in the API, change the number 1 to a different room ID.      
+      operationId: getRoom
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Room'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - Room
+      summary: /room/:roomId - UpdateRoom
+      description: |-
+        A request that allows you to update a specific Room. To update the details of a different room within the API, change the number 1 to a different room ID.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: updateRoom
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: token
+          in: cookie
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Room'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - Room
+      summary: /room/:roomId - DeleteRoom
+      description: |-
+        A request that allows you to delete a specific Room. To delete a different room within the API, change the number 1 to a different room ID.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.      
+      operationId: deleteRoom
+      parameters:
+        - name: roomId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: token
+          in: cookie
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /room:
+    get:
+      tags:
+        - Room
+      summary: /room - GetRooms
+      description: A simple GET request that returns all the Rooms within the Room API.
+      operationId: getRooms
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Rooms'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - Room
+      summary: /room - CreateRoom
+      description: |-
+        A request that allows you to create a Room.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+     
+      operationId: createRoom
+      parameters:
+        - name: token
+          in: cookie
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Room'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Room'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /room/actuator/health:
+    get:
+      tags:
+      - Room
+      summary: /room/actuator/health - HealthCheck
+      description: A simple health check request for the Room API.
+      operationId: roomActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        error:
+          type: string
+        errorMessage:
+          type: string
+        fieldErrors:
+          type: array
+          items:
+            type: string
+    Room:
+      required:
+        - roomName
+        - type
+      type: object
+      properties:
+        roomid:
+          type: integer
+          format: int32
+        roomName:
+          type: string
+        type:
+          pattern: Single|Double|Twin|Family|Suite
+          type: string
+        accessible:
+          type: boolean
+        image:
+          type: string
+        description:
+          type: string
+        features:
+          type: array
+          items:
+            type: string
+        roomPrice:
+          maximum: 999
+          minimum: 1
+          type: integer
+          format: int32
+    Rooms:
+      type: object
+      properties:
+        rooms:
+          type: array
+          items:
+            $ref: '#/components/schemas/Room'

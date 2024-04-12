@@ -1,0 +1,29 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/message/"
+    },
+    "response": {
+        "body": {
+            "messages": [
+                {
+                    "id": 1,
+                    "name": "James Dean",
+                    "subject": "Booking enquiry",
+                    "read": false
+                },
+                {
+                    "id": 3,
+                    "name": "James Dean",
+                    "subject": "You have a new booking!",
+                    "read": false
+                }
+            ]
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

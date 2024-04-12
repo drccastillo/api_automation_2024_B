@@ -1,47 +1,34 @@
-from dotenv import load_dotenv
-from utils.logger import get_logger
+"""
+This module contains the configuration for the Restful-Booker API.
+"""
+
 import os
-import requests
-import logging
+from dotenv import load_dotenv
 
+# Get the absolute path of the current directory
+abs_path = os.path.abspath(__file__ + "../../../")
 
-# Set up logging
-LOGGER = get_logger(__name__, logging.DEBUG)
-
-# Load enviromment variables from .env file
+# Load environment variables from the .env file
 load_dotenv()
 
-# Retrive values from enviromment variables
-user_booker_api = os.getenv("user")
-password_booker_api = os.getenv("password")
-url_booker = "https://restful-booker.herokuapp.com"
-headers_booker = {}
-body_credential_booker = {"username": user_booker_api, "password": password_booker_api}
-# Make authentication request to obtain token
-auth_response = requests.post(f"{url_booker}/auth", json=body_credential_booker)
-auth_response_data = auth_response.json()
+# Base URL for the Restful-Booker API
+BASE_URL = os.getenv("RESTFUL_BOOKER_BASE_URL", "https://restful-booker.herokuapp.com")
 
-if auth_response.status_code == 200:
-    obtained_token = auth_response_data.get("token")
-    if obtained_token:
-        # Set token as environment variable
-        os.environ["token"] = obtained_token
-    else:
-        LOGGER.error("Token not found in authentication response.")
-else:
-    LOGGER.error(
-        "Authentication failed with status code: %s", auth_response.status_code
-    )
+# Credentials for authentication
+CREDENTIALS = {
+    "username": os.getenv("RESTFUL_BOOKER_USERNAME"),
+    "password": os.getenv("RESTFUL_BOOKER_PASSWORD"),
+}
 
-# Now you can retrieve the token using os.getenv("token")
-token_booker_api = os.getenv("token")
-if not token_booker_api:
-    LOGGER.warning("Token not found in environment variables.")
+# Token for authorization
+TOKEN = os.getenv("RESTFUL_BOOKER_TOKEN")
 
-# Update headers with token
-if token_booker_api:
-    headers_booker["Cookie"] = f"token={token_booker_api}"
-else:
-    LOGGER.warning("Token is missing, Authorization header will not be set.")
+# Default headers for requests to the Restful-Booker API
+DEFAULT_HEADERS = {
+    "Content-Type": "application/json",
+    "Accept": "application/json",
+}
 
-LOGGER.debug("Token %s", token_booker_api)
+# Add authorization if a token is provided
+if TOKEN:
+    DEFAULT_HEADERS["cookie"] = f"token={TOKEN}"

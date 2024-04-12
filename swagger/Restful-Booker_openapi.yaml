@@ -1,0 +1,1144 @@
+openapi: 3.0.3
+info:
+  title: Restful-Booker-Platform
+  description: |-
+    # Restful-Booker-Platform
+
+    Welcome to restful-booker-platform, a collection of Web APIs built using SpringBoot that form together to create a fake Bed and Breakfast website. Each API is responsible for a section of the site, for example the management of rooms and bookings.
+
+    As this is a more complex application the challenge with testing this site is understanding when to focus on individual API testing, and when to combine APIs in your testing.
+
+    It also comes with a ReactJS frontend that can be used for practising testing techniques beyond API testing.
+
+    **Where are the APIs?**
+
+    You can find the code for Restful-booker-platform on GitHub here: [https://github.com/mwinteringham/restful-booker-platform](https://github.com/mwinteringham/restful-booker-platform)
+
+    You can find a deployed instance at [https://automationintesting.online](https://automationintesting.online)
+
+    The application is seeded with data for you to work with **and resets itself every 10 minutes back to that default state.**
+  version: 1.0.0
+  contact: {}
+servers:
+- url: https://automationintesting.online
+paths:
+  /auth/actuator/health:
+    get:
+      tags:
+      - Auth
+      summary: /auth/actuator/health - HealthCheck
+      description: A simple health check request for the Auth API.
+      operationId: authActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+  /auth/login:
+    post:
+      tags:
+      - Auth
+      summary: /auth/login - CreateToken
+      description: |-
+        A request that allows you to create a `token` that can be used by other requests to authenticate yourself.
+
+        If you would like to use authenticated API calls within this collection. Run the `/auth/login` request once and a valid token will be added.
+
+        **Please note, tokens are reset on the deployed instance every 10 minutes**
+      operationId: authLoginCreatetoken
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                password:
+                  type: string
+                  example: password
+                username:
+                  type: string
+                  example: admin
+            examples:
+              /auth/login - CreateToken:
+                value:
+                  password: password
+                  username: admin
+      responses:
+        '200':
+          description: ''
+  /auth/validate:
+    post:
+      tags:
+      - Auth
+      summary: /auth/validate - ValidateToken
+      description: A request that allows you to validate whether a token is valid or not. The `token` is added to the body of the request.
+      operationId: authValidateValidatetoken
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: abc123
+            examples:
+              /auth/validate - ValidateToken:
+                value:
+                  token: abc123
+      responses:
+        '200':
+          description: ''
+        '400':
+          description: /auth/validate - ValidateToken
+          content: {}
+  /auth/logout:
+    post:
+      tags:
+      - Auth
+      summary: /auth/logout - DestroyToken
+      description: A request that allows you to destroy a token within the Auth API. The `token` is added to the body of the request.
+      operationId: authLogoutDestroytoken
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+                  example: abc123
+            examples:
+              /auth/logout - DestroyToken:
+                value:
+                  token: abc123
+      responses:
+        '200':
+          description: ''
+  /booking/actuator/health:
+    get:
+      tags:
+      - Booking
+      summary: /booking/actuator/health - HealthCheck
+      description: A simple health check request for the Booking API.
+      operationId: bookingActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+  /booking/1:
+    get:
+      tags:
+      - Booking
+      summary: /booking/:id - GetBooking
+      description: |-
+        A simple request to get the details of a booking. To get different bookings, simply change the booking ID from '1' to a different ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: bookingIdGetbooking
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+    put:
+      tags:
+      - Booking
+      summary: /booking/:id - UpdateBooking
+      description: |-
+        A request that allows you to update a booking's details within the booking API. To update other bookings, simply update the booking ID from '1' to a different booking ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: bookingIdUpdatebooking
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookingdates:
+                  type: object
+                  properties:
+                    checkin:
+                      type: string
+                      example: 2020-02-01
+                    checkout:
+                      type: string
+                      example: 2020-02-05
+                depositpaid:
+                  type: boolean
+                  example: true
+                firstname:
+                  type: string
+                  example: James
+                lastname:
+                  type: string
+                  example: Dean
+                roomid:
+                  type: number
+                  example: 1
+            examples:
+              /booking/:id - UpdateBooking:
+                value:
+                  bookingdates:
+                    checkin: 2020-02-01
+                    checkout: 2020-02-05
+                  depositpaid: true
+                  firstname: James
+                  lastname: Dean
+                  roomid: 1
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+      - Booking
+      summary: /booking/:id - DeleteBooking
+      description: |-
+        A request that allows you to delete a booking's details within the booking API. To delete other bookings, simply update the booking ID from '1' to a different booking ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: bookingIdDeletebooking
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+  /booking/:
+    get:
+      tags:
+      - Booking
+      summary: /booking/ - GetBookings
+      description: |-
+        A simple request that returns all the bookings for a specific room. The request contains an optional querystring of `roomid`
+
+        Add the `roomid` query string to only return bookings for a specific room. Alternatively, remove the query string to return all bookings within the API.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: bookingGetbookings
+      parameters:
+      - name: roomid
+        in: query
+        schema:
+          type: string
+          example: '1'
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+      - Booking
+      summary: /booking/ - CreateBooking
+      description: |-
+        A request that allows you to create a booking within the Booking API.
+
+        Note that the `email` and `phone` parameters within the booking payload are optional. Removing them will mean the booking API will not make a call to the Message API.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: bookingCreatebooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                bookingdates:
+                  type: object
+                  properties:
+                    checkin:
+                      type: string
+                      example: 2020-02-01
+                    checkout:
+                      type: string
+                      example: 2020-02-05
+                depositpaid:
+                  type: boolean
+                  example: true
+                email:
+                  type: string
+                  example: test@email.com
+                firstname:
+                  type: string
+                  example: James
+                lastname:
+                  type: string
+                  example: Dean
+                phone:
+                  type: string
+                  example: '07123456789'
+                roomid:
+                  type: number
+                  example: 1
+            examples:
+              /booking/ - CreateBooking:
+                value:
+                  bookingdates:
+                    checkin: 2020-02-01
+                    checkout: 2020-02-05
+                  depositpaid: true
+                  email: test@email.com
+                  firstname: James
+                  lastname: Dean
+                  phone: '07123456789'
+                  roomid: 1
+      responses:
+        '200':
+          description: ''
+  /booking/summary:
+    get:
+      tags:
+      - Booking
+      summary: /booking/summary - GetBookingSummary
+      description: |-
+        A simple request that returns summary details for all the bookings for a specific room. The request contains an optional querystring of `roomid`
+
+        Add the `roomid` query string to only return bookings for a specific room. Alternatively, remove the query string to return all bookings within the API.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: bookingSummaryGetbookingsummary
+      parameters:
+      - name: roomid
+        in: query
+        schema:
+          type: string
+          example: '1'
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+  /branding/actuator/health:
+    get:
+      tags:
+      - Branding
+      summary: /branding/actuator/health - HealthCheck
+      description: A simple health check request for the Branding API.
+      operationId: brandingActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+  /branding/:
+    get:
+      tags:
+      - Branding
+      summary: /branding/ - GetBranding
+      description: A simple request that allows you to read the branding details
+      operationId: brandingGetbranding
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: /branding/ - GetBranding
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  contact:
+                    type: object
+                    properties:
+                      address:
+                        type: string
+                        example: The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S
+                      email:
+                        type: string
+                        example: fake@fakeemail.com
+                      name:
+                        type: string
+                        example: Shady Meadows B&B
+                      phone:
+                        type: string
+                        example: '012345678901'
+                  description:
+                    type: string
+                    example: Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.
+                  logoUrl:
+                    type: string
+                    example: https://www.mwtestconsultancy.co.uk/img/rbp-logo.png
+                  map:
+                    type: object
+                    properties:
+                      latitude:
+                        type: number
+                        example: 52.6351204
+                      longitude:
+                        type: number
+                        example: 1.2733774
+                  name:
+                    type: string
+                    example: Shady Meadows B&B
+              examples:
+                /branding/ - GetBranding:
+                  value:
+                    contact:
+                      address: The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S
+                      email: fake@fakeemail.com
+                      name: Shady Meadows B&B
+                      phone: '012345678901'
+                    description: Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.
+                    logoUrl: https://www.mwtestconsultancy.co.uk/img/rbp-logo.png
+                    map:
+                      latitude: 52.6351204
+                      longitude: 1.2733774
+                    name: Shady Meadows B&B
+    put:
+      tags:
+      - Branding
+      summary: /branding/ - UpdateBranding
+      description: |-
+        A request that allows you to update the branding details.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: brandingUpdatebranding
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contact:
+                  type: object
+                  properties:
+                    address:
+                      type: string
+                      example: The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S
+                    email:
+                      type: string
+                      example: fake@fakeemail.com
+                    name:
+                      type: string
+                      example: Shady Meadows B&B
+                    phone:
+                      type: string
+                      example: '012345678901'
+                description:
+                  type: string
+                  example: Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.
+                logoUrl:
+                  type: string
+                  example: https://www.mwtestconsultancy.co.uk/img/rbp-logo.png
+                map:
+                  type: object
+                  properties:
+                    latitude:
+                      type: number
+                      example: 52.6351204
+                    longitude:
+                      type: number
+                      example: 1.2733774
+                name:
+                  type: string
+                  example: Shady Meadows B&B
+            examples:
+              /branding/ - UpdateBranding:
+                value:
+                  contact:
+                    address: The Old Farmhouse, Shady Street, Newfordburyshire, NE1 410S
+                    email: fake@fakeemail.com
+                    name: Shady Meadows B&B
+                    phone: '012345678901'
+                  description: Welcome to Shady Meadows, a delightful Bed & Breakfast nestled in the hills on Newingtonfordburyshire. A place so beautiful you will never want to leave. All our rooms have comfortable beds and we provide breakfast from the locally sourced supermarket. It is a delightful place.
+                  logoUrl: https://www.mwtestconsultancy.co.uk/img/rbp-logo.png
+                  map:
+                    latitude: 52.6351204
+                    longitude: 1.2733774
+                  name: Shady Meadows B&B
+      responses:
+        '200':
+          description: ''
+  /message/actuator/health:
+    get:
+      tags:
+      - Message
+      summary: /message/actuator/health - HealthCheck
+      description: A simple health check request for the Message API.
+      operationId: messageActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+  /message/:
+    get:
+      tags:
+      - Message
+      summary: /message/ - GetMessages
+      description: A simple request that returns all messages from the message API.
+      operationId: messageGetmessages
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+      - Message
+      summary: /message/ - CreateMessage
+      description: A request that allows you to create a message in the Message API.
+      operationId: messageCreatemessage
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                description:
+                  type: string
+                  example: I would like to book a room at your place
+                email:
+                  type: string
+                  example: james@email.com
+                name:
+                  type: string
+                  example: James Dean
+                phone:
+                  type: string
+                  example: 01402 619211
+                subject:
+                  type: string
+                  example: Booking enquiry
+            examples:
+              /message/ - CreateMessage:
+                value:
+                  description: I would like to book a room at your place
+                  email: james@email.com
+                  name: James Dean
+                  phone: 01402 619211
+                  subject: Booking enquiry
+      responses:
+        '201':
+          description: /message/ - CreateMessage
+          headers:
+            CF-Cache-Status:
+              schema:
+                type: string
+                example: DYNAMIC
+            CF-RAY:
+              schema:
+                type: string
+                example: 72285ad63dbb7697-LHR
+            Connection:
+              schema:
+                type: string
+                example: keep-alive
+            Date:
+              schema:
+                type: string
+                example: Tue, 28 Jun 2022 18:06:10 GMT
+            Expect-CT:
+              schema:
+                type: string
+                example: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+            NEL:
+              schema:
+                type: string
+                example: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}'
+            Report-To:
+              schema:
+                type: string
+                example: '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v3?s=ekYavHtq2EOc7rfmOyhYcre4tN81RN9J6DrJ34XHo%2F7IzlmWz%2FfenD3GPmIc%2BqhUZuvh9QBMm75P1Fo20uICXXhL9dUryQ7GFxAv4CeZItEoA3ewCHqkTlbQ8xuTGAYpPpTDmHey%2FEGvHrnt%2Fg%3D%3D"}],"group":"cf-nel","max_age":604800}'
+            Server:
+              schema:
+                type: string
+                example: cloudflare
+            Transfer-Encoding:
+              schema:
+                type: string
+                example: chunked
+            alt-svc:
+              schema:
+                type: string
+                example: h3=":443"; ma=86400, h3-29=":443"; ma=86400
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  description:
+                    type: string
+                    example: I would like to book a room at your place
+                  email:
+                    type: string
+                    example: james@email.com
+                  messageid:
+                    type: number
+                    example: 2
+                  name:
+                    type: string
+                    example: James Dean
+                  phone:
+                    type: string
+                    example: 01402 619211
+                  subject:
+                    type: string
+                    example: Booking enquiry
+              examples:
+                /message/ - CreateMessage:
+                  value:
+                    description: I would like to book a room at your place
+                    email: james@email.com
+                    messageid: 2
+                    name: James Dean
+                    phone: 01402 619211
+                    subject: Booking enquiry
+  /message/1:
+    get:
+      tags:
+      - Message
+      summary: /message/:id - GetMessage
+      description: A simple request that returns the details of a specific message. To access other messages, simply update the message ID of '1' to a different message ID number.
+      operationId: messageIdGetmessage
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+      - Message
+      summary: /message/:id - DeleteMessage
+      description: |-
+        A request that allows you to delete a message. To delete a different message, simply update the message ID of '1' to a different message ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: messageIdDeletemessage
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+  /message/count:
+    get:
+      tags:
+      - Message
+      summary: /message/count - UnreadCount
+      description: A simple request that returns the count of how many messages are unread.
+      operationId: messageCountUnreadcount
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+  /message/1/read:
+    put:
+      tags:
+      - Message
+      summary: /message/1/read - MarkAsRead
+      description: |-
+        A request that allows you to mark a specific message as read. To mark a different message as read, simply update the message ID of '1' to a different message ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: message1ReadMarkasread
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+  /room/actuator/health:
+    get:
+      tags:
+      - Room
+      summary: /room/actuator/health - HealthCheck
+      description: A simple health check request for the Room API.
+      operationId: roomActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+  /room/:
+    get:
+      tags:
+      - Room
+      summary: /room/ - GetRooms
+      description: A simple GET request that returns all the Rooms within the Room API.
+      operationId: roomGetrooms
+      parameters:
+      - name: accept-language
+        in: header
+        schema:
+          type: string
+          example: en-GB,en;q=0.5
+      - name: accept-encoding
+        in: header
+        schema:
+          type: string
+          example: gzip, deflate
+      - name: origin
+        in: header
+        schema:
+          type: string
+          example: '{{host}}'
+      responses:
+        '200':
+          description: ''
+    post:
+      tags:
+      - Room
+      summary: /room/ - CreateRoom
+      description: |-
+        A request that allows you to create a Room.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: roomCreateroom
+      parameters:
+      - name: accept-language
+        in: header
+        schema:
+          type: string
+          example: en-GB,en;q=0.5
+      - name: accept-encoding
+        in: header
+        schema:
+          type: string
+          example: gzip, deflate
+      - name: origin
+        in: header
+        schema:
+          type: string
+          example: '{{host}}'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accessible:
+                  type: boolean
+                  example: true
+                description:
+                  type: string
+                  example: This is room 101, dare you enter?
+                features:
+                  type: array
+                  items:
+                    type: string
+                    example: WiFi
+                  example:
+                  - WiFi
+                  - Safe
+                image:
+                  type: string
+                  example: https://blog.postman.com/wp-content/uploads/2014/07/logo.png
+                roomName:
+                  type: string
+                  example: '101'
+                roomPrice:
+                  type: number
+                  example: 100
+                type:
+                  type: string
+                  example: Suite
+            examples:
+              /room/ - CreateRoom:
+                value:
+                  accessible: true
+                  description: This is room 101, dare you enter?
+                  features:
+                  - WiFi
+                  - Safe
+                  image: https://blog.postman.com/wp-content/uploads/2014/07/logo.png
+                  roomName: '101'
+                  roomPrice: 100
+                  type: Suite
+      responses:
+        '200':
+          description: ''
+  /room/1:
+    get:
+      tags:
+      - Room
+      summary: /room/:id - GetRoom
+      description: A simple GET request that returns you the details of a specific room. To get different room details in the API, change the number 1 to a different room ID.
+      operationId: roomIdGetroom
+      parameters:
+      - name: accept-language
+        in: header
+        schema:
+          type: string
+          example: en-GB,en;q=0.5
+      - name: accept-encoding
+        in: header
+        schema:
+          type: string
+          example: gzip, deflate
+      - name: origin
+        in: header
+        schema:
+          type: string
+          example: '{{host}}'
+      responses:
+        '200':
+          description: ''
+    put:
+      tags:
+      - Room
+      summary: /room/:id - UpdateRoom
+      description: |-
+        A request that allows you to update a specific Room. To update the details of a different room within the API, change the number 1 to a different room ID.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: roomIdUpdateroom
+      parameters:
+      - name: accept-language
+        in: header
+        schema:
+          type: string
+          example: en-GB,en;q=0.5
+      - name: accept-encoding
+        in: header
+        schema:
+          type: string
+          example: gzip, deflate
+      - name: origin
+        in: header
+        schema:
+          type: string
+          example: '{{host}}'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accessible:
+                  type: boolean
+                  example: true
+                description:
+                  type: string
+                  example: This is room 101, dare you enter?
+                features:
+                  type: array
+                  items:
+                    type: string
+                    example: WiFi
+                  example:
+                  - WiFi
+                  - Safe
+                image:
+                  type: string
+                  example: https://blog.postman.com/wp-content/uploads/2014/07/logo.png
+                roomName:
+                  type: string
+                  example: '101'
+                roomPrice:
+                  type: number
+                  example: 100
+                type:
+                  type: string
+                  example: Suite
+            examples:
+              /room/:id - UpdateRoom:
+                value:
+                  accessible: true
+                  description: This is room 101, dare you enter?
+                  features:
+                  - WiFi
+                  - Safe
+                  image: https://blog.postman.com/wp-content/uploads/2014/07/logo.png
+                  roomName: '101'
+                  roomPrice: 100
+                  type: Suite
+      responses:
+        '200':
+          description: ''
+    delete:
+      tags:
+      - Room
+      summary: /room/:id - DeleteRoom
+      description: |-
+        A request that allows you to delete a specific Room. To delete a different room within the API, change the number 1 to a different room ID.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: roomIdDeleteroom
+      parameters:
+      - name: accept-language
+        in: header
+        schema:
+          type: string
+          example: en-GB,en;q=0.5
+      - name: accept-encoding
+        in: header
+        schema:
+          type: string
+          example: gzip, deflate
+      - name: origin
+        in: header
+        schema:
+          type: string
+          example: '{{host}}'
+      responses:
+        '200':
+          description: ''
+  /report/actuator/health:
+    get:
+      tags:
+      - Report
+      summary: /report/actuator/health - HealthCheck
+      description: A simple health check request for the Report API.
+      operationId: reportActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: ''
+  /report/room/1:
+    get:
+      tags:
+      - Report
+      summary: /report/room/:id - GetSpecificRoomReport
+      description: A request that allows you to get report details for a specific room.
+      operationId: reportRoomIdGetspecificroomreport
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+  /report/:
+    get:
+      tags:
+      - Report
+      summary: /report/ - GetRoomsReport
+      description: |-
+        A request that returns a report of availability in all rooms.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: reportGetroomsreport
+      parameters:
+      - name: referer
+        in: header
+        schema:
+          type: string
+          example: ''
+      responses:
+        '200':
+          description: ''
+tags:
+- name: Auth
+  description: |-
+    ## Restful-Booker-Platform: Auth
+
+    The Auth API within restful-booker-platform is responsible for managing who can and cannot make specific calls within the application.
+
+    Other APIs within the platform rely upon the Auth API to determine if specific requests can be carried out. For example, when creating a Room a valid `token` needs to be sent in the `Cookie` header inside the POST request. The Room API will then send the `token` to Auth API to validate if the token is real.
+
+    **Authenticating for other APIs**
+
+    If you would like to use authenticated API calls within this collection. Run the `/auth/login` request once and a valid token will be added.
+
+    **Please note, tokens are reset on the deployed instance every 10 minutes**
+- name: Booking
+  description: |-
+    ## Restful-Booker-Platform: Booking
+
+    The Booking API of restful-booker-platform is responsible for managing the bookings within the platform. The API allows you to create, read, update and delete bookings
+
+    **Authorisation**
+
+    Requests such as read, update and delete bookings require you to be authorised.
+
+    Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+    Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+- name: Branding
+  description: |-
+    ## Restful-Booker-Platform: Branding
+
+    The Branding API of restful-booker-platform is responsible for providing the home page details for the application. It allows you to read and update branding details.
+
+    **Authorisation**
+
+    Requests such as `PUT /branding/` require you to be authorised.
+
+    Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+    Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+- name: Message
+  description: |-
+    ## Restful-Booker-Platform: Message
+
+    The Message API of restful-booker-platform is responsible for the management of Messages within the platform. With this API you can Create, Read, Update and Delete Messages.
+
+    **Authorisation**
+
+    Requests such as update and delete message require you to be authorised.
+
+    Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+    Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+- name: Room
+  description: |-
+    ## Restful-Booker-Platform: Room
+
+    The Room API of restful-booker-platform is responsible for the management of Rooms within the platform. With this API you can Create, Read, Update and Delete Rooms.
+
+    **Authorisation**
+
+    Requests such as create, update and delete room require you to be authorised.
+
+    Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+    Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+- name: Report
+  description: |-
+    ## Restful-Booker-Platform: Report
+
+    The Report API of restful-booker-platform is responsible for creating a Report for Calendar UI components to use within the platform.
+
+    **Authorisation**
+
+    Requests such as `GET /report/` require you to be authorised.
+
+    Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+    Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+

@@ -1,0 +1,351 @@
+openapi: 3.0.1
+info:
+  title: Booking API for Restful Booker Platform
+  description: |-
+    The Booking API allows you to interact with the booking data within the Restful Booker Platform. This API is used to create, read, update and delete booking data.
+    **Please note, the data within this API is reset every 10 minutes**
+  version: v0
+  contact:
+    name: API Support
+    url:  https://github.com/mwinteringham/restful-booker-platform
+    email: support@example.com
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: booking
+    description: Operations about booking
+paths:
+  /booking/actuator/health:
+    get:
+      tags:
+      - booking
+      summary: /booking/actuator/health - HealthCheck
+      description: A simple health check request for the Booking API.
+      operationId: bookingActuatorHealthHealthcheck
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Health'
+  /booking/{id}:
+    get:
+      tags:
+        - booking
+      summary: /booking/:id - GetBooking
+      description: |-
+        A simple request to get the details of a booking. To get different bookings, simply change the booking ID from '1' to a different ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: getBooking
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: token
+          in: cookie
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      tags:
+        - booking
+      summary: /booking/:id - UpdateBooking
+      description: |-
+        A request that allows you to update a booking's details within the booking API. To update other bookings, simply update the booking ID from '1' to a different booking ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: updateBooking
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: token
+          in: cookie
+          required: false
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CreatedBooking'
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      tags:
+        - booking
+      operationId: deleteBooking
+      summary: /booking/:id - DeleteBooking
+      description: |-
+        A request that allows you to delete a booking's details within the booking API. To delete other bookings, simply update the booking ID from '1' to a different booking ID number.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      security:
+        - TokenAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /booking/:
+    get:
+      tags:
+        - booking
+      summary: /booking/ - GetBookings
+      description: |-
+        A simple request that returns all the bookings for a specific room. The request contains an optional querystring of `roomid`
+
+        Add the `roomid` query string to only return bookings for a specific room. Alternatively, remove the query string to return all bookings within the API.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: getBookings
+      parameters:
+        - name: roomid
+          in: query
+          required: false
+          schema:
+            type: string
+        - name: token
+          in: cookie
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      tags:
+        - booking
+      summary: /booking/ - CreateBooking
+      description: |-
+        A request that allows you to create a booking within the Booking API.
+
+        Note that the `email` and `phone` parameters within the booking payload are optional. Removing them will mean the booking API will not make a call to the Message API.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.      
+      operationId: createBooking
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Booking'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /booking/summary:
+    get:
+      tags:
+        - booking
+      summary: /booking/summary - GetBookingSummary
+      description: |-
+        A simple request that returns summary details for all the bookings for a specific room. The request contains an optional querystring of `roomid`
+
+        Add the `roomid` query string to only return bookings for a specific room. Alternatively, remove the query string to return all bookings within the API.
+
+        **Authorisation**
+
+        To use this request you must be authorised.
+
+        Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
+
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
+      operationId: getSummaries
+      parameters:
+        - name: roomid
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+        '400':
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          format: int32
+        error:
+          type: string
+        errorMessage:
+          type: string
+        fieldErrors:
+          type: array
+          items:
+            type: string
+    Booking:
+      required:
+        - depositpaid
+        - firstname
+        - lastname
+      type: object
+      properties:
+        bookingid:
+          type: integer
+          format: int32
+        roomid:
+          minimum: 1
+          type: integer
+          format: int32
+        firstname:
+          maxLength: 18
+          minLength: 3
+          type: string
+        lastname:
+          maxLength: 30
+          minLength: 3
+          type: string
+        depositpaid:
+          type: boolean
+        email:
+          type: string
+        phone:
+          type: string
+        bookingdates:
+          $ref: '#/components/schemas/BookingDates'
+    BookingDates:
+      required:
+        - checkin
+        - checkout
+      type: object
+      properties:
+        checkin:
+          type: string
+          format: date
+        checkout:
+          type: string
+          format: date
+    CreatedBooking:
+      type: object
+      properties:
+        bookingid:
+          type: integer
+          format: int32
+        booking:
+          $ref: '#/components/schemas/Booking'
+    Health:
+      type: object
+      properties:
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - status    
+  securitySchemes:
+    TokenAuth:    # arbitrary name for the security scheme
+      type: apiKey
+      in: header
+      name: Authorization
+security:
+  - TokenAuth: []

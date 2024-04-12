@@ -1,0 +1,15 @@
+{
+    "request": {
+        "method": "DELETE",
+        "url": "/booking/{bookingid}"
+    },
+    "response": {
+        "body": {
+            "msg": "No body content"
+        }
+    },
+    "headers": {
+        "Content-Length": "0"
+    },
+    "status_code": 202
+}

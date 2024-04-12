@@ -1,0 +1,15 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/auth/validate"
+    },
+    "response": {
+        "body": {
+            "msg": "No body content"
+        }
+    },
+    "headers": {
+        "Content-Length": "0"
+    },
+    "status_code": 200
+}

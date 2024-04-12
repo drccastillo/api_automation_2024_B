@@ -1,0 +1,118 @@
+openapi: 3.0.3
+info:
+  title: Auth API for Restful Booker Platform
+  description: |-
+    The Auth API allows you to authenticate yourself with the Restful Booker Platform. This API is used to create, validate and destroy tokens that are used to authenticate yourself with the platform.
+    **Please note, tokens are reset on the deployed instance every 10 minutes**
+  version: v0
+  contact:
+    name: API Support
+    url:  https://github.com/mwinteringham/restful-booker-platform
+    email: support@example.com
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: auth
+    description: Operations about authentication
+paths:
+  /auth/actuator/health:
+      get:
+        tags:
+        - auth
+        summary: /auth/actuator/health - HealthCheck
+        description: A simple health check request for the Auth API.
+        operationId: authActuatorHealthHealthcheck
+        responses:
+          '200':
+            description: OK
+            content:
+              '*/*':
+                schema:
+                  $ref: '#/components/schemas/Health'
+  /auth/validate:
+    post:
+      tags:
+        - auth
+      summary: ValidateToken
+      description: A request that allows you to validate whether a token is valid or not. The `token` is added to the body of the request.      
+      operationId: validateToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Token'
+  /auth/logout:
+    post:
+      tags:
+        - auth
+      summary: DestroyToken
+      description: A request that allows you to destroy a token within the Auth API. The `token` is added to the body of the request.      
+      operationId: clearToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Token'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: string
+  /auth/login:
+    post:
+      tags:
+        - auth
+      summary: CreateToken
+      description: |-
+        A request that allows you to create a `token` that can be used by other requests to authenticate yourself.
+
+        If you would like to use authenticated API calls within this collection. Run the `/auth/login` request once and a valid token will be added.
+
+        **Please note, tokens are reset on the deployed instance every 10 minutes**
+      operationId: createToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Auth'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Token'
+components:
+  schemas:
+    Token:
+      type: object
+      properties:
+        token:
+          type: string
+    Auth:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Health:
+      type: object
+      properties:
+        status:
+          type: string
+      additionalProperties: false
+      required:
+        - status

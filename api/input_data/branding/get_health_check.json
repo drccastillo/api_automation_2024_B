@@ -1,0 +1,16 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/branding/actuator/health"
+    },
+    "response": {
+        "body": {
+            "status": "UP"
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 200
+}

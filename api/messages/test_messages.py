@@ -1,5 +1,6 @@
 import logging
-from config.config import BASE_URL
+import pytest
+
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -20,6 +21,7 @@ class TestMessages:
         cls.message_list = []
 
 
+    @pytest.mark.acceptance
     def test_get_all_messages(self, log_test_names):
         """
         Test get all messages endpoint
@@ -29,6 +31,7 @@ class TestMessages:
         self.validate.validate_response(actual_response=response, endpoint="message", file_name="get_all_messages")
 
 
+    @pytest.mark.acceptance
     def test_get_message(self, create_message, log_test_names):   
         """
         Test get message endpoint
@@ -38,6 +41,7 @@ class TestMessages:
         self.validate.validate_response(actual_response=response, endpoint="message", file_name="get_message")
 
 
+    @pytest.mark.acceptance
     def test_get_unread_messages(self, log_test_names):
         """
         Test get unread messages endpoint
@@ -47,6 +51,7 @@ class TestMessages:
         self.validate.validate_response(actual_response=response, endpoint="message", file_name="get_unread_messages")
 
 
+    @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names):    
         """
         Test get health check endpoint
@@ -56,6 +61,7 @@ class TestMessages:
         self.validate.validate_response(actual_response=response, endpoint="message", file_name="get_health_check")
 
     
+    @pytest.mark.acceptance
     def test_create_message(self, log_test_names):
         """
         Test create message
@@ -67,6 +73,7 @@ class TestMessages:
         self.message_list.append(response["json"]["messageid"])
 
 
+    @pytest.mark.acceptance
     def test_mark_message_as_read(self, create_message, log_test_names):
         """
         Test mark message as read
@@ -75,6 +82,8 @@ class TestMessages:
         response = self.message.mark_message_as_read(message_id=create_message)
         self.validate.validate_response(actual_response=response, endpoint="message", file_name="mark_message_as_read")
 
+
+    @pytest.mark.acceptance
     def test_delete_message(self, create_message, log_test_names):
         """
         Test delete message
@@ -82,6 +91,7 @@ class TestMessages:
         LOGGER.info("Test delete message")
         response = self.message.delete_message(message_id=create_message)
         self.validate.validate_response(actual_response=response, endpoint="message", file_name="delete_message")
+
 
     @classmethod
     def teardown_class(cls):

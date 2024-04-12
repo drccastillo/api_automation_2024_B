@@ -1,4 +1,6 @@
 import logging
+import pytest
+
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -20,6 +22,7 @@ class TestAuth:
         cls.list_tokens = []
 
 
+    @pytest.mark.acceptance
     def test_create_token(self, log_test_names):
         """
         Test create token
@@ -30,6 +33,8 @@ class TestAuth:
         self.list_tokens.append(response["cookies"]["token"])
         LOGGER.debug("Cookie token: %s", response["cookies"]["token"])
 
+
+    @pytest.mark.acceptance
     def test_validate_token(self, create_token, log_test_names):
         """
         Test validate token
@@ -38,6 +43,8 @@ class TestAuth:
         response = self.auth.validate_token(token=create_token)
         self.validate.validate_response(actual_response=response, endpoint="auth", file_name="validate_token")
 
+
+    @pytest.mark.acceptance
     def test_destroy_token(self, create_token, log_test_names):
         """
         Test destroy token
@@ -45,6 +52,7 @@ class TestAuth:
         LOGGER.info("Test destroy token")
         response = self.auth.destroy_token(token=create_token)
         self.validate.validate_response(actual_response=response, endpoint="auth", file_name="destroy_token")
+
 
     @classmethod
     def teardown_class(cls):

@@ -1,5 +1,6 @@
 import logging
-from config.config import BASE_URL
+import pytest
+
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -19,6 +20,7 @@ class TestReports:
         cls.report = Report()
 
     
+    @pytest.mark.acceptance
     def test_get_all_reports(self, log_test_names):
         """
         Test get all reports endpoint
@@ -27,6 +29,8 @@ class TestReports:
         response = self.report.all_reports()
         self.validate.validate_response(actual_response=response, endpoint="report", file_name="get_all_reports")
 
+
+    @pytest.mark.acceptance
     def test_get_specific_room_report(self, create_booking, log_test_names):
         """
         Test get specific room report endpoint
@@ -35,6 +39,8 @@ class TestReports:
         response = self.report.specific_report(room_id=create_booking["room_id"])
         self.validate.validate_response(actual_response=response, endpoint="report", file_name="get_specific_room_report")
 
+
+    @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names):
         """
         Test get health check endpoint

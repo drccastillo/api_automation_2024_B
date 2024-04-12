@@ -1,6 +1,6 @@
 import logging
+import pytest
 
-from config.config import BASE_URL
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -21,6 +21,7 @@ class TestBrandings:
         cls.validate = ValidateResponse()
 
 
+    @pytest.mark.acceptance
     def test_get_all_brandings(self, log_test_names):
         """
         Test get all brandings endpoint
@@ -30,6 +31,7 @@ class TestBrandings:
         self.validate.validate_response(actual_response=response, endpoint="branding", file_name="get_all_brandings")
 
 
+    @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names):    
         """
         Test get health check endpoint
@@ -39,6 +41,7 @@ class TestBrandings:
         self.validate.validate_response(actual_response=response, endpoint="branding", file_name="get_health_check")
 
 
+    @pytest.mark.acceptance
     def test_update_branding(self, log_test_names):
         """
         Test update branding

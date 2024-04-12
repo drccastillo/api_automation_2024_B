@@ -1,7 +1,6 @@
 import logging
-import random
+import pytest
 
-from config.config import BASE_URL
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -21,7 +20,9 @@ class TestBookings:
         cls.booking = Booking()
         cls.validate = ValidateResponse()
         cls.bookings_list = []
+    
 
+    @pytest.mark.acceptance
     def test_get_all_bookings(self, log_test_names):
         """
         Test get all bookings endpoint
@@ -30,7 +31,8 @@ class TestBookings:
         response = self.booking.all_bookings()
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_all_bookings")
 
-
+    
+    @pytest.mark.acceptance
     def test_get_booking(self, create_booking, log_test_names):
         """
         Test get booking endpoint
@@ -39,6 +41,8 @@ class TestBookings:
         response = self.booking.specific_booking(booking_id=create_booking["booking_id"])
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_booking")
     
+    
+    @pytest.mark.acceptance
     def test_get_bookings_by_room(self, create_booking, log_test_names):
         """
         Test get booking by room endpoint
@@ -46,7 +50,9 @@ class TestBookings:
         LOGGER.info("Test get booking by room")
         response = self.booking.all_bookings_by_room(room_id=create_booking['room_id'])
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_bookings_by_room")
-
+    
+    
+    @pytest.mark.acceptance
     def test_get_booking_summary(self, create_booking, log_test_names):
         """
         Test get booking summary endpoint
@@ -54,7 +60,9 @@ class TestBookings:
         LOGGER.info("Test get booking summary")
         response = self.booking.booking_summary_by_room(room_id=create_booking['room_id'])
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_booking_summary")
-
+    
+    
+    @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names): # noqa: N805
         """
         Test get health check endpoint
@@ -63,6 +71,8 @@ class TestBookings:
         response = self.booking.health_check_booking()
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_health_check")
     
+    
+    @pytest.mark.acceptance
     def test_create_booking(self, create_room, log_test_names):
         """
         Test create booking
@@ -74,6 +84,7 @@ class TestBookings:
         self.bookings_list.append(response["json"]["bookingid"])
 
 
+    @pytest.mark.acceptance
     def test_update_booking(self, create_booking, log_test_names):
         """
         Test update booking endpoint
@@ -83,6 +94,8 @@ class TestBookings:
         response = self.booking.update_booking(booking_id=create_booking['booking_id'], body=body_update_booking)
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="update_booking")
 
+
+    @pytest.mark.acceptance
     def test_delete_booking(self, create_booking, log_test_names):
         """
         Test delete  booking endpoint

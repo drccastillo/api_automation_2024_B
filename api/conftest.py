@@ -2,15 +2,11 @@
 This module contains fixtures for the RESTful Booker API tests.
 """
 
-import json
 import logging
 import os
 
 import pytest
-from helpers.rest_client import RestClient
 from utils.logger import get_logger
-from config.config import BASE_URL
-from config.config import CREDENTIALS
 from entities.auth import Auth
 from entities.room import Room
 from entities.booking import Booking

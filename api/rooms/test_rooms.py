@@ -1,5 +1,6 @@
 import logging
-from config.config import BASE_URL
+import pytest
+
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
 from entities.room import Room
@@ -20,6 +21,7 @@ class TestRooms:
         cls.room_list = []
 
 
+    @pytest.mark.acceptance
     def test_get_all_rooms(self, log_test_names):
         """
         Test get all rooms endpoint
@@ -28,6 +30,8 @@ class TestRooms:
         response = self.room.all_rooms()
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="get_all_rooms")
 
+
+    @pytest.mark.acceptance
     def test_get_room(self, create_room, log_test_names):
         """
         Test get room endpoint
@@ -36,6 +40,8 @@ class TestRooms:
         response = self.room.specific_room(room_id=create_room)
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="get_room")
     
+
+    @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names): # noqa: N805   
         """
         Test get health check endpoint
@@ -44,6 +50,8 @@ class TestRooms:
         response = self.room.health_check_room()
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="get_health_check")
     
+
+    @pytest.mark.acceptance
     def test_create_room(self, log_test_names):
         """
         Test create room
@@ -54,6 +62,8 @@ class TestRooms:
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="create_room")
         self.room_list.append(response["json"]["roomid"])
 
+
+    @pytest.mark.acceptance
     def test_update_room(self, create_room, log_test_names):
         """
         Test update room
@@ -63,6 +73,8 @@ class TestRooms:
         response = self.room.update_room(room_id=create_room, body=body_room)
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="update_room")
     
+
+    @pytest.mark.acceptance
     def test_delete_room(self, create_room, log_test_names):
         """
         Test delete room

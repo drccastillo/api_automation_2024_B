@@ -11,7 +11,7 @@ services:
     volumes:
       - ${PWD}/reports/allure/results:/app/allure-results
       - ${PWD}/reports/allure/reports:/app/default-reports
-
+    restart: always
   allure-ui:
     image: "frankescobar/allure-docker-service-ui"
     environment:
@@ -19,3 +19,4 @@ services:
       ALLURE_DOCKER_PUBLIC_API_URL_PREFIX: ""
     ports:
       - "5252:5252"
+    restart: always  

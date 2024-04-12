@@ -110,46 +110,43 @@ excel-reports:
 markdown-reports: 
 	python -m pytest -v -s --md-report --md-report-output reports/markdown/md_report_reports.md api/reports/test_reports.py
 
-allure-auth: allure-clean allure-generate-auth allure-open
+allure-auth: allure-clean allure-generate-auth 
 
-allure-bookings: allure-clean allure-generate-bookings allure-open
+allure-bookings: allure-clean allure-generate-bookings 
 
-allure-rooms: allure-clean allure-generate-rooms allure-open
+allure-rooms: allure-clean allure-generate-rooms 
 
-allure-brandings: allure-clean allure-generate-brandings allure-open
+allure-brandings: allure-clean allure-generate-brandings 
 
-allure-messages: allure-clean allure-generate-messages allure-open
+allure-messages: allure-clean allure-generate-messages 
 
-allure-reports: allure-clean allure-generate-reports allure-open
+allure-reports: allure-clean allure-generate-reports 
 
-allure-all: allure-clean allure-generate-all allure-open
+allure-all: allure-clean allure-generate-all
 
 allure-clean:
-	rm -rf allure-report allure-results
+	rm -rf reports/allure/reports/* reports/allure/results/*
 
 allure-generate-auth:
-	python -m pytest -v -s --alluredir=reports/allure/auth api/auth/test_auths.py
+	python -m pytest -v -s --alluredir=reports/allure/results api/auth/test_auths.py
 
 allure-generate-bookings:
-	python -m pytest -v -s --alluredir=reports/allure/bookings api/bookings/test_bookings.py
+	python -m pytest -v -s --alluredir=reports/allure/results api/bookings/test_bookings.py
 
 allure-generate-rooms:
-	python -m pytest -v -s --alluredir=reports/allure/rooms api/rooms/test_rooms.py
+	python -m pytest -v -s --alluredir=reports/allure/results api/rooms/test_rooms.py
 
 allure-generate-brandings:
-	python -m pytest -v -s --alluredir=reports/allure/brandings api/brandings/test_brandings.py
+	python -m pytest -v -s --alluredir=reports/allure/results api/brandings/test_brandings.py
 
 allure-generate-messages:
-	python -m pytest -v -s --alluredir=reports/allure/messages api/messages/test_messages.py
+	python -m pytest -v -s --alluredir=reports/allure/results api/messages/test_messages.py
 
 allure-generate-reports:
-	python -m pytest -v -s --alluredir=reports/allure/reports api/reports/test_reports.py
+	python -m pytest -v -s --alluredir=reports/allure/results api/reports/test_reports.py
 
 allure-generate-all:
-	python -m pytest -v -s --alluredir=reports/allure/all api/bookings/test_bookings.py api/rooms/test_rooms.py api/brandings/test_brandings.py api/messages/test_messages.py api/reports/test_reports.py
-
-allure-open:
-	allure serve reports/allure/
+	python -m pytest -v -s --alluredir=reports/allure/results api/bookings/test_bookings.py api/rooms/test_rooms.py api/brandings/test_brandings.py api/messages/test_messages.py api/reports/test_reports.py
 
 format:
 	python -m black **/*.py

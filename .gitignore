@@ -170,5 +170,6 @@ cython_debug/
 /reports/excel/*
 /reports/html/*
 /reports/junitxml/*
+/reports/markdown/*
 
 !.gitkeep

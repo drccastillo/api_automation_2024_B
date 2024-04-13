@@ -1,0 +1,21 @@
+{
+    "request": {
+        "method": "POST",
+        "url": "/booking/"
+    },
+    "response": {
+        "body": {
+            "errorCode": 400,
+            "error": "BAD_REQUEST",
+            "errorMessage": "Validation failed for argument [0] in public org.springframework.http.ResponseEntity com.automationintesting.api.BookingController.createBooking(com.automationintesting.model.db.Booking) throws java.sql.SQLException: [Field error in object 'booking' on field 'firstname': rejected value [null]; codes [NotBlank.booking.firstname,NotBlank.firstname,NotBlank.java.lang.String,NotBlank]; arguments [org.springframework.context.support.DefaultMessageSourceResolvable: codes [booking.firstname,firstname]; arguments []; default message [firstname]]; default message [Firstname should not be blank]] ",
+            "fieldErrors": [
+                "Firstname should not be blank"
+            ]
+        }
+    },
+    "headers": {
+        "Content-Type": "application/json",
+        "Transfer-Encoding": "chunked"
+    },
+    "status_code": 400
+}

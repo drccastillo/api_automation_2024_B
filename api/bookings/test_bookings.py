@@ -72,16 +72,29 @@ class TestBookings:
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_health_check")
     
     
-    @pytest.mark.acceptance
-    def test_create_booking(self, create_room, log_test_names):
+    @pytest.mark.parametrize(
+        "scenario, file_name",
+        [
+            pytest.param("good", "create_booking", marks=pytest.mark.acceptance),
+            pytest.param("no_firstname", "create_booking_bad_body", marks=pytest.mark.functional),
+            pytest.param("no_lastname", "create_booking_bad_body", marks=pytest.mark.functional),
+            pytest.param("no_roomid", "create_booking_bad_body", marks=pytest.mark.functional),
+            pytest.param("no_checkin", "create_booking_bad_body", marks=pytest.mark.functional),
+            pytest.param("no_checkout", "create_booking_bad_body", marks=pytest.mark.functional),
+            pytest.param("no_bookingdates", "create_booking_bad_body", marks=pytest.mark.functional),
+        ],
+    )
+    def test_create_booking(self, create_room, scenario, file_name, log_test_names):
         """
-        Test create booking
+        Test create booking with both good and bad scenarios.
         """
-        LOGGER.info("Test create booking")
-        body_booking = self.booking.generate_data(room_id=create_room)
+        LOGGER.info(f"Test create booking with scenario: {scenario}")
+        body_booking = self.booking.generate_data(room_id=create_room, scenario=scenario)
         response = self.booking.create_booking(body=body_booking)
-        self.validate.validate_response(actual_response=response, endpoint="booking", file_name="create_booking")
-        self.bookings_list.append(response["json"]["bookingid"])
+        self.validate.validate_response(actual_response=response, endpoint="booking", file_name=file_name)
+        
+        if scenario == "good":
+            self.bookings_list.append(response["json"]["bookingid"])
 
 
     @pytest.mark.acceptance
@@ -103,7 +116,8 @@ class TestBookings:
         LOGGER.info("Test delete booking")
         response = self.booking.delete_booking(booking_id=create_booking['booking_id'])
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="delete_booking")
-
+       
+    
     @classmethod
     def teardown_class(cls):
         """

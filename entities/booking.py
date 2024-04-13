@@ -1,6 +1,5 @@
 import logging
 from faker import Faker
-from httpx import delete
 from config.config import BASE_URL
 from utils.logger import get_logger
 from helpers.rest_client import RestClient
@@ -21,9 +20,13 @@ class Booking:
         else:
             self.rest_client = rest_client
 
-    def generate_data(self, room_id):
+
+    def generate_booking_dates(self):
         """
-        Generate booking body with fake data
+        Generate booking dates with fake data.
+
+        Returns:
+            dict: The booking dates.
         """
         checkin_date = self.fake.date_between(start_date="-20y", end_date="-1m")
         checkout_date = self.fake.date_between_dates(
@@ -31,20 +34,98 @@ class Booking:
             date_end=checkin_date + timedelta(days=self.fake.random_int(min=2, max=10)),
         )
 
-        data = {
+        return {
+            "checkin": checkin_date.strftime("%Y-%m-%d"),
+            "checkout": checkout_date.strftime("%Y-%m-%d"),
+        }
+
+    def generate_good_data(self, room_id):
+        """
+        Generate good booking body with fake data.
+
+        Args:
+            room_id (int): The ID of the room for the booking.
+
+        Returns:
+            dict: The booking body.
+        """
+        return {
             "firstname": self.fake.first_name(),
             "lastname": self.fake.last_name(),
             "totalprice": self.fake.random_int(min=1, max=999),
             "depositpaid": self.fake.boolean(),
-            "bookingdates": {
-                "checkin": checkin_date.strftime("%Y-%m-%d"),
-                "checkout": checkout_date.strftime("%Y-%m-%d"),
-            },
+            "bookingdates": self.generate_booking_dates(),
             "additionalneeds": self.fake.sentence(),
             "roomid": room_id,
         }
-        LOGGER.info("new booking %s", data)
+
+    def generate_bad_data(self, room_id, bad_scenario):
+        """
+        Generate booking body with fake data based on the bad scenario.
+
+        Args:
+            room_id (int): The ID of the room for the booking.
+            bad_scenario (str): The scenario for which to generate the booking body. 
+                                Should be one of the following: "no_firstname", "no_lastname", 
+                                "no_roomid", "no_checkin", "no_checkout", "no_bookingdates".
+
+        Returns:
+            dict: The booking body.
+        """
+        data = self.generate_good_data(room_id)
+
+        bad_scenario_map = {
+            "no_firstname": "firstname",
+            "no_lastname": "lastname",
+            "no_roomid": "roomid",
+            "no_checkin": "bookingdates.checkin",
+            "no_checkout": "bookingdates.checkout",
+            "no_bookingdates": "bookingdates",
+        }
+        if bad_scenario not in bad_scenario_map:
+            raise ValueError(f"Invalid bad scenario: {bad_scenario}")
+
+        if "." in bad_scenario_map[bad_scenario]:
+            key, subkey = bad_scenario_map[bad_scenario].split(".")
+            if key in data and subkey in data[key]:
+                del data[key][subkey]
+        else:
+            data[bad_scenario_map[bad_scenario]] = None
+
         return data
+
+    def generate_data(self, room_id, scenario="good"):
+        """
+        Generate booking body with fake data based on the scenario.
+
+        Args:
+            room_id (int): The ID of the room for the booking.
+            scenario (str): The scenario for which to generate the booking body. 
+                            Should be either "good" or one of the following bad scenarios: 
+                            "no_firstname", "no_lastname", "no_roomid", "no_checkin", 
+                            "no_checkout", "no_bookingdates". Defaults to "good".
+
+        Returns:
+            dict: The booking body.
+        """
+        scenario_map = {
+            "good": self.generate_good_data,
+            "no_firstname": lambda room_id: self.generate_bad_data(room_id, "no_firstname"),
+            "no_lastname": lambda room_id: self.generate_bad_data(room_id, "no_lastname"),
+            "no_roomid": lambda room_id: self.generate_bad_data(room_id, "no_roomid"),
+            "no_checkin": lambda room_id: self.generate_bad_data(room_id, "no_checkin"),
+            "no_checkout": lambda room_id: self.generate_bad_data(room_id, "no_checkout"),
+            "no_bookingdates": lambda room_id: self.generate_bad_data(room_id, "no_bookingdates"),
+        }
+
+        if scenario not in scenario_map:
+            raise ValueError(f"Invalid scenario: {scenario}")
+
+        data = scenario_map[scenario](room_id)
+
+        LOGGER.info("new bad booking %s", data)
+        return data
+    
 
     def all_bookings(self):
         """

@@ -52,9 +52,9 @@ class RestClient:
                     except json.JSONDecodeError:
                         response_dict["json"] = {"msg": "No body content"}
                 else:
-                    response_dict["json"] = {"error": str(http_err)}
+                    response_dict["json"] = {"msg": str(http_err)}
             else:
-                response_dict["json"] = {"error": str(http_err)}
+                response_dict["json"] = {"msg": str(http_err)}
         except requests.exceptions.ConnectionError as conn_err:
             LOGGER.error(f"Error connecting: {conn_err}")
             response_dict["json"] = {"error": str(conn_err)}
@@ -63,7 +63,7 @@ class RestClient:
             response_dict["json"] = {"error": str(timeout_err)}
         except requests.exceptions.RequestException as err:
             LOGGER.error(f"Error: {err}")
-            response_dict["json"] = {"error": str(err)}
+            response_dict["json"] = {"msg": str(err)}
         finally:
             if response is not None:
                 response_dict.update(

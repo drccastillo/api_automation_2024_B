@@ -1,0 +1,13 @@
+{
+    "request": {
+        "method": "GET",
+        "url": "/booking/{bookingid}"
+    },
+    "response": {
+        "body": {
+            "msg": "404 Client Error:  for url: http://localhost:8080/booking/6988"
+        }
+    },
+    "headers": {},
+    "status_code": 404
+}

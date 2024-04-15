@@ -4,6 +4,7 @@ This module contains fixtures for the RESTful Booker API tests.
 
 import logging
 import os
+import random
 
 import pytest
 from utils.logger import get_logger
@@ -62,6 +63,14 @@ def validate_token(token, auth):
         os.environ["TOKEN"] = token_id
 
     LOGGER.debug("The cookie is: %s", auth.rest_client.headers["cookie"])
+
+
+@pytest.fixture()
+def booking_id(scenario, create_booking):
+    if scenario == "exist":
+        return create_booking["booking_id"]
+    else:
+        return random.randint(1000, 9999)
 
 
 @pytest.fixture()
@@ -133,7 +142,7 @@ def delete_booking(booking_id, booking):
     """
     Function to delete a booking.
     """
-    LOGGER.info("Function to delete a room")
+    LOGGER.info("Function to delete a booking")
     booking.delete_booking(booking_id)
 
 

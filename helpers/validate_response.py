@@ -70,14 +70,6 @@ class ValidateResponse:
         json_file.close()
         return data
 
-    """
-    json1'{'rooms': [{'roomid': 1, 'roomName': '101', 'type': 'single', 'accessible': True, 'image': 'https://www.mwtestconsultancy.co.uk/img/testim/room2.jpg', 'description': 'Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.', 'features': ['TV', 'WiFi', 'Safe'], 'roomPrice': 100}]}'
-    json2: '{'rooms': [{'roomid': 1, 'roomName': '101', 'type': 'single', 'accessible': True, 'image': 'https://www.mwtestconsultancy.co.uk/img/testim/room2.jpg', 'description': 'Aenean porttitor mauris sit amet lacinia molestie. In posuere accumsan aliquet. Maecenas sit amet nisl massa. Interdum et malesuada fames ac ante.', 'features': ['TV', 'WiFi', 'Safe'], 'roomPrice': 100}]}'
-    Compara todo los keys de los dos jsons, solos keys de todos los niveles
-    Tambien use el LOGGER para imprimir cada key de cada json que se compara. algo como el key se necuntra en el json2
-    Los valores no debe compararse solos los keys
-    """
-
     @staticmethod
     def compare_json_keys(json1, json2):
         results = []

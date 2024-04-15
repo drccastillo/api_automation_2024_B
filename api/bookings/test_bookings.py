@@ -31,15 +31,21 @@ class TestBookings:
         response = self.booking.all_bookings()
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_all_bookings")
 
-    
-    @pytest.mark.acceptance
-    def test_get_booking(self, create_booking, log_test_names):
+
+    @pytest.mark.parametrize(
+        "scenario, file_name",
+        [
+            pytest.param("exist", "get_booking", marks=pytest.mark.acceptance),
+            pytest.param("not_exist", "get_booking_not_exist", marks=pytest.mark.functional),
+        ],
+    )   
+    def test_get_booking(self, booking_id, scenario, file_name, log_test_names):
         """
         Test get booking endpoint
         """
-        LOGGER.info("Test get booking")
-        response = self.booking.specific_booking(booking_id=create_booking["booking_id"])
-        self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_booking")
+        LOGGER.info(f"Test get booking with scenario: {scenario}")
+        response = self.booking.specific_booking(booking_id=booking_id)
+        self.validate.validate_response(actual_response=response, endpoint="booking", file_name=file_name)
     
     
     @pytest.mark.acceptance
@@ -70,8 +76,8 @@ class TestBookings:
         LOGGER.info("Test get health check")
         response = self.booking.health_check_booking()
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="get_health_check")
-    
-    
+
+
     @pytest.mark.parametrize(
         "scenario, file_name",
         [
@@ -107,7 +113,6 @@ class TestBookings:
         response = self.booking.update_booking(booking_id=create_booking['booking_id'], body=body_update_booking)
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="update_booking")
 
-
     @pytest.mark.acceptance
     def test_delete_booking(self, create_booking, log_test_names):
         """
@@ -116,7 +121,6 @@ class TestBookings:
         LOGGER.info("Test delete booking")
         response = self.booking.delete_booking(booking_id=create_booking['booking_id'])
         self.validate.validate_response(actual_response=response, endpoint="booking", file_name="delete_booking")
-       
     
     @classmethod
     def teardown_class(cls):

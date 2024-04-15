@@ -1,5 +1,6 @@
 import logging
 import pytest
+import allure
 
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
@@ -9,6 +10,9 @@ from entities.branding import Branding
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
+
+@allure.epic("Branding API")
+@allure.story("Branding API Endpoints")
 class TestBrandings:
     @classmethod
     def setup_class(cls):
@@ -20,7 +24,8 @@ class TestBrandings:
         cls.branding = Branding()
         cls.validate = ValidateResponse()
 
-
+    @allure.title("Get all brandings")
+    @allure.tag("Branding", "Get")
     @pytest.mark.acceptance
     def test_get_all_brandings(self, log_test_names):
         """
@@ -31,6 +36,8 @@ class TestBrandings:
         self.validate.validate_response(actual_response=response, endpoint="branding", file_name="get_all_brandings")
 
 
+    @allure.title("Check health of branding service")
+    @allure.tag("Branding", "Get")
     @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names):    
         """
@@ -41,6 +48,8 @@ class TestBrandings:
         self.validate.validate_response(actual_response=response, endpoint="branding", file_name="get_health_check")
 
 
+    @allure.title("Update branding")
+    @allure.tag("Branding", "Update")
     @pytest.mark.acceptance
     def test_update_branding(self, log_test_names):
         """

@@ -1,5 +1,6 @@
 import logging
 import pytest
+import allure
 
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
@@ -8,6 +9,8 @@ from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
+@allure.epic("Room API")
+@allure.story("Room API Endpoints")
 class TestRooms:
     @classmethod
     def setup_class(cls):
@@ -21,6 +24,8 @@ class TestRooms:
         cls.room_list = []
 
 
+    @allure.title("Get all rooms")
+    @allure.tag("Room", "Get")
     @pytest.mark.acceptance
     def test_get_all_rooms(self, log_test_names):
         """
@@ -31,6 +36,8 @@ class TestRooms:
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="get_all_rooms")
 
 
+    @allure.title("Get a room")
+    @allure.tag("Room", "Get")
     @pytest.mark.acceptance
     def test_get_room(self, create_room, log_test_names):
         """
@@ -41,6 +48,8 @@ class TestRooms:
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="get_room")
     
 
+    @allure.title("Check health of room service")
+    @allure.tag("Room", "Get")
     @pytest.mark.acceptance
     def test_get_health_check(self, log_test_names): # noqa: N805   
         """
@@ -51,6 +60,8 @@ class TestRooms:
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="get_health_check")
     
 
+    @allure.title("Create a room")
+    @allure.tag("Room", "Create")
     @pytest.mark.acceptance
     def test_create_room(self, log_test_names):
         """
@@ -63,6 +74,8 @@ class TestRooms:
         self.room_list.append(response["json"]["roomid"])
 
 
+    @allure.title("Update a room")
+    @allure.tag("Room", "Update")
     @pytest.mark.acceptance
     def test_update_room(self, create_room, log_test_names):
         """
@@ -74,6 +87,8 @@ class TestRooms:
         self.validate.validate_response(actual_response=response, endpoint="room", file_name="update_room")
     
 
+    @allure.title("Delete a room")
+    @allure.tag("Room", "Delete")
     @pytest.mark.acceptance
     def test_delete_room(self, create_room, log_test_names):
         """

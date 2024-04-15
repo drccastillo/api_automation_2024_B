@@ -38,7 +38,7 @@ class TestBrandings:
 
     @allure.title("Check health of branding service")
     @allure.tag("Branding", "Get")
-    @pytest.mark.acceptance
+    @pytest.mark.smoke
     def test_get_health_check(self, log_test_names):    
         """
         Test get health check endpoint

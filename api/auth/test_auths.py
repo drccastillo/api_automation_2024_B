@@ -1,5 +1,6 @@
 import logging
 import pytest
+import allure
 
 from helpers.validate_response import ValidateResponse
 from helpers.rest_client import RestClient
@@ -10,6 +11,8 @@ from entities.auth import Auth
 LOGGER = get_logger(__name__, logging.DEBUG)
 
 
+@allure.epic("Auth API")
+@allure.story("Auth API Endpoints")
 class TestAuth:
     @classmethod
     def setup_class(cls):
@@ -22,6 +25,8 @@ class TestAuth:
         cls.list_tokens = []
 
 
+    @allure.title("Create a token")
+    @allure.tag("Auth", "Create")
     @pytest.mark.acceptance
     def test_create_token(self, log_test_names):
         """
@@ -34,6 +39,8 @@ class TestAuth:
         LOGGER.debug("Cookie token: %s", response["cookies"]["token"])
 
 
+    @allure.title("Validate a token")
+    @allure.tag("Auth", "Validate")
     @pytest.mark.acceptance
     def test_validate_token(self, create_token, log_test_names):
         """
@@ -44,6 +51,8 @@ class TestAuth:
         self.validate.validate_response(actual_response=response, endpoint="auth", file_name="validate_token")
 
 
+    @allure.title("Destroy a token")
+    @allure.tag("Auth", "Delete")
     @pytest.mark.acceptance
     def test_destroy_token(self, create_token, log_test_names):
         """
@@ -53,6 +62,17 @@ class TestAuth:
         response = self.auth.destroy_token(token=create_token)
         self.validate.validate_response(actual_response=response, endpoint="auth", file_name="destroy_token")
 
+
+    @allure.title("Check health of the auth service")
+    @allure.tag("Auth", "Health")
+    @pytest.mark.smoke
+    def test_health_check_auth(self, log_test_names):
+        """
+        Test get health check endpoint
+        """
+        LOGGER.info("Test get health check")
+        response = self.auth.health_check_auth()
+        self.validate.validate_response(actual_response=response, endpoint="auth", file_name="get_health_check")
 
     @classmethod
     def teardown_class(cls):

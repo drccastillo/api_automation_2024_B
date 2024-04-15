@@ -61,7 +61,7 @@ class TestMessages:
 
     @allure.title("Check health of message service")
     @allure.tag("Message", "Get")
-    @pytest.mark.acceptance
+    @pytest.mark.smoke
     def test_get_health_check(self, log_test_names):    
         """
         Test get health check endpoint

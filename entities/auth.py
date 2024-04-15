@@ -59,3 +59,13 @@ class Auth:
             method_name="post", url=url_auth_logout, body=body_token
         )
         return response
+    
+    def health_check_auth(self):
+        """
+        Health check auth
+        """
+        url_health_check_auth = f"{self.url_auth}actuator/health"
+        response = self.rest_client.request(
+            method_name="get", url=url_health_check_auth
+        )
+        return response

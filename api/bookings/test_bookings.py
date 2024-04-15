@@ -84,7 +84,7 @@ class TestBookings:
     
     @allure.title("Check health of the booking service")
     @allure.tag("Booking", "Get")
-    @pytest.mark.acceptance
+    @pytest.mark.smoke
     def test_get_health_check(self, log_test_names): # noqa: N805
         """
         Test get health check endpoint

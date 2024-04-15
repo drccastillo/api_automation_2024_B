@@ -59,7 +59,7 @@ class Auth:
             method_name="post", url=url_auth_logout, body=body_token
         )
         return response
-    
+
     def health_check_auth(self):
         """
         Health check auth

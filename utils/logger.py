@@ -6,7 +6,7 @@ logger.py
 """
 
 import logging
-import os
+
 import pathlib
 import sys
 from datetime import datetime

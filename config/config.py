@@ -11,6 +11,9 @@ abs_path = os.path.abspath(__file__ + "../../../")
 # Load environment variables from the .env file
 load_dotenv()
 
+# Webhook URL for sending notifications
+WEB_HOOK = os.getenv("RESTFUL_BOOKER_WEB_HOOK")
+
 # Base URL for the Restful-Booker API
 BASE_URL = os.getenv("RESTFUL_BOOKER_BASE_URL", "https://restful-booker.herokuapp.com")
 

@@ -1,5 +1,11 @@
+"""
+Module containing the Message class with message-related operations.
+"""
+
 import logging
+
 from faker import Faker
+
 from config.config import BASE_URL
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -61,9 +67,7 @@ class Message:
         Unread messages endpoint
         """
         url_get_unread_messages = f"{self.url_messages}count"
-        response = self.rest_client.request(
-            method_name="get", url=url_get_unread_messages
-        )
+        response = self.rest_client.request(method_name="get", url=url_get_unread_messages)
         return response
 
     def health_check_message(self):
@@ -92,9 +96,7 @@ class Message:
         Mark message as read endpoint
         """
         url_mark_message_as_read = f"{self.url_messages}{message_id}/read"
-        response = self.rest_client.request(
-            method_name="put", url=url_mark_message_as_read
-        )
+        response = self.rest_client.request(method_name="put", url=url_mark_message_as_read)
         return response
 
     def delete_message(self, message_id):
@@ -102,7 +104,5 @@ class Message:
         Delete message endpoint
         """
         url_delete_message = f"{self.url_messages}{message_id}"
-        response = self.rest_client.request(
-            method_name="delete", url=url_delete_message
-        )
+        response = self.rest_client.request(method_name="delete", url=url_delete_message)
         return response

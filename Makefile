@@ -4,8 +4,11 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
-log:
-	python -m unittest unittests/test_logger.py
+test-logger:
+	- python -m unittest unittests/test_logger.py
+
+test-restclient:
+	- python -m unittest unittests/test_rest_client.py
 
 test-all:
 	- python -m pytest -v api/rooms/test_rooms.py api/bookings/test_bookings.py api/brandings/test_brandings.py api/messages/test_messages.py api/reports/test_reports.py
@@ -172,10 +175,10 @@ web-hook-all: markdown-all
 	python utils/web_hook.py all
 
 format:
-	python -m black **/*.py
+	find . -type f -name '*.py' -not -path '*/\.git/*' -not -path '*/\.gitignore' -not -path '*/\.*' | xargs python -m black --line-length=100
 
 lint:
-	pylint unittests/test_logger.py
+	- pylint **/*.py
 
 all: install lint test
 

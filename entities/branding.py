@@ -1,8 +1,14 @@
+"""
+Module containing the Branding class for branding operations.
+"""
+
 import logging
 import random
 import re
 import string
+
 from faker import Faker
+
 from config.config import BASE_URL
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
@@ -38,13 +44,18 @@ class Branding:
                 return phone_number
 
     def generate_string(self, pattern, min_length, max_length):
+        """
+        Generate a string of correct length and pattern
+        """
         while True:
-            string = self.fake.text(max_nb_chars=max_length)
+            generated_string = self.fake.text(max_nb_chars=max_length)
             regex_pattern = r"[^&.\w\s]" if "." in pattern else r"[^&\w\s]"
-            string = re.sub(regex_pattern, " ", string)
-            string = re.sub(r"\s+", " ", string).strip()
-            if min_length <= len(string) <= max_length and re.match(pattern, string):
-                return string
+            generated_string = re.sub(regex_pattern, " ", generated_string)
+            generated_string = re.sub(r"\s+", " ", generated_string).strip()
+            if min_length <= len(generated_string) <= max_length and re.match(
+                pattern, generated_string
+            ):
+                return generated_string
 
     def generate_data(self):
         """
@@ -81,9 +92,7 @@ class Branding:
         Health check branding endpoint
         """
         url_health_check_branding = f"{self.url_branding}actuator/health"
-        response = self.rest_client.request(
-            method_name="get", url=url_health_check_branding
-        )
+        response = self.rest_client.request(method_name="get", url=url_health_check_branding)
         return response
 
     def update_branding(self, body=None):

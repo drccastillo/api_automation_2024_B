@@ -1,3 +1,7 @@
+"""
+Module to validate the response from the API
+"""
+
 import json
 import logging
 
@@ -8,10 +12,16 @@ LOGGER = get_logger(__name__, logging.DEBUG)
 
 
 class ValidateResponse:
+    """
+    Class to validate the response from the API
+    """
+
     def validate_response(self, actual_response=None, endpoint=None, file_name=None):
         """
+        Validate the response from the API
         :param actual_response: response from the API
         :param endpoint: endpoint of the API
+        :param file_name: name of the file
         """
         if actual_response is not None:
             # read from json file
@@ -27,9 +37,7 @@ class ValidateResponse:
                 "status_code",
             )
             # validate headers
-            self.validate_value(
-                expected_response["headers"], actual_response["headers"], "headers"
-            )
+            self.validate_value(expected_response["headers"], actual_response["headers"], "headers")
             # validate body
             self.validate_value(
                 expected_response["response"]["body"], actual_response["json"], "body"
@@ -37,6 +45,7 @@ class ValidateResponse:
 
     def validate_value(self, expected_value, actual_value, key_compare):
         """
+        Validate the expected and actual values
         :param expected_value: expected value
         :param actual_value: actual value
         :param key_compare: key to compare
@@ -50,21 +59,24 @@ class ValidateResponse:
             for header, expected_header_value in expected_value.items():
                 if header == "Set-Cookie":
                     assert (
-                        "Set-Cookie" in actual_value
-                        and "token" in actual_value["Set-Cookie"]
+                        "Set-Cookie" in actual_value and "token" in actual_value["Set-Cookie"]
                     ), error_message
                 else:
                     assert (
-                        header in actual_value
-                        and expected_header_value == actual_value[header]
+                        header in actual_value and expected_header_value == actual_value[header]
                     ), error_message
         else:
             assert expected_value == actual_value, error_message
 
     @staticmethod
     def read_input_data_json(file_name):
+        """
+        Read the input data from the json file
+        :param file_name: name of the file
+        :return: data from the json file
+        """
         LOGGER.debug("Reading input data from file: %s", file_name)
-        with open(file_name, "r") as json_file:
+        with open(file_name, "r", encoding="utf-8") as json_file:
             data = json.load(json_file)
         LOGGER.debug("Input data json: %s", data)
         json_file.close()
@@ -72,15 +84,19 @@ class ValidateResponse:
 
     @staticmethod
     def compare_json_keys(json1, json2):
+        """
+        Compare the keys in the json
+        :param json1: json1
+        :param json2: json2
+        :return: True if keys are same else False
+        """
         results = []
 
         if isinstance(json1, dict) and isinstance(json2, dict):
             for key in json1.keys():
                 if key in json2.keys():
                     LOGGER.debug("Key '%s' found in json2", key)
-                    results.append(
-                        ValidateResponse.compare_json_keys(json1[key], json2[key])
-                    )
+                    results.append(ValidateResponse.compare_json_keys(json1[key], json2[key]))
                 else:
                     LOGGER.debug("Key '%s' not found in json2", key)
                     results.append(False)

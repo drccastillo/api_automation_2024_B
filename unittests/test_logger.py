@@ -13,6 +13,9 @@ LOGGER = get_logger(__name__, logging.DEBUG)
 
 
 class TestLogger(unittest.TestCase):
+    """
+    Test class for logger
+    """
 
     def test_logging(self):
         """

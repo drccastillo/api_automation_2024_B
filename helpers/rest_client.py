@@ -1,7 +1,11 @@
+"""
+Module to send HTTP requests to the server
+"""
+
 import json
 import logging
 import requests
-import requests.utils
+
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from config.config import DEFAULT_HEADERS
@@ -11,15 +15,23 @@ LOGGER = get_logger(__name__, logging.DEBUG)
 
 
 class RestClient:
-    def __init__(self, headers=DEFAULT_HEADERS, timeout=155, max_retries=135):
+    """
+    Class to send HTTP requests to the server
+    """
+
+    def __init__(self, headers=None, timeout=155, max_retries=135):
+        """
+        Setup class for RestClient
+        :param headers: Headers for the request
+        :param timeout: Timeout for the request
+        :param max_retries: Maximum number of retries
+        """
         self.session = requests.Session()
-        self.session.headers.update(headers)
+        self.session.headers.update(headers if headers is not None else DEFAULT_HEADERS)
         self.timeout = timeout
 
         # Setup retries
-        retry_strategy = Retry(
-            total=max_retries, status_forcelist=[429, 500, 502, 503, 504]
-        )
+        retry_strategy = Retry(total=max_retries, status_forcelist=[429, 500, 502, 503, 504])
         adapter = HTTPAdapter(max_retries=retry_strategy)
         self.session.mount("https://", adapter)
         self.session.mount("http://", adapter)
@@ -41,10 +53,10 @@ class RestClient:
         try:
             method_func = getattr(self.session, method_name)
             response = method_func(url=url, json=body, timeout=self.timeout)
-            response.raise_for_status()
             response_dict.update({"json": self.get_json(response)})
+            response.raise_for_status()
         except requests.exceptions.HTTPError as http_err:
-            LOGGER.error(f"HTTP error occurred: {http_err}")
+            LOGGER.error("HTTP error occurred: %s", http_err)
             if response is not None:
                 if response.text:
                     try:
@@ -56,13 +68,13 @@ class RestClient:
             else:
                 response_dict["json"] = {"msg": str(http_err)}
         except requests.exceptions.ConnectionError as conn_err:
-            LOGGER.error(f"Error connecting: {conn_err}")
-            response_dict["json"] = {"error": str(conn_err)}
+            LOGGER.error("Error connecting: %s", conn_err)
+            response_dict["json"] = {"msg": str(conn_err)}
         except requests.exceptions.Timeout as timeout_err:
-            LOGGER.error(f"Timeout error: {timeout_err}")
-            response_dict["json"] = {"error": str(timeout_err)}
+            LOGGER.error("Timeout error: %s", timeout_err)
+            response_dict["json"] = {"msg": str(timeout_err)}
         except requests.exceptions.RequestException as err:
-            LOGGER.error(f"Error: {err}")
+            LOGGER.error("Error: %s", err)
             response_dict["json"] = {"msg": str(err)}
         finally:
             if response is not None:
@@ -76,9 +88,10 @@ class RestClient:
             else:
                 response_dict.update(
                     {
-                        "status_code": None,
+                        "status_code": "Unknown",
                         "headers": {"msg": "No response headers"},
-                        "cookies": {"msg": "No response content"},
+                        "json": {"msg": "No response body content"},
+                        "cookies": {"msg": "No response cookies"},
                     }
                 )
             LOGGER.debug("Status Code: %s", response_dict["status_code"])
@@ -90,6 +103,11 @@ class RestClient:
 
     @staticmethod
     def get_json(response):
+        """
+        Get JSON content from the response
+        :param response: Response from the server
+        :return: JSON content
+        """
         if response.text:
             try:
                 return response.json()
@@ -100,6 +118,11 @@ class RestClient:
 
     @staticmethod
     def get_header(response):
+        """
+        Get headers from the response
+        :param response: Response from the server
+        :return: Headers
+        """
         try:
             return response.headers
         except AttributeError:
@@ -107,6 +130,11 @@ class RestClient:
 
     @staticmethod
     def get_cookies(response):
+        """
+        Get cookies from the response
+        :param response: Response from the server
+        :return: Cookies
+        """
         try:
             return requests.utils.dict_from_cookiejar(response.cookies)
         except AttributeError:

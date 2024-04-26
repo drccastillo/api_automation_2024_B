@@ -2,11 +2,15 @@
 Module to test the rest client helper
 """
 
+from __future__ import annotations
+
 import logging
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 import requests
+
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
 
@@ -68,7 +72,9 @@ class TestRestClient(unittest.TestCase):
         Test a connection error from request method
         """
         LOGGER.info("Test request connection error")
-        mock_session.return_value.get.side_effect = requests.exceptions.ConnectionError()
+        mock_session.return_value.get.side_effect = (
+            requests.exceptions.ConnectionError()
+        )
         client = RestClient()
         response = client.request("get", "https://example.com")
         assert "msg" in response["json"]
@@ -90,7 +96,9 @@ class TestRestClient(unittest.TestCase):
         Test a general request exception from request method
         """
         LOGGER.info("Test request general request exception")
-        mock_session.return_value.get.side_effect = requests.exceptions.RequestException()
+        mock_session.return_value.get.side_effect = (
+            requests.exceptions.RequestException()
+        )
         client = RestClient()
         response = client.request("get", "https://example.com")
         assert "msg" in response["json"]

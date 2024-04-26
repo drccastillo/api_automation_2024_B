@@ -2,12 +2,14 @@
 Module to send HTTP requests to the server
 """
 
+from __future__ import annotations
+
 import json
 import logging
-import requests
 
+import requests.utils
 from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
+
 from config.config import DEFAULT_HEADERS
 from utils.logger import get_logger
 
@@ -19,7 +21,7 @@ class RestClient:
     Class to send HTTP requests to the server
     """
 
-    def __init__(self, headers=None, timeout=155, max_retries=135):
+    def __init__(self, headers=None, timeout=3, max_retries=5):
         """
         Setup class for RestClient
         :param headers: Headers for the request
@@ -29,12 +31,7 @@ class RestClient:
         self.session = requests.Session()
         self.session.headers.update(headers if headers is not None else DEFAULT_HEADERS)
         self.timeout = timeout
-
-        # Setup retries
-        retry_strategy = Retry(total=max_retries, status_forcelist=[429, 500, 502, 503, 504])
-        adapter = HTTPAdapter(max_retries=retry_strategy)
-        self.session.mount("https://", adapter)
-        self.session.mount("http://", adapter)
+        self.adapter = HTTPAdapter(max_retries=max_retries)
 
     def request(self, method_name, url, body=None):
         """
@@ -51,6 +48,8 @@ class RestClient:
         response = None  # Initialize response
         response_dict = {}
         try:
+            self.session.mount(url, self.adapter)
+
             method_func = getattr(self.session, method_name)
             response = method_func(url=url, json=body, timeout=self.timeout)
             response_dict.update({"json": self.get_json(response)})
@@ -83,7 +82,7 @@ class RestClient:
                         "status_code": response.status_code,
                         "headers": self.get_header(response),
                         "cookies": self.get_cookies(response),
-                    }
+                    },
                 )
             else:
                 response_dict.update(
@@ -92,7 +91,7 @@ class RestClient:
                         "headers": {"msg": "No response headers"},
                         "json": {"msg": "No response body content"},
                         "cookies": {"msg": "No response cookies"},
-                    }
+                    },
                 )
             LOGGER.debug("Status Code: %s", response_dict["status_code"])
             LOGGER.debug("Response headers: %s", response_dict["headers"])

@@ -5,8 +5,11 @@ test_logger.py
     test file to test configuration of logger file levels
 """
 
+from __future__ import annotations
+
 import logging
 import unittest
+
 from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)

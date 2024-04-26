@@ -2,6 +2,8 @@
 Module containing the Branding class for branding operations.
 """
 
+from __future__ import annotations
+
 import logging
 import random
 import re
@@ -53,7 +55,8 @@ class Branding:
             generated_string = re.sub(regex_pattern, " ", generated_string)
             generated_string = re.sub(r"\s+", " ", generated_string).strip()
             if min_length <= len(generated_string) <= max_length and re.match(
-                pattern, generated_string
+                pattern,
+                generated_string,
             ):
                 return generated_string
 
@@ -92,7 +95,10 @@ class Branding:
         Health check branding endpoint
         """
         url_health_check_branding = f"{self.url_branding}actuator/health"
-        response = self.rest_client.request(method_name="get", url=url_health_check_branding)
+        response = self.rest_client.request(
+            method_name="get",
+            url=url_health_check_branding,
+        )
         return response
 
     def update_branding(self, body=None):
@@ -104,6 +110,8 @@ class Branding:
         if body is None:
             body_branding = self.generate_data()
         response = self.rest_client.request(
-            method_name="put", url=url_update_branding, body=body_branding
+            method_name="put",
+            url=url_update_branding,
+            body=body_branding,
         )
         return response

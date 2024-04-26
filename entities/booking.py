@@ -2,14 +2,16 @@
 This module contains the Booking class which is used to manage bookings.
 """
 
-import logging
+from __future__ import annotations
 
+import logging
 from datetime import timedelta
+
 from faker import Faker
 
 from config.config import BASE_URL
-from utils.logger import get_logger
 from helpers.rest_client import RestClient
+from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
@@ -119,12 +121,24 @@ class Booking:
         """
         scenario_map = {
             "good": self.generate_good_data,
-            "no_firstname": lambda room_id: self.generate_bad_data(room_id, "no_firstname"),
-            "no_lastname": lambda room_id: self.generate_bad_data(room_id, "no_lastname"),
+            "no_firstname": lambda room_id: self.generate_bad_data(
+                room_id,
+                "no_firstname",
+            ),
+            "no_lastname": lambda room_id: self.generate_bad_data(
+                room_id,
+                "no_lastname",
+            ),
             "no_roomid": lambda room_id: self.generate_bad_data(room_id, "no_roomid"),
             "no_checkin": lambda room_id: self.generate_bad_data(room_id, "no_checkin"),
-            "no_checkout": lambda room_id: self.generate_bad_data(room_id, "no_checkout"),
-            "no_bookingdates": lambda room_id: self.generate_bad_data(room_id, "no_bookingdates"),
+            "no_checkout": lambda room_id: self.generate_bad_data(
+                room_id,
+                "no_checkout",
+            ),
+            "no_bookingdates": lambda room_id: self.generate_bad_data(
+                room_id,
+                "no_bookingdates",
+            ),
         }
 
         if scenario not in scenario_map:
@@ -148,7 +162,10 @@ class Booking:
         Get all bookings by room endpoint
         """
         url_get_bookings_by_room = f"{self.url_bookings}?roomid={room_id}"
-        response = self.rest_client.request(method_name="get", url=url_get_bookings_by_room)
+        response = self.rest_client.request(
+            method_name="get",
+            url=url_get_bookings_by_room,
+        )
         return response
 
     def specific_booking(self, booking_id):
@@ -164,7 +181,10 @@ class Booking:
         Get booking summary by room endpoint
         """
         url_get_booking_summary_by_room = f"{self.url_bookings}summary?roomid={room_id}"
-        response = self.rest_client.request(method_name="get", url=url_get_booking_summary_by_room)
+        response = self.rest_client.request(
+            method_name="get",
+            url=url_get_booking_summary_by_room,
+        )
         return response
 
     def health_check_booking(self):
@@ -172,7 +192,10 @@ class Booking:
         Health check booking endpoint
         """
         url_health_check_booking = f"{self.url_bookings}actuator/health"
-        response = self.rest_client.request(method_name="get", url=url_health_check_booking)
+        response = self.rest_client.request(
+            method_name="get",
+            url=url_health_check_booking,
+        )
         return response
 
     def create_booking(self, body=None, room_id=None):
@@ -184,7 +207,9 @@ class Booking:
         if body is None:
             body_booking = self.generate_data(room_id=room_id)
         response = self.rest_client.request(
-            method_name="post", url=url_create_booking, body=body_booking
+            method_name="post",
+            url=url_create_booking,
+            body=body_booking,
         )
         return response
 
@@ -197,7 +222,9 @@ class Booking:
         if body is None:
             body_booking = self.generate_data(room_id=room_id)
         response = self.rest_client.request(
-            method_name="put", url=url_update_booking, body=body_booking
+            method_name="put",
+            url=url_update_booking,
+            body=body_booking,
         )
         return response
 
@@ -206,5 +233,8 @@ class Booking:
         Delete booking endpoint
         """
         url_delete_booking = f"{self.url_bookings}{booking_id}"
-        response = self.rest_client.request(method_name="delete", url=url_delete_booking)
+        response = self.rest_client.request(
+            method_name="delete",
+            url=url_delete_booking,
+        )
         return response

@@ -69,7 +69,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
 > content-length: 28
-> 
+>
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
 * We are completely uploaded and fine
@@ -86,7 +86,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 200 
+< HTTP/2 200
 < content-type: application/json
 < content-length: 307
 < date: Mon, 11 Mar 2024 22:32:11 GMT
@@ -104,11 +104,11 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 < via: 1.1 51f43f7212ad8e67ae9503b19380b67c.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: h0QJio6l-rmc_szkNncBw1K_2lqseOsT8qxIYuwtCEPrMR0e2AcEmA==
-< 
+<
 { [307 bytes data]
 100   335  100   307  100    28    377     34 --:--:-- --:--:-- --:--:--   412
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 200 
+HTTP/2 200
 content-type: application/json
 content-length: 307
 date: Mon, 11 Mar 2024 22:32:11 GMT

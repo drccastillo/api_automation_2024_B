@@ -67,7 +67,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 > user-agent: curl/7.81.0
 > accept: */*
 > authorization: Bearer INVALID_TOKEN
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -79,7 +79,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 } [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 401 
+< HTTP/2 401
 < content-type: text/plain; charset=utf-8
 < content-length: 9
 < date: Mon, 11 Mar 2024 22:32:33 GMT
@@ -95,13 +95,13 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 < via: 1.1 7893def1fcfa053ac53965f46f4728ee.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: d9r82HyjaB15IlBSBVCuAPomcvCCZ4Urzh-2pLKI_0HWoQARXnP0fw==
-< 
+<
 { [9 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100     9  100     9    0     0     16      0 --:--:-- --:--:-- --:--:--    16
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 401 
+HTTP/2 401
 content-type: text/plain; charset=utf-8
 content-length: 9
 date: Mon, 11 Mar 2024 22:32:33 GMT
@@ -186,7 +186,7 @@ ForbiddenNote: Unnecessary use of -X or --request, GET is already inferred.
 > Host: api.todoist.com
 > user-agent: curl/7.81.0
 > accept: */*
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -200,7 +200,7 @@ ForbiddenNote: Unnecessary use of -X or --request, GET is already inferred.
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 404 
+< HTTP/2 404
 < content-type: application/json
 < content-length: 126
 < date: Mon, 11 Mar 2024 22:32:33 GMT
@@ -214,13 +214,13 @@ ForbiddenNote: Unnecessary use of -X or --request, GET is already inferred.
 < via: 1.1 0b03db44a4f3db5d63a11240f3fe13b0.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: -MI1Xp-blPlL_1KWrIY2sRjSRUpShKF58525-Nvx0KZsxcQc9mHb-Q==
-< 
+<
 { [126 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100   126  100   126    0     0    254      0 --:--:-- --:--:-- --:--:--   254
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 404 
+HTTP/2 404
 content-type: application/json
 content-length: 126
 date: Mon, 11 Mar 2024 22:32:33 GMT
@@ -304,7 +304,7 @@ x-amz-cf-id: -MI1Xp-blPlL_1KWrIY2sRjSRUpShKF58525-Nvx0KZsxcQc9mHb-Q==
 > accept: */*
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -318,7 +318,7 @@ x-amz-cf-id: -MI1Xp-blPlL_1KWrIY2sRjSRUpShKF58525-Nvx0KZsxcQc9mHb-Q==
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 400 
+< HTTP/2 400
 < content-type: text/plain; charset=utf-8
 < content-length: 46
 < date: Mon, 11 Mar 2024 22:32:34 GMT
@@ -336,11 +336,11 @@ x-amz-cf-id: -MI1Xp-blPlL_1KWrIY2sRjSRUpShKF58525-Nvx0KZsxcQc9mHb-Q==
 < via: 1.1 4bc37bed72cc3441acb8099dc21c8698.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: lZhhYPoQDz3v3brLiR0gk4NXi9nGj4gnyrBtrEyDbYPafSyE2mRLWg==
-< 
+<
 { [46 bytes data]
 100    46  100    46    0     0     87      0 --:--:-- --:--:-- --:--:--    87
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 400 
+HTTP/2 400
 content-type: text/plain; charset=utf-8
 content-length: 46
 date: Mon, 11 Mar 2024 22:32:34 GMT
@@ -427,7 +427,7 @@ Name must be provided for the project creationNote: Unnecessary use of -X or --r
 > Host: api.todoist.com
 > user-agent: curl/7.81.0
 > accept: */*
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -441,7 +441,7 @@ Name must be provided for the project creationNote: Unnecessary use of -X or --r
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 401 
+< HTTP/2 401
 < content-type: text/plain; charset=utf-8
 < content-length: 9
 < date: Mon, 11 Mar 2024 22:32:34 GMT
@@ -457,13 +457,13 @@ Name must be provided for the project creationNote: Unnecessary use of -X or --r
 < via: 1.1 53df790f50283121a495841b9963ea24.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: 4pERaKMFo6O4fag4s-yuro-b6lYftbjaLiZANTJwGRU9QSoye_bAgw==
-< 
+<
 { [9 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100     9  100     9    0     0     16      0 --:--:-- --:--:-- --:--:--    16
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 401 
+HTTP/2 401
 content-type: text/plain; charset=utf-8
 content-length: 9
 date: Mon, 11 Mar 2024 22:32:34 GMT

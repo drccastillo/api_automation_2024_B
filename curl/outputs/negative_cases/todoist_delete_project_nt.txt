@@ -67,7 +67,7 @@
 > accept: */*
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -81,7 +81,7 @@
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 400 
+< HTTP/2 400
 < content-type: text/plain; charset=utf-8
 < content-length: 22
 < date: Mon, 11 Mar 2024 22:32:40 GMT
@@ -98,13 +98,13 @@
 < via: 1.1 51f43f7212ad8e67ae9503b19380b67c.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: lHURGacVLlArq0MVmcX5qPEQizNRZBSIk1Ft7BFqZkAZl-6SRFLWyg==
-< 
+<
 { [22 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100    22  100    22    0     0     34      0 --:--:-- --:--:-- --:--:--    34
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 400 
+HTTP/2 400
 content-type: text/plain; charset=utf-8
 content-length: 22
 date: Mon, 11 Mar 2024 22:32:40 GMT
@@ -190,7 +190,7 @@ Invalid argument value  % Total    % Received % Xferd  Average Speed   Time    T
 > user-agent: curl/7.81.0
 > accept: */*
 > authorization: Bearer INVALID_TOKEN
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -204,7 +204,7 @@ Invalid argument value  % Total    % Received % Xferd  Average Speed   Time    T
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 401 
+< HTTP/2 401
 < content-type: text/plain; charset=utf-8
 < content-length: 9
 < date: Mon, 11 Mar 2024 22:32:41 GMT
@@ -221,11 +221,11 @@ Invalid argument value  % Total    % Received % Xferd  Average Speed   Time    T
 < via: 1.1 53df790f50283121a495841b9963ea24.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: 8GhJ8c1J7uBdV7qsg_efS1xlEPEHeTzHyaD0sra4wltDwv-gdk66cw==
-< 
+<
 { [9 bytes data]
 100     9  100     9    0     0     16      0 --:--:-- --:--:-- --:--:--    16
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 401 
+HTTP/2 401
 content-type: text/plain; charset=utf-8
 content-length: 9
 date: Mon, 11 Mar 2024 22:32:41 GMT
@@ -312,7 +312,7 @@ Forbidden  % Total    % Received % Xferd  Average Speed   Time    Time     Time 
 > accept: */*
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -326,7 +326,7 @@ Forbidden  % Total    % Received % Xferd  Average Speed   Time    Time     Time 
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 400 
+< HTTP/2 400
 < content-type: text/plain; charset=utf-8
 < content-length: 63
 < date: Mon, 11 Mar 2024 22:32:41 GMT
@@ -344,13 +344,13 @@ Forbidden  % Total    % Received % Xferd  Average Speed   Time    Time     Time 
 < via: 1.1 7d306155ab8019f7c5a3e7c3468732de.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: HlGULLHnfnzIOGl-8RHHsSQKZ0bVKfrFZuMHgomwLXCp3xawUwz7ww==
-< 
+<
 { [63 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100    63  100    63    0     0    116      0 --:--:-- --:--:-- --:--:--   116
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 400 
+HTTP/2 400
 content-type: text/plain; charset=utf-8
 content-length: 63
 date: Mon, 11 Mar 2024 22:32:41 GMT
@@ -438,7 +438,7 @@ At least one of name, color or is_favorite fields should be set  % Total    % Re
 > accept: */*
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -452,7 +452,7 @@ At least one of name, color or is_favorite fields should be set  % Total    % Re
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 204 
+< HTTP/2 204
 < date: Mon, 11 Mar 2024 22:32:42 GMT
 < access-control-allow-credentials: false
 < access-control-allow-origin: *
@@ -468,11 +468,11 @@ At least one of name, color or is_favorite fields should be set  % Total    % Re
 < via: 1.1 de07d2c238e1555cdb3d398a5c48fc18.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: rjpmUsagMoVQ__jTs1u0LmBTJWuu7F2pAkuOvQGOqDlzxxqFjLuc0A==
-< 
+<
 { [0 bytes data]
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 204 
+HTTP/2 204
 date: Mon, 11 Mar 2024 22:32:42 GMT
 access-control-allow-credentials: false
 access-control-allow-origin: *
@@ -488,4 +488,3 @@ x-cache: Miss from cloudfront
 via: 1.1 de07d2c238e1555cdb3d398a5c48fc18.cloudfront.net (CloudFront)
 x-amz-cf-pop: MIA3-C5
 x-amz-cf-id: rjpmUsagMoVQ__jTs1u0LmBTJWuu7F2pAkuOvQGOqDlzxxqFjLuc0A==
-

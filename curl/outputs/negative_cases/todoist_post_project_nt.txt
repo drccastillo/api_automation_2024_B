@@ -69,7 +69,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
 > content-length: 2
-> 
+>
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
 * We are completely uploaded and fine
@@ -86,7 +86,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 400 
+< HTTP/2 400
 < content-type: text/plain; charset=utf-8
 < content-length: 46
 < date: Mon, 11 Mar 2024 22:32:35 GMT
@@ -104,13 +104,13 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 < via: 1.1 0b03db44a4f3db5d63a11240f3fe13b0.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: bDxc4MZv_ASIZt0jBxw8pZKLQaY-tZxCseA-2EJHxAYaQuYxwb9HEQ==
-< 
+<
 { [46 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100    48  100    46  100     2     85      3 --:--:-- --:--:-- --:--:--    89
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 400 
+HTTP/2 400
 content-type: text/plain; charset=utf-8
 content-length: 46
 date: Mon, 11 Mar 2024 22:32:35 GMT
@@ -200,7 +200,7 @@ Name must be provided for the project creationNote: Unnecessary use of -X or --r
 > authorization: Bearer INVALID_TOKEN
 > content-length: 28
 > content-type: application/x-www-form-urlencoded
-> 
+>
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
 * We are completely uploaded and fine
@@ -217,7 +217,7 @@ Name must be provided for the project creationNote: Unnecessary use of -X or --r
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 401 
+< HTTP/2 401
 < content-type: text/plain; charset=utf-8
 < content-length: 9
 < date: Mon, 11 Mar 2024 22:32:35 GMT
@@ -234,13 +234,13 @@ Name must be provided for the project creationNote: Unnecessary use of -X or --r
 < via: 1.1 4de3cdbf8046367453bc168e829b445e.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: BizPej28jDHlsxow8x3Z_cvyFgMcycRKP9MYVVTfC_PZ5AHQkav_XQ==
-< 
+<
 { [9 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 100    37  100     9  100    28     15     48 --:--:-- --:--:-- --:--:--    64
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 401 
+HTTP/2 401
 content-type: text/plain; charset=utf-8
 content-length: 9
 date: Mon, 11 Mar 2024 22:32:35 GMT
@@ -328,7 +328,7 @@ Forbidden  % Total    % Received % Xferd  Average Speed   Time    Time     Time 
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
 > content-length: 28
-> 
+>
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
 * We are completely uploaded and fine
@@ -345,7 +345,7 @@ Forbidden  % Total    % Received % Xferd  Average Speed   Time    Time     Time 
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 403 
+< HTTP/2 403
 < server: CloudFront
 < date: Mon, 11 Mar 2024 22:32:36 GMT
 < content-type: text/html
@@ -355,11 +355,11 @@ Forbidden  % Total    % Received % Xferd  Average Speed   Time    Time     Time 
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: 4q_kzp72TL_OiplOtg4RXFrWeUO3vgDiOD6hzd875Mi4xymRQaXPLQ==
 < strict-transport-security: max-age=31536000; includeSubDomains; preload
-< 
+<
 { [915 bytes data]
 100   943  100   915  100    28   1970     60 --:--:-- --:--:-- --:--:--  2032
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 403 
+HTTP/2 403
 server: CloudFront
 date: Mon, 11 Mar 2024 22:32:36 GMT
 content-type: text/html
@@ -460,7 +460,7 @@ Request ID: 4q_kzp72TL_OiplOtg4RXFrWeUO3vgDiOD6hzd875Mi4xymRQaXPLQ==
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
 > content-length: 17
-> 
+>
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
 * We are completely uploaded and fine
@@ -477,7 +477,7 @@ Request ID: 4q_kzp72TL_OiplOtg4RXFrWeUO3vgDiOD6hzd875Mi4xymRQaXPLQ==
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 400 
+< HTTP/2 400
 < content-type: application/json
 < content-length: 159
 < date: Mon, 11 Mar 2024 22:32:36 GMT
@@ -492,11 +492,11 @@ Request ID: 4q_kzp72TL_OiplOtg4RXFrWeUO3vgDiOD6hzd875Mi4xymRQaXPLQ==
 < via: 1.1 8f18576d7056ccf2712062bde60aeafc.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: TU1EC5lhcfZoI3_oEDh5s6VA7rA-d45HlbVw2AKDfQwC5R0NIEQdlA==
-< 
+<
 { [159 bytes data]
 100   176  100   159  100    17    318     34 --:--:-- --:--:-- --:--:--   352
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 400 
+HTTP/2 400
 content-type: application/json
 content-length: 159
 date: Mon, 11 Mar 2024 22:32:36 GMT
@@ -583,7 +583,7 @@ x-amz-cf-id: TU1EC5lhcfZoI3_oEDh5s6VA7rA-d45HlbVw2AKDfQwC5R0NIEQdlA==
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
 > content-length: 28
-> 
+>
 * TLSv1.2 (OUT), TLS header, Supplemental data (23):
 } [5 bytes data]
 * We are completely uploaded and fine
@@ -600,7 +600,7 @@ x-amz-cf-id: TU1EC5lhcfZoI3_oEDh5s6VA7rA-d45HlbVw2AKDfQwC5R0NIEQdlA==
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 200 
+< HTTP/2 200
 < content-type: application/json
 < content-length: 307
 < date: Mon, 11 Mar 2024 22:32:37 GMT
@@ -618,11 +618,11 @@ x-amz-cf-id: TU1EC5lhcfZoI3_oEDh5s6VA7rA-d45HlbVw2AKDfQwC5R0NIEQdlA==
 < via: 1.1 e6bae4d10173db66ba5ca34e39baf8fa.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: TDDO3isbrzdi--OUVF_AKdI5NwKB2CoaS4TFurmoAourmwqFMjkbXA==
-< 
+<
 { [307 bytes data]
 100   335  100   307  100    28    355     32 --:--:-- --:--:-- --:--:--   387100   335  100   307  100    28    355     32 --:--:-- --:--:-- --:--:--   387
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 200 
+HTTP/2 200
 content-type: application/json
 content-length: 307
 date: Mon, 11 Mar 2024 22:32:37 GMT

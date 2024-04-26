@@ -2,10 +2,13 @@
 Module contains the Report class for handling report-related operations.
 """
 
+from __future__ import annotations
+
 import logging
-from utils.logger import get_logger
-from helpers.rest_client import RestClient
+
 from config.config import BASE_URL
+from helpers.rest_client import RestClient
+from utils.logger import get_logger
 
 
 LOGGER = get_logger(__name__, logging.DEBUG)
@@ -47,5 +50,8 @@ class Report:
         Health check report endpoint
         """
         url_health_check_report = f"{self.url_reports}actuator/health"
-        response = self.rest_client.request(method_name="get", url=url_health_check_report)
+        response = self.rest_client.request(
+            method_name="get",
+            url=url_health_check_report,
+        )
         return response

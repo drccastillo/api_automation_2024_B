@@ -67,7 +67,7 @@
 > accept: */*
 > authorization: Bearer 67a7cb818f2e4434218bfd0122c4d08b2ec7edb7
 > content-type: application/json
-> 
+>
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
 * TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
@@ -81,7 +81,7 @@
 { [5 bytes data]
 * TLSv1.2 (IN), TLS header, Supplemental data (23):
 { [5 bytes data]
-< HTTP/2 204 
+< HTTP/2 204
 < date: Mon, 11 Mar 2024 22:32:12 GMT
 < access-control-allow-credentials: false
 < access-control-allow-origin: *
@@ -97,11 +97,11 @@
 < via: 1.1 53df790f50283121a495841b9963ea24.cloudfront.net (CloudFront)
 < x-amz-cf-pop: MIA3-C5
 < x-amz-cf-id: LQVUrtEZvLeBdWgXtoc6ZP9LX2MXGRhFiIQkKkVaeeO1UqLSOlOtqw==
-< 
+<
 { [0 bytes data]
   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 * Connection #0 to host api.todoist.com left intact
-HTTP/2 204 
+HTTP/2 204
 date: Mon, 11 Mar 2024 22:32:12 GMT
 access-control-allow-credentials: false
 access-control-allow-origin: *
@@ -117,4 +117,3 @@ x-cache: Miss from cloudfront
 via: 1.1 53df790f50283121a495841b9963ea24.cloudfront.net (CloudFront)
 x-amz-cf-pop: MIA3-C5
 x-amz-cf-id: LQVUrtEZvLeBdWgXtoc6ZP9LX2MXGRhFiIQkKkVaeeO1UqLSOlOtqw==
-

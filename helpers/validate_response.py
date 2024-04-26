@@ -2,11 +2,13 @@
 Module to validate the response from the API
 """
 
+from __future__ import annotations
+
 import json
 import logging
 
-from utils.logger import get_logger
 from config.config import abs_path
+from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
@@ -26,7 +28,7 @@ class ValidateResponse:
         if actual_response is not None:
             # read from json file
             expected_response = self.read_input_data_json(
-                f"{abs_path}/api/input_data/{endpoint}/{file_name}.json"
+                f"{abs_path}/booker_api/input_data/{endpoint}/{file_name}.json",
             )
 
             # compare actual and expected response
@@ -37,10 +39,16 @@ class ValidateResponse:
                 "status_code",
             )
             # validate headers
-            self.validate_value(expected_response["headers"], actual_response["headers"], "headers")
+            self.validate_value(
+                expected_response["headers"],
+                actual_response["headers"],
+                "headers",
+            )
             # validate body
             self.validate_value(
-                expected_response["response"]["body"], actual_response["json"], "body"
+                expected_response["response"]["body"],
+                actual_response["json"],
+                "body",
             )
 
     def validate_value(self, expected_value, actual_value, key_compare):
@@ -59,11 +67,13 @@ class ValidateResponse:
             for header, expected_header_value in expected_value.items():
                 if header == "Set-Cookie":
                     assert (
-                        "Set-Cookie" in actual_value and "token" in actual_value["Set-Cookie"]
+                        "Set-Cookie" in actual_value
+                        and "token" in actual_value["Set-Cookie"]
                     ), error_message
                 else:
                     assert (
-                        header in actual_value and expected_header_value == actual_value[header]
+                        header in actual_value
+                        and expected_header_value == actual_value[header]
                     ), error_message
         else:
             assert expected_value == actual_value, error_message
@@ -76,7 +86,7 @@ class ValidateResponse:
         :return: data from the json file
         """
         LOGGER.debug("Reading input data from file: %s", file_name)
-        with open(file_name, "r", encoding="utf-8") as json_file:
+        with open(file_name, encoding="utf-8") as json_file:
             data = json.load(json_file)
         LOGGER.debug("Input data json: %s", data)
         json_file.close()
@@ -96,7 +106,9 @@ class ValidateResponse:
             for key in json1.keys():
                 if key in json2.keys():
                     LOGGER.debug("Key '%s' found in json2", key)
-                    results.append(ValidateResponse.compare_json_keys(json1[key], json2[key]))
+                    results.append(
+                        ValidateResponse.compare_json_keys(json1[key], json2[key]),
+                    )
                 else:
                     LOGGER.debug("Key '%s' not found in json2", key)
                     results.append(False)

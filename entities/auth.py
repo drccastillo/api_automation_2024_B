@@ -2,12 +2,14 @@
 This module contains the Auth class which provides methods for handling authentication.
 """
 
+from __future__ import annotations
+
 import logging
 
 from config.config import BASE_URL
 from config.config import CREDENTIALS
-from utils.logger import get_logger
 from helpers.rest_client import RestClient
+from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
@@ -41,7 +43,9 @@ class Auth:
         """
         url_auth_login = f"{self.url_auth}login"
         response = self.rest_client.request(
-            method_name="post", url=url_auth_login, body=CREDENTIALS
+            method_name="post",
+            url=url_auth_login,
+            body=CREDENTIALS,
         )
         return response
 
@@ -53,7 +57,9 @@ class Auth:
         url_auth_validate = f"{self.url_auth}validate"
         body_token = {"token": token}
         response = self.rest_client.request(
-            method_name="post", url=url_auth_validate, body=body_token
+            method_name="post",
+            url=url_auth_validate,
+            body=body_token,
         )
         return response
 
@@ -65,7 +71,9 @@ class Auth:
         url_auth_logout = f"{self.url_auth}logout"
         body_token = {"token": token}
         response = self.rest_client.request(
-            method_name="post", url=url_auth_logout, body=body_token
+            method_name="post",
+            url=url_auth_logout,
+            body=body_token,
         )
         return response
 
@@ -74,5 +82,8 @@ class Auth:
         Health check auth
         """
         url_health_check_auth = f"{self.url_auth}actuator/health"
-        response = self.rest_client.request(method_name="get", url=url_health_check_auth)
+        response = self.rest_client.request(
+            method_name="get",
+            url=url_health_check_auth,
+        )
         return response

@@ -2,6 +2,8 @@
 This module is used to send a report via webhook.
 """
 
+from __future__ import annotations
+
 import argparse
 import logging
 import os
@@ -33,7 +35,7 @@ class Webhook:
         :return: report message
         """
         if os.path.exists(report_path):
-            with open(report_path, "r", encoding="utf-8") as report:
+            with open(report_path, encoding="utf-8") as report:
                 report_content = report.read()
             return report_content
         LOGGER.error("%s does not exist", report_path)

@@ -23,12 +23,12 @@ class TestLogger(unittest.TestCase):
         """
         Method to demonstrate log levels
         """
-        LOGGER.debug("log DEBUG level")
-        LOGGER.info("log INFO level")
-        LOGGER.warning("log WARNING level")
-        LOGGER.error("log ERROR level")
-        LOGGER.critical("log CRITICAL level")
+        LOGGER.debug('log DEBUG level')
+        LOGGER.info('log INFO level')
+        LOGGER.warning('log WARNING level')
+        LOGGER.error('log ERROR level')
+        LOGGER.critical('log CRITICAL level')
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

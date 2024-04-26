@@ -34,11 +34,11 @@ class Webhook:
         :return: report message
         """
         if os.path.exists(report_path):
-            with open(report_path, encoding="utf-8") as report:
+            with open(report_path, encoding='utf-8') as report:
                 report_content = report.read()
             return report_content
-        LOGGER.error("%s does not exist", report_path)
-        raise FileNotFoundError(f"{report_path} does not exist")
+        LOGGER.error('%s does not exist', report_path)
+        raise FileNotFoundError(f'{report_path} does not exist')
 
     def send_message(self, message):
         """
@@ -49,14 +49,14 @@ class Webhook:
         try:
             self.team_message.send()
         except pymsteams.TeamsWebhookException as e:
-            LOGGER.error("Failed to send message: %s", e)
+            LOGGER.error('Failed to send message: %s', e)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Send a report via webhook.")
-    parser.add_argument("module", type=str, help="The module to send the report for.")
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Send a report via webhook.')
+    parser.add_argument('module', type=str, help='The module to send the report for.')
     args = parser.parse_args()
 
     webhook = Webhook(WEB_HOOK)
-    report_message = webhook.read_report(f"reports/markdown/md_report_{args.module}.md")
+    report_message = webhook.read_report(f'reports/markdown/md_report_{args.module}.md')
     webhook.send_message(report_message)

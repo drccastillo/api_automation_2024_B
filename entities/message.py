@@ -24,7 +24,7 @@ class Message:
         Setup class for Messages
         """
         self.fake = Faker()
-        self.url_messages = f"{BASE_URL}/message/"
+        self.url_messages = f'{BASE_URL}/message/'
         if rest_client is None:
             self.rest_client = RestClient()
         else:
@@ -39,11 +39,11 @@ class Message:
             phone_number = self.fake.phone_number()
 
         body_message = {
-            "name": self.fake.name(),
-            "email": self.fake.email(),
-            "phone": phone_number,
-            "subject": self.fake.sentence(nb_words=6),
-            "description": self.fake.text(max_nb_chars=200),
+            'name': self.fake.name(),
+            'email': self.fake.email(),
+            'phone': phone_number,
+            'subject': self.fake.sentence(nb_words=6),
+            'description': self.fake.text(max_nb_chars=200),
         }
         return body_message
 
@@ -51,25 +51,25 @@ class Message:
         """
         Get all messages endpoint
         """
-        url_get_messages = f"{self.url_messages}"
-        response = self.rest_client.request(method_name="get", url=url_get_messages)
+        url_get_messages = f'{self.url_messages}'
+        response = self.rest_client.request(method_name='get', url=url_get_messages)
         return response
 
     def specific_message(self, message_id):
         """
         Get specific message endpoint
         """
-        url_get_message = f"{self.url_messages}{message_id}"
-        response = self.rest_client.request(method_name="get", url=url_get_message)
+        url_get_message = f'{self.url_messages}{message_id}'
+        response = self.rest_client.request(method_name='get', url=url_get_message)
         return response
 
     def unread_messages(self):
         """
         Unread messages endpoint
         """
-        url_get_unread_messages = f"{self.url_messages}count"
+        url_get_unread_messages = f'{self.url_messages}count'
         response = self.rest_client.request(
-            method_name="get",
+            method_name='get',
             url=url_get_unread_messages,
         )
         return response
@@ -78,20 +78,20 @@ class Message:
         """
         Health check endpoint
         """
-        url_health_check = f"{self.url_messages}actuator/health"
-        response = self.rest_client.request(method_name="get", url=url_health_check)
+        url_health_check = f'{self.url_messages}actuator/health'
+        response = self.rest_client.request(method_name='get', url=url_health_check)
         return response
 
     def create_message(self, body=None):
         """
         Create message endpoint
         """
-        url_create_message = f"{self.url_messages}"
+        url_create_message = f'{self.url_messages}'
         body_message = body
         if body is None:
             body_message = self.generate_data()
         response = self.rest_client.request(
-            method_name="post",
+            method_name='post',
             url=url_create_message,
             body=body_message,
         )
@@ -101,9 +101,9 @@ class Message:
         """
         Mark message as read endpoint
         """
-        url_mark_message_as_read = f"{self.url_messages}{message_id}/read"
+        url_mark_message_as_read = f'{self.url_messages}{message_id}/read'
         response = self.rest_client.request(
-            method_name="put",
+            method_name='put',
             url=url_mark_message_as_read,
         )
         return response
@@ -112,9 +112,9 @@ class Message:
         """
         Delete message endpoint
         """
-        url_delete_message = f"{self.url_messages}{message_id}"
+        url_delete_message = f'{self.url_messages}{message_id}'
         response = self.rest_client.request(
-            method_name="delete",
+            method_name='delete',
             url=url_delete_message,
         )
         return response

@@ -30,12 +30,18 @@ repos:
     hooks:
       - id: pyupgrade
         args: [--py39-plus]
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.1.2
+  - repo: local
     hooks:
-      - id: ruff
-        args: [--fix]
-      - id: ruff-format
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [python]
+        args:
+            [
+            "-rn", # Only display messages
+            "--rcfile=.pylintrc", # Link to your config file
+            ]
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.9.0
     hooks:

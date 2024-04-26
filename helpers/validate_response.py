@@ -27,27 +27,27 @@ class ValidateResponse:
         if actual_response is not None:
             # read from json file
             expected_response = self.read_input_data_json(
-                f"{abs_path}/booker_api/input_data/{endpoint}/{file_name}.json",
+                f'{abs_path}/booker_api/input_data/{endpoint}/{file_name}.json',
             )
 
             # compare actual and expected response
             # validate status_code
             self.validate_value(
-                expected_response["status_code"],
-                actual_response["status_code"],
-                "status_code",
+                expected_response['status_code'],
+                actual_response['status_code'],
+                'status_code',
             )
             # validate headers
             self.validate_value(
-                expected_response["headers"],
-                actual_response["headers"],
-                "headers",
+                expected_response['headers'],
+                actual_response['headers'],
+                'headers',
             )
             # validate body
             self.validate_value(
-                expected_response["response"]["body"],
-                actual_response["json"],
-                "body",
+                expected_response['response']['body'],
+                actual_response['json'],
+                'body',
             )
 
     def validate_value(self, expected_value, actual_value, key_compare):
@@ -57,17 +57,17 @@ class ValidateResponse:
         :param actual_value: actual value
         :param key_compare: key to compare
         """
-        error_message = f"Expected value: {expected_value} but got: {actual_value}"
+        error_message = f'Expected value: {expected_value} but got: {actual_value}'
         LOGGER.debug("Expected value '%s': '%s'", key_compare, expected_value)
         LOGGER.debug("Actual value '%s': '%s'", key_compare, actual_value)
-        if key_compare == "body":
+        if key_compare == 'body':
             assert self.compare_json_keys(expected_value, actual_value), error_message
-        elif key_compare == "headers":
+        elif key_compare == 'headers':
             for header, expected_header_value in expected_value.items():
-                if header == "Set-Cookie":
+                if header == 'Set-Cookie':
                     assert (
-                        "Set-Cookie" in actual_value
-                        and "token" in actual_value["Set-Cookie"]
+                        'Set-Cookie' in actual_value
+                        and 'token' in actual_value['Set-Cookie']
                     ), error_message
                 else:
                     assert (
@@ -84,10 +84,10 @@ class ValidateResponse:
         :param file_name: name of the file
         :return: data from the json file
         """
-        LOGGER.debug("Reading input data from file: %s", file_name)
-        with open(file_name, encoding="utf-8") as json_file:
+        LOGGER.debug('Reading input data from file: %s', file_name)
+        with open(file_name, encoding='utf-8') as json_file:
             data = json.load(json_file)
-        LOGGER.debug("Input data json: %s", data)
+        LOGGER.debug('Input data json: %s', data)
         json_file.close()
         return data
 
@@ -120,6 +120,6 @@ class ValidateResponse:
         return False not in results
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     val = ValidateResponse()
     val.validate_response()

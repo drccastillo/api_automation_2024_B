@@ -14,7 +14,7 @@ test-all:
 	- python -m pytest -v booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py
 
 test-auth:
-	- python -m pytest -v booker_api/auth/test_auths.py
+	- python -m pytest -v booker_api/auths/test_auths.py
 
 test-bookings:
 	- python -m pytest -v booker_api/bookings/test_bookings.py
@@ -44,16 +44,16 @@ markdown-all:
 	- python -m pytest -v -s --md-report --md-report-output reports/markdown/md_report_all.md booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py
 
 junitxml-auth:
-	- python -m pytest -v -s --junitxml=reports/junitxml/report_auth.xml booker_api/auth/test_auths.py
+	- python -m pytest -v -s --junitxml=reports/junitxml/report_auth.xml booker_api/auths/test_auths.py
 
 html-auth:
-	- python -m pytest -v -s --html=reports/html/pytest_html_report_auth.html booker_api/auth/test_auths.py
+	- python -m pytest -v -s --html=reports/html/pytest_html_report_auth.html booker_api/auths/test_auths.py
 
 excel-auth:
-	- python -m pytest -v -s --excelreport=reports/excel/report_auth.xlsx booker_api/auth/test_auths.py
+	- python -m pytest -v -s --excelreport=reports/excel/report_auth.xlsx booker_api/auths/test_auths.py
 
 markdown-auth:
-	- python -m pytest -v -s --md-report --md-report-output reports/markdown/md_report_auth.md booker_api/auth/test_auths.py
+	- python -m pytest -v -s --md-report --md-report-output reports/markdown/md_report_auth.md booker_api/auths/test_auths.py
 
 junitxml-bookings:
 	- python -m pytest -v -s --junitxml=reports/junitxml/report_bookings.xml booker_api/bookings/test_bookings.py
@@ -139,7 +139,7 @@ allure-clean:
 	rm -rf reports/allure/reports/* reports/allure/results/*
 
 allure-generate-auth:
-	python -m pytest -v -s --alluredir=reports/allure/results booker_api/auth/test_auths.py
+	python -m pytest -v -s --alluredir=reports/allure/results booker_api/auths/test_auths.py
 
 allure-generate-bookings:
 	python -m pytest -v -s --alluredir=reports/allure/results booker_api/bookings/test_bookings.py

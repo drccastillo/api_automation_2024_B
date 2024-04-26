@@ -22,7 +22,7 @@ class Report:
         """
         Setup class for Reports
         """
-        self.url_reports = f"{BASE_URL}/report/"
+        self.url_reports = f'{BASE_URL}/report/'
         if rest_client is None:
             self.rest_client = RestClient()
         else:
@@ -32,25 +32,25 @@ class Report:
         """
         Get all reports endpoint
         """
-        url_get_reports = f"{self.url_reports}"
-        response = self.rest_client.request(method_name="get", url=url_get_reports)
+        url_get_reports = f'{self.url_reports}'
+        response = self.rest_client.request(method_name='get', url=url_get_reports)
         return response
 
     def specific_report(self, room_id):
         """ "
         Get specific report endpoint
         """
-        url_get_report = f"{self.url_reports}room/{room_id}"
-        response = self.rest_client.request(method_name="get", url=url_get_report)
+        url_get_report = f'{self.url_reports}room/{room_id}'
+        response = self.rest_client.request(method_name='get', url=url_get_report)
         return response
 
     def health_check_report(self):
         """
         Health check report endpoint
         """
-        url_health_check_report = f"{self.url_reports}actuator/health"
+        url_health_check_report = f'{self.url_reports}actuator/health'
         response = self.rest_client.request(
-            method_name="get",
+            method_name='get',
             url=url_health_check_report,
         )
         return response

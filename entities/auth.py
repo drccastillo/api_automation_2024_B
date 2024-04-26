@@ -23,7 +23,7 @@ class Auth:
         Setup class for Auth
         param rest_client: The rest client to use. If None, a new rest client is created.
         """
-        self.url_auth = f"{BASE_URL}/auth/"
+        self.url_auth = f'{BASE_URL}/auth/'
         if rest_client is None:
             self.rest_client = RestClient()
         else:
@@ -34,15 +34,15 @@ class Auth:
         Extract token from response
         param response: The response from the request
         """
-        return response["cookies"]["token"]
+        return response['cookies']['token']
 
     def create_token(self):
         """
         Create token
         """
-        url_auth_login = f"{self.url_auth}login"
+        url_auth_login = f'{self.url_auth}login'
         response = self.rest_client.request(
-            method_name="post",
+            method_name='post',
             url=url_auth_login,
             body=CREDENTIALS,
         )
@@ -53,10 +53,10 @@ class Auth:
         Validate token
         param token: The token to validate
         """
-        url_auth_validate = f"{self.url_auth}validate"
-        body_token = {"token": token}
+        url_auth_validate = f'{self.url_auth}validate'
+        body_token = {'token': token}
         response = self.rest_client.request(
-            method_name="post",
+            method_name='post',
             url=url_auth_validate,
             body=body_token,
         )
@@ -67,10 +67,10 @@ class Auth:
         Destroy token
         param token: The token to destroy
         """
-        url_auth_logout = f"{self.url_auth}logout"
-        body_token = {"token": token}
+        url_auth_logout = f'{self.url_auth}logout'
+        body_token = {'token': token}
         response = self.rest_client.request(
-            method_name="post",
+            method_name='post',
             url=url_auth_logout,
             body=body_token,
         )
@@ -80,9 +80,9 @@ class Auth:
         """
         Health check auth
         """
-        url_health_check_auth = f"{self.url_auth}actuator/health"
+        url_health_check_auth = f'{self.url_auth}actuator/health'
         response = self.rest_client.request(
-            method_name="get",
+            method_name='get',
             url=url_health_check_auth,
         )
         return response

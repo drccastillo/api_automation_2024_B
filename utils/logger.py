@@ -15,7 +15,7 @@ from logging import handlers
 from config.config import abs_path
 
 DEFAULT_LOG_LEVEL = logging.INFO
-DEFAULT_LOG_FORMAT = "%(asctime)s UTC %(levelname)-8s %(name)-15s  %(message)s"
+DEFAULT_LOG_FORMAT = '%(asctime)s UTC %(levelname)-8s %(name)-15s  %(message)s'
 
 
 def get_logger(name, level=DEFAULT_LOG_LEVEL, log_format=DEFAULT_LOG_FORMAT):
@@ -32,7 +32,7 @@ def get_logger(name, level=DEFAULT_LOG_LEVEL, log_format=DEFAULT_LOG_FORMAT):
     :return:
     """
     logger = logging.getLogger(name)
-    log_file_name = datetime.now().strftime("%m_%d_%Y_%H_%M_%S")
+    log_file_name = datetime.now().strftime('%m_%d_%Y_%H_%M_%S')
 
     if not logger.handlers:
         # Remove existing handlers
@@ -45,9 +45,9 @@ def get_logger(name, level=DEFAULT_LOG_LEVEL, log_format=DEFAULT_LOG_FORMAT):
         # abs_path = os.path.abspath(__file__ + "../../../")
 
         # if logs folder there is not exist it wil be created
-        pathlib.Path(f"{abs_path}/logs").mkdir(parents=True, exist_ok=True)
+        pathlib.Path(f'{abs_path}/logs').mkdir(parents=True, exist_ok=True)
         handler_file = handlers.RotatingFileHandler(
-            f"{abs_path}/logs/{log_file_name}.log",
+            f'{abs_path}/logs/{log_file_name}.log',
             maxBytes=1000000,
             backupCount=5,
         )

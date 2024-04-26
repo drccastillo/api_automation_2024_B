@@ -51,51 +51,51 @@ class RestClient:
 
             method_func = getattr(self.session, method_name)
             response = method_func(url=url, json=body, timeout=self.timeout)
-            response_dict.update({"json": self.get_json(response)})
+            response_dict.update({'json': self.get_json(response)})
             response.raise_for_status()
         except requests.exceptions.HTTPError as http_err:
-            LOGGER.error("HTTP error occurred: %s", http_err)
+            LOGGER.error('HTTP error occurred: %s', http_err)
             if response is not None:
                 if response.text:
                     try:
-                        response_dict["json"] = response.json()
+                        response_dict['json'] = response.json()
                     except json.JSONDecodeError:
-                        response_dict["json"] = {"msg": "No body content"}
+                        response_dict['json'] = {'msg': 'No body content'}
                 else:
-                    response_dict["json"] = {"msg": str(http_err)}
+                    response_dict['json'] = {'msg': str(http_err)}
             else:
-                response_dict["json"] = {"msg": str(http_err)}
+                response_dict['json'] = {'msg': str(http_err)}
         except requests.exceptions.ConnectionError as conn_err:
-            LOGGER.error("Error connecting: %s", conn_err)
-            response_dict["json"] = {"msg": str(conn_err)}
+            LOGGER.error('Error connecting: %s', conn_err)
+            response_dict['json'] = {'msg': str(conn_err)}
         except requests.exceptions.Timeout as timeout_err:
-            LOGGER.error("Timeout error: %s", timeout_err)
-            response_dict["json"] = {"msg": str(timeout_err)}
+            LOGGER.error('Timeout error: %s', timeout_err)
+            response_dict['json'] = {'msg': str(timeout_err)}
         except requests.exceptions.RequestException as err:
-            LOGGER.error("Error: %s", err)
-            response_dict["json"] = {"msg": str(err)}
+            LOGGER.error('Error: %s', err)
+            response_dict['json'] = {'msg': str(err)}
         finally:
             if response is not None:
                 response_dict.update(
                     {
-                        "status_code": response.status_code,
-                        "headers": self.get_header(response),
-                        "cookies": self.get_cookies(response),
+                        'status_code': response.status_code,
+                        'headers': self.get_header(response),
+                        'cookies': self.get_cookies(response),
                     },
                 )
             else:
                 response_dict.update(
                     {
-                        "status_code": "Unknown",
-                        "headers": {"msg": "No response headers"},
-                        "json": {"msg": "No response body content"},
-                        "cookies": {"msg": "No response cookies"},
+                        'status_code': 'Unknown',
+                        'headers': {'msg': 'No response headers'},
+                        'json': {'msg': 'No response body content'},
+                        'cookies': {'msg': 'No response cookies'},
                     },
                 )
-            LOGGER.debug("Status Code: %s", response_dict["status_code"])
-            LOGGER.debug("Response headers: %s", response_dict["headers"])
-            LOGGER.debug("Response Content: %s", response_dict["json"])
-            LOGGER.debug("Response Cookies: %s", response_dict["cookies"])
+            LOGGER.debug('Status Code: %s', response_dict['status_code'])
+            LOGGER.debug('Response headers: %s', response_dict['headers'])
+            LOGGER.debug('Response Content: %s', response_dict['json'])
+            LOGGER.debug('Response Cookies: %s', response_dict['cookies'])
 
         return response_dict
 
@@ -110,9 +110,9 @@ class RestClient:
             try:
                 return response.json()
             except json.JSONDecodeError:
-                return {"msg": response.text}
+                return {'msg': response.text}
         else:
-            return {"msg": "No body content"}
+            return {'msg': 'No body content'}
 
     @staticmethod
     def get_header(response):
@@ -124,7 +124,7 @@ class RestClient:
         try:
             return response.headers
         except AttributeError:
-            return {"msg": "No headers content"}
+            return {'msg': 'No headers content'}
 
     @staticmethod
     def get_cookies(response):
@@ -136,4 +136,4 @@ class RestClient:
         try:
             return requests.utils.dict_from_cookiejar(response.cookies)
         except AttributeError:
-            return {"msg": "No cookies content"}
+            return {'msg': 'No cookies content'}

@@ -2,14 +2,17 @@
 Module to test Bookings API endpoints
 """
 
-import logging
-import pytest
-import allure
+from __future__ import annotations
 
-from helpers.validate_response import ValidateResponse
-from helpers.rest_client import RestClient
-from utils.logger import get_logger
+import logging
+
+import allure
+import pytest
+
 from entities.booking import Booking
+from helpers.rest_client import RestClient
+from helpers.validate_response import ValidateResponse
+from utils.logger import get_logger
 
 
 LOGGER = get_logger(__name__, logging.DEBUG)
@@ -42,7 +45,9 @@ class TestBookings:
         LOGGER.info("Test get all bookings")
         response = self.booking.all_bookings()
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name="get_all_bookings"
+            actual_response=response,
+            endpoint="booking",
+            file_name="get_all_bookings",
         )
 
     @allure.title("{title}")
@@ -66,7 +71,14 @@ class TestBookings:
             ),
         ],
     )
-    def test_get_booking(self, scenario_booking, scenario, file_name, title, _log_test_names):
+    def test_get_booking(
+        self,
+        scenario_booking,
+        scenario,
+        file_name,
+        title,
+        _log_test_names,
+    ):
         """
         Test get booking endpoint
         :param scenario_booking: fixture to create a booking
@@ -76,7 +88,9 @@ class TestBookings:
         LOGGER.info("%s: Test %s", scenario, title)
         response = self.booking.specific_booking(booking_id=scenario_booking)
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name=file_name
+            actual_response=response,
+            endpoint="booking",
+            file_name=file_name,
         )
 
     @allure.title("Get bookings by room")
@@ -92,7 +106,9 @@ class TestBookings:
         LOGGER.info("Test get booking by room")
         response = self.booking.all_bookings_by_room(room_id=create_booking["room_id"])
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name="get_bookings_by_room"
+            actual_response=response,
+            endpoint="booking",
+            file_name="get_bookings_by_room",
         )
 
     @allure.title("Get bookings summary by room")
@@ -106,9 +122,13 @@ class TestBookings:
         :param create_booking: fixture to create a booking
         """
         LOGGER.info("Test get booking summary")
-        response = self.booking.booking_summary_by_room(room_id=create_booking["room_id"])
+        response = self.booking.booking_summary_by_room(
+            room_id=create_booking["room_id"],
+        )
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name="get_booking_summary"
+            actual_response=response,
+            endpoint="booking",
+            file_name="get_booking_summary",
         )
 
     @allure.title("Check health of the booking service")
@@ -121,7 +141,9 @@ class TestBookings:
         LOGGER.info("Test get health check")
         response = self.booking.health_check_booking()
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name="get_health_check"
+            actual_response=response,
+            endpoint="booking",
+            file_name="get_health_check",
         )
 
     @allure.title("{title}")
@@ -173,7 +195,14 @@ class TestBookings:
             ),
         ],
     )
-    def test_create_booking(self, create_room, scenario, file_name, title, _log_test_names):
+    def test_create_booking(
+        self,
+        create_room,
+        scenario,
+        file_name,
+        title,
+        _log_test_names,
+    ):
         """
         Test create booking with both good and bad scenarios.
         :param create_room: fixture to create a room
@@ -181,10 +210,15 @@ class TestBookings:
         :param file_name: file name to validate
         """
         LOGGER.info("Test %s", title)
-        body_booking = self.booking.generate_data(room_id=create_room, scenario=scenario)
+        body_booking = self.booking.generate_data(
+            room_id=create_room,
+            scenario=scenario,
+        )
         response = self.booking.create_booking(body=body_booking)
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name=file_name
+            actual_response=response,
+            endpoint="booking",
+            file_name=file_name,
         )
         if scenario == "good":
             self.bookings_list.append(response["json"]["bookingid"])
@@ -198,12 +232,17 @@ class TestBookings:
         :param create_booking: fixture to create a booking
         """
         LOGGER.info("Test update booking")
-        body_update_booking = self.booking.generate_data(room_id=create_booking["room_id"])
+        body_update_booking = self.booking.generate_data(
+            room_id=create_booking["room_id"],
+        )
         response = self.booking.update_booking(
-            booking_id=create_booking["booking_id"], body=body_update_booking
+            booking_id=create_booking["booking_id"],
+            body=body_update_booking,
         )
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name="update_booking"
+            actual_response=response,
+            endpoint="booking",
+            file_name="update_booking",
         )
 
     @allure.title("Delete a booking")
@@ -217,7 +256,9 @@ class TestBookings:
         LOGGER.info("Test delete booking")
         response = self.booking.delete_booking(booking_id=create_booking["booking_id"])
         self.validate.validate_response(
-            actual_response=response, endpoint="booking", file_name="delete_booking"
+            actual_response=response,
+            endpoint="booking",
+            file_name="delete_booking",
         )
 
     @classmethod

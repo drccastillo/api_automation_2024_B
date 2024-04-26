@@ -210,7 +210,7 @@ paths:
 
         Authorisation is achieved by creating a `Cookie` header with the value `token=abc123`. To get a valid token, you send a request to `POST /auth` using the `Auth` API in restful-booker-platform.
 
-        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.      
+        Simply run the request once with the default credentials to have Postman add a `token` to the Cookies manager.
       operationId: createBooking
       requestBody:
         content:
@@ -341,7 +341,7 @@ components:
           type: string
       additionalProperties: false
       required:
-        - status    
+        - status
   securitySchemes:
     TokenAuth:    # arbitrary name for the security scheme
       type: apiKey

@@ -2,16 +2,19 @@
 This module contains fixtures for the RESTful Booker API tests.
 """
 
+from __future__ import annotations
+
 import logging
 import os
 import random
 
 import pytest
-from utils.logger import get_logger
+
 from entities.auth import Auth
-from entities.room import Room
 from entities.booking import Booking
 from entities.message import Message
+from entities.room import Room
+from utils.logger import get_logger
 
 
 LOGGER = get_logger(__name__, logging.DEBUG)

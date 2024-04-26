@@ -1,17 +1,14 @@
+from __future__ import annotations
+
 import logging
 
-
-from config.config import BASE_URL
-from entities.room import Room
-from entities.report import Report
-from entities.message import Message
-from entities.branding import Branding
 from entities.booking import Booking
-
-
+from entities.branding import Branding
+from entities.message import Message
+from entities.report import Report
+from entities.room import Room
 from helpers.rest_client import RestClient
 from helpers.validate_response import ValidateResponse
-
 from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
@@ -31,13 +28,12 @@ def before_all(context):
     context.message = Message()
     context.branding = Branding()
 
-
-
     context.resource_list = {
-        "room":[],
-        "booking":[],
-        "message":[],
+        "room": [],
+        "booking": [],
+        "message": [],
     }
+
 
 def before_feature(context, feature):
     """
@@ -45,8 +41,9 @@ def before_feature(context, feature):
     :param context: context instance
     :param feature: Feature instance
     """
-    LOGGER.info(f"BEFORE FEATURE: %s", feature.name)
-    LOGGER.info(f"Feature tags: %s", feature.tags)
+    LOGGER.info("BEFORE FEATURE: %s", feature.name)
+    LOGGER.info("Feature tags: %s", feature.tags)
+
 
 def before_scenario(context, scenario):
     """
@@ -54,7 +51,7 @@ def before_scenario(context, scenario):
     :param context: context instance
     :param scenario: Scenario instance
     """
-    LOGGER.info(f"BEFORE SCENARIO: %s", scenario.name)
+    LOGGER.info("BEFORE SCENARIO: %s", scenario.name)
     LOGGER.debug("Scenario tags: %s", scenario.tags)
 
     if "room_id" in scenario.effective_tags:
@@ -63,7 +60,7 @@ def before_scenario(context, scenario):
         context.resource_list["room"].append(context.room_id)
         context.param_id = context.room_id
 
-        LOGGER.debug(f"Room ID created in before scenario : %s", context.room_id)
+        LOGGER.debug("Room ID created in before scenario : %s", context.room_id)
 
     elif "booking_id" in scenario.effective_tags:
         room = context.room.create_room()
@@ -74,8 +71,8 @@ def before_scenario(context, scenario):
 
         context.resource_list["room"].append(context.room_id)
         context.resource_list["booking"].append(context.booking_id)
-        LOGGER.debug(f"Room ID created in before scenario : %s", context.room_id)
-        LOGGER.debug(f"Booking ID created in before scenario : %s", context.booking_id)
+        LOGGER.debug("Room ID created in before scenario : %s", context.room_id)
+        LOGGER.debug("Booking ID created in before scenario : %s", context.booking_id)
 
     elif "message_id" in scenario.effective_tags:
         message = context.message.create_message()
@@ -83,7 +80,7 @@ def before_scenario(context, scenario):
         context.resource_list["message"].append(context.message_id)
         context.param_id = context.message_id
 
-        LOGGER.debug(f"Message ID created in before scenario : %s", context.message_id)
+        LOGGER.debug("Message ID created in before scenario : %s", context.message_id)
 
 
 def after_scenario(context, scenario):
@@ -92,7 +89,8 @@ def after_scenario(context, scenario):
     :param context: context instance
     :param scenario: Scenario instance
     """
-    LOGGER.info(f"AFTER SCENARIO: %s", scenario.name)
+    LOGGER.info("AFTER SCENARIO: %s", scenario.name)
+
 
 def after_feature(context, feature):
     """
@@ -100,8 +98,9 @@ def after_feature(context, feature):
     :param context:
     :param feature: Feature instance
     """
-    LOGGER.info(f"AFTER FEATURE: %s", feature.name)
+    LOGGER.info("AFTER FEATURE: %s", feature.name)
     delete_resources(context)
+
 
 def after_all(context):
     """

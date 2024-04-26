@@ -2,14 +2,17 @@
 Module to test Brandings API endpoints
 """
 
-import logging
-import pytest
-import allure
+from __future__ import annotations
 
-from helpers.validate_response import ValidateResponse
-from helpers.rest_client import RestClient
-from utils.logger import get_logger
+import logging
+
+import allure
+import pytest
+
 from entities.branding import Branding
+from helpers.rest_client import RestClient
+from helpers.validate_response import ValidateResponse
+from utils.logger import get_logger
 
 
 LOGGER = get_logger(__name__, logging.DEBUG)
@@ -42,7 +45,9 @@ class TestBrandings:
         LOGGER.info("Test get all brandings")
         response = self.branding.all_branding()
         self.validate.validate_response(
-            actual_response=response, endpoint="branding", file_name="get_all_brandings"
+            actual_response=response,
+            endpoint="branding",
+            file_name="get_all_brandings",
         )
 
     @allure.title("Check health of branding service")
@@ -55,7 +60,9 @@ class TestBrandings:
         LOGGER.info("Test get health check")
         response = self.branding.health_check_branding()
         self.validate.validate_response(
-            actual_response=response, endpoint="branding", file_name="get_health_check"
+            actual_response=response,
+            endpoint="branding",
+            file_name="get_health_check",
         )
 
     @allure.title("Update branding")
@@ -69,5 +76,7 @@ class TestBrandings:
         body_branding = self.branding.generate_data()
         response = self.branding.update_branding(body=body_branding)
         self.validate.validate_response(
-            actual_response=response, endpoint="branding", file_name="update_branding"
+            actual_response=response,
+            endpoint="branding",
+            file_name="update_branding",
         )

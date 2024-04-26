@@ -2,14 +2,17 @@
 Module to test the Auth API endpoints
 """
 
-import logging
-import pytest
-import allure
+from __future__ import annotations
 
-from helpers.validate_response import ValidateResponse
-from helpers.rest_client import RestClient
-from utils.logger import get_logger
+import logging
+
+import allure
+import pytest
+
 from entities.auth import Auth
+from helpers.rest_client import RestClient
+from helpers.validate_response import ValidateResponse
+from utils.logger import get_logger
 
 
 LOGGER = get_logger(__name__, logging.DEBUG)
@@ -17,7 +20,7 @@ LOGGER = get_logger(__name__, logging.DEBUG)
 
 @allure.epic("Auth API")
 @allure.story("Auth API Endpoints")
-class TestAuth:
+class TestAuths:
     """
     Class to test Auth API endpoints
     """
@@ -42,7 +45,9 @@ class TestAuth:
         LOGGER.info("Test create token")
         response = self.auth.create_token()
         self.validate.validate_response(
-            actual_response=response, endpoint="auth", file_name="create_token"
+            actual_response=response,
+            endpoint="auth",
+            file_name="create_token",
         )
         self.list_tokens.append(response["cookies"]["token"])
         LOGGER.debug("Cookie token: %s", response["cookies"]["token"])
@@ -58,7 +63,9 @@ class TestAuth:
         LOGGER.info("Test validate token")
         response = self.auth.validate_token(token=create_token)
         self.validate.validate_response(
-            actual_response=response, endpoint="auth", file_name="validate_token"
+            actual_response=response,
+            endpoint="auth",
+            file_name="validate_token",
         )
 
     @allure.title("Destroy a token")
@@ -72,7 +79,9 @@ class TestAuth:
         LOGGER.info("Test destroy token")
         response = self.auth.destroy_token(token=create_token)
         self.validate.validate_response(
-            actual_response=response, endpoint="auth", file_name="destroy_token"
+            actual_response=response,
+            endpoint="auth",
+            file_name="destroy_token",
         )
 
     @allure.title("Check health of the auth service")
@@ -85,7 +94,9 @@ class TestAuth:
         LOGGER.info("Test get health check")
         response = self.auth.health_check_auth()
         self.validate.validate_response(
-            actual_response=response, endpoint="auth", file_name="get_health_check"
+            actual_response=response,
+            endpoint="auth",
+            file_name="get_health_check",
         )
 
     @classmethod

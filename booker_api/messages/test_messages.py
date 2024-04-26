@@ -2,14 +2,17 @@
 Module to test Message API endpoints
 """
 
-import logging
-import pytest
-import allure
+from __future__ import annotations
 
-from helpers.validate_response import ValidateResponse
-from helpers.rest_client import RestClient
-from utils.logger import get_logger
+import logging
+
+import allure
+import pytest
+
 from entities.message import Message
+from helpers.rest_client import RestClient
+from helpers.validate_response import ValidateResponse
+from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
@@ -42,7 +45,9 @@ class TestMessages:
         LOGGER.info("Test get all messages")
         response = self.message.all_messages()
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="get_all_messages"
+            actual_response=response,
+            endpoint="message",
+            file_name="get_all_messages",
         )
 
     @allure.title("Get a message")
@@ -56,7 +61,9 @@ class TestMessages:
         LOGGER.info("Test get message")
         response = self.message.specific_message(message_id=create_message)
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="get_message"
+            actual_response=response,
+            endpoint="message",
+            file_name="get_message",
         )
 
     @allure.title("Get unread messages")
@@ -69,7 +76,9 @@ class TestMessages:
         LOGGER.info("Test get unread messages")
         response = self.message.unread_messages()
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="get_unread_messages"
+            actual_response=response,
+            endpoint="message",
+            file_name="get_unread_messages",
         )
 
     @allure.title("Check health of message service")
@@ -82,7 +91,9 @@ class TestMessages:
         LOGGER.info("Test get health check")
         response = self.message.health_check_message()
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="get_health_check"
+            actual_response=response,
+            endpoint="message",
+            file_name="get_health_check",
         )
 
     @allure.title("Create a message")
@@ -96,7 +107,9 @@ class TestMessages:
         body_message = self.message.generate_data()
         response = self.message.create_message(body=body_message)
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="create_message"
+            actual_response=response,
+            endpoint="message",
+            file_name="create_message",
         )
         self.message_list.append(response["json"]["messageid"])
 
@@ -111,7 +124,9 @@ class TestMessages:
         LOGGER.info("Test mark message as read")
         response = self.message.mark_message_as_read(message_id=create_message)
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="mark_message_as_read"
+            actual_response=response,
+            endpoint="message",
+            file_name="mark_message_as_read",
         )
 
     @allure.title("Delete a message")
@@ -125,7 +140,9 @@ class TestMessages:
         LOGGER.info("Test delete message")
         response = self.message.delete_message(message_id=create_message)
         self.validate.validate_response(
-            actual_response=response, endpoint="message", file_name="delete_message"
+            actual_response=response,
+            endpoint="message",
+            file_name="delete_message",
         )
 
     @classmethod

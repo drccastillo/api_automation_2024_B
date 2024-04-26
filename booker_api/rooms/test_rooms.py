@@ -2,13 +2,16 @@
 Module to test Room API endpoints
 """
 
-import logging
-import pytest
-import allure
+from __future__ import annotations
 
-from helpers.validate_response import ValidateResponse
-from helpers.rest_client import RestClient
+import logging
+
+import allure
+import pytest
+
 from entities.room import Room
+from helpers.rest_client import RestClient
+from helpers.validate_response import ValidateResponse
 from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
@@ -42,7 +45,9 @@ class TestRooms:
         LOGGER.info("Test get all rooms")
         response = self.room.all_rooms()
         self.validate.validate_response(
-            actual_response=response, endpoint="room", file_name="get_all_rooms"
+            actual_response=response,
+            endpoint="room",
+            file_name="get_all_rooms",
         )
 
     @allure.title("Get a room")
@@ -56,7 +61,9 @@ class TestRooms:
         LOGGER.info("Test get room")
         response = self.room.specific_room(room_id=create_room)
         self.validate.validate_response(
-            actual_response=response, endpoint="room", file_name="get_room"
+            actual_response=response,
+            endpoint="room",
+            file_name="get_room",
         )
 
     @allure.title("Check health of room service")
@@ -69,7 +76,9 @@ class TestRooms:
         LOGGER.info("Test get health check")
         response = self.room.health_check_room()
         self.validate.validate_response(
-            actual_response=response, endpoint="room", file_name="get_health_check"
+            actual_response=response,
+            endpoint="room",
+            file_name="get_health_check",
         )
 
     @allure.title("Create a room")
@@ -83,7 +92,9 @@ class TestRooms:
         body_room = self.room.generate_data()
         response = self.room.create_room(body=body_room)
         self.validate.validate_response(
-            actual_response=response, endpoint="room", file_name="create_room"
+            actual_response=response,
+            endpoint="room",
+            file_name="create_room",
         )
         self.room_list.append(response["json"]["roomid"])
 
@@ -99,7 +110,9 @@ class TestRooms:
         body_room = self.room.generate_data()
         response = self.room.update_room(room_id=create_room, body=body_room)
         self.validate.validate_response(
-            actual_response=response, endpoint="room", file_name="update_room"
+            actual_response=response,
+            endpoint="room",
+            file_name="update_room",
         )
 
     @allure.title("Delete a room")
@@ -113,7 +126,9 @@ class TestRooms:
         LOGGER.info("Test delete room")
         response = self.room.delete_room(room_id=create_room)
         self.validate.validate_response(
-            actual_response=response, endpoint="room", file_name="delete_room"
+            actual_response=response,
+            endpoint="room",
+            file_name="delete_room",
         )
 
     @classmethod

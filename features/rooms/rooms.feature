@@ -5,7 +5,7 @@ Feature: Rooms
     Scenario: Get all rooms
         As a user
         I want to be able to retrieve all rooms
-        So that I can view the details of all rooms    
+        So that I can view the details of all rooms
 
         When I call to "room" endpoint using "get" method and without body
         Then I receive the response and validate using "get_all_rooms" json
@@ -19,7 +19,7 @@ Feature: Rooms
 
         When I call to "room" endpoint using "get" method and without body
         Then I receive the response and validate using "get_room" json
-    
+
     @acceptance
     Scenario: Create a room
         As a user
@@ -38,7 +38,7 @@ Feature: Rooms
 
         When I call to "room" endpoint using "put" method and with body
         Then I receive the response and validate using "update_room" json
-    
+
     @room_id @acceptance
     Scenario: Delete a room
         As a user

@@ -1,7 +1,6 @@
 """
 This module contains the Auth class which provides methods for handling authentication.
 """
-
 from __future__ import annotations
 
 import logging

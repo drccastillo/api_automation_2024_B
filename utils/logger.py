@@ -4,7 +4,6 @@
 logger.py
     configuration of logger file
 """
-
 from __future__ import annotations
 
 import logging

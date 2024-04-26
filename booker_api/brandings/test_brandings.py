@@ -1,7 +1,6 @@
 """
 Module to test Brandings API endpoints
 """
-
 from __future__ import annotations
 
 import logging

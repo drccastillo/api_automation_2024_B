@@ -1,7 +1,6 @@
 """
 This module is used to send a report via webhook.
 """
-
 from __future__ import annotations
 
 import argparse

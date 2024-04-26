@@ -1,7 +1,6 @@
 """
 Module contains the Report class for handling report-related operations.
 """
-
 from __future__ import annotations
 
 import logging

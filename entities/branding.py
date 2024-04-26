@@ -1,7 +1,6 @@
 """
 Module containing the Branding class for branding operations.
 """
-
 from __future__ import annotations
 
 import logging

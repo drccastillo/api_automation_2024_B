@@ -1,7 +1,6 @@
 """
 Module containing the Message class with message-related operations.
 """
-
 from __future__ import annotations
 
 import logging

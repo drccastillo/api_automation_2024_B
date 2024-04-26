@@ -1,7 +1,6 @@
 """
 Module to validate the response from the API
 """
-
 from __future__ import annotations
 
 import json

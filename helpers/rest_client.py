@@ -1,7 +1,6 @@
 """
 Module to send HTTP requests to the server
 """
-
 from __future__ import annotations
 
 import json

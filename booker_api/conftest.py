@@ -1,7 +1,6 @@
 """
 This module contains fixtures for the RESTful Booker API tests.
 """
-
 from __future__ import annotations
 
 import logging

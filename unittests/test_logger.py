@@ -4,7 +4,6 @@
 test_logger.py
     test file to test configuration of logger file levels
 """
-
 from __future__ import annotations
 
 import logging

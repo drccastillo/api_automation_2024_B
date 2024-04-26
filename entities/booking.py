@@ -1,7 +1,6 @@
 """
 This module contains the Booking class which is used to manage bookings.
 """
-
 from __future__ import annotations
 
 import logging

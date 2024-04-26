@@ -1,7 +1,6 @@
 """
 Module containing the Room class which is used for room-related operations.
 """
-
 from __future__ import annotations
 
 import logging

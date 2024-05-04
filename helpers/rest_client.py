@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import json
 import logging
+from threading import Lock
+from typing import Any
 
 import requests.utils
 from requests.adapters import HTTPAdapter
@@ -15,7 +17,31 @@ from utils.logger import get_logger
 LOGGER = get_logger(__name__, logging.DEBUG)
 
 
-class RestClient:
+class SingletonMeta(type):
+    """
+    Singleton metaclass to create a single instance of a class
+    :param type: Metaclass type
+    """
+
+    _instances: dict[type, Any] = {}
+    _lock: Lock = Lock()
+
+    def __call__(cls, *args, **kwargs):
+        """
+        Call method to create a single instance of a class
+        :param cls: Class
+        :param args: Arguments
+        :param kwargs: Keyword arguments
+        :return: Instance of the class
+        """
+        with cls._lock:
+            if cls not in cls._instances:
+                instance = super().__call__(*args, **kwargs)
+                cls._instances[cls] = instance
+        return cls._instances[cls]
+
+
+class RestClient(metaclass=SingletonMeta):
     """
     Class to send HTTP requests to the server
     """
@@ -31,6 +57,8 @@ class RestClient:
         self.session.headers.update(headers if headers is not None else DEFAULT_HEADERS)
         self.timeout = timeout
         self.adapter = HTTPAdapter(max_retries=max_retries)
+        self.session.mount('http://', self.adapter)
+        self.session.mount('https://', self.adapter)
 
     def request(self, method_name, url, body=None):
         """
@@ -47,8 +75,6 @@ class RestClient:
         response = None  # Initialize response
         response_dict = {}
         try:
-            self.session.mount(url, self.adapter)
-
             method_func = getattr(self.session, method_name)
             response = method_func(url=url, json=body, timeout=self.timeout)
             response_dict.update({'json': self.get_json(response)})

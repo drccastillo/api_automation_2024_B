@@ -42,7 +42,7 @@ class TestBrandings:
         Test get all brandings endpoint
         """
         LOGGER.info('Test get all brandings')
-        response = self.branding.all_branding()
+        response = self.branding.all_brandings()
         self.validate.validate_response(
             actual_response=response,
             endpoint='branding',

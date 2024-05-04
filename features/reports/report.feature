@@ -1,6 +1,10 @@
 @Reports
 Feature:Reports
     @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-001
+    @allure.issue:BOOK-001
     Scenario: Get all reports
         As a user
         I want to be able to get all reports
@@ -11,6 +15,10 @@ Feature:Reports
 
     @room_id
     @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-002
+    @allure.issue:BOOK-002
     Scenario: Get reports by room
         As a user
         I want to be able to get reports by room

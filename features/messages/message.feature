@@ -2,6 +2,11 @@
 Feature: Messages
 
     @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-001
+    @allure.issue:BOOK-001
+
     Scenario: Get all messages
         As a user
         I want to get all messages
@@ -12,6 +17,10 @@ Feature: Messages
 
     @message_id
     @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-002
+    @allure.issue:BOOK-002
     Scenario: Get message by id
         As a user
         I want to get message by id

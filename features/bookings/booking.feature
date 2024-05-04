@@ -1,7 +1,11 @@
-@bookings
+@bookings @acceptance
 Feature: Bookings
 
     @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-001
+    @allure.issue:BOOK-001
     Scenario: Get all bookings
         As a user
         I want to be able to retrieve all bookings
@@ -12,6 +16,10 @@ Feature: Bookings
 
     @booking_id
     @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-002
+    @allure.issue:BOOK-002
     Scenario: Get a booking
         As a user
         I want to be able to retrieve a booking
@@ -21,6 +29,11 @@ Feature: Bookings
         Then I receive the response and validate using "get_booking" json
 
     @room_id
+    @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-003
+    @allure.issue:BOOK-003
     Scenario: Create a booking
         As a user
         I want to be able to create a booking
@@ -30,6 +43,11 @@ Feature: Bookings
         Then I receive the response and validate using "create_booking" json
 
     @booking_id
+    @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-004
+    @allure.issue:BOOK-004
     Scenario: Update a booking
         As a user
         I want to be able to update a booking
@@ -39,6 +57,11 @@ Feature: Bookings
         Then I receive the response and validate using "update_booking" json
 
     @booking_id
+    @acceptance
+    @critical
+    @allure.label.owner:DC
+    @allure.link:https://jira.com/BOOK-005
+    @allure.issue:BOOK-005
     Scenario: Delete a booking
         As a user
         I want to be able to delete a booking

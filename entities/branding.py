@@ -81,7 +81,7 @@ class Branding:
         LOGGER.info('New Branding %s', body_branding)
         return body_branding
 
-    def all_branding(self):
+    def all_brandings(self):
         """
         Get all branding endpoint
         """

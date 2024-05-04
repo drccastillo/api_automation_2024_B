@@ -26,9 +26,9 @@ def call_get_endpoint(context, endpoint):
     )
 
     endpoint_name = getattr(context, endpoint)
-    if hasattr(context, 'param_id'):
+    if context.param_list[endpoint] is not None:
         method = getattr(endpoint_name, f'specific_{endpoint}')
-        endpoint_id = context.param_id
+        endpoint_id = context.param_list[endpoint]
         response = method(endpoint_id)
     else:
         method = getattr(endpoint_name, f'all_{endpoint}s')
@@ -39,6 +39,44 @@ def call_get_endpoint(context, endpoint):
 
     LOGGER.debug('Response: %s', context.response)
     LOGGER.debug('Enpoint: %s', context.endpoint)
+
+
+def get_data_by_feature(context, method_name, endpoint):
+    """
+    Function to get data by feature.
+    :param context: Context object.
+    :param method_name: Method name.
+    :param endpoint: Endpoint to call.
+    """
+    endpoint_obj = getattr(context, endpoint)
+    if method_name == 'GET':
+        if hasattr(context, context.param_list[endpoint]):
+            method = getattr(endpoint_obj, f'specific_{endpoint}')
+            response = method(context.param_list[endpoint])
+        else:
+            method = getattr(endpoint_obj, f'all_{endpoint}s')
+            response = method()
+    elif method_name == 'POST':
+        method = getattr(endpoint_obj, f'create_{endpoint}')
+        if hasattr(context, context.param_list[endpoint]):
+            body = endpoint_obj.generate_data(context.param_list[endpoint])
+        else:
+            body = endpoint_obj.generate_data()
+    elif method_name == 'PUT':
+        method = getattr(endpoint_obj, f'update_{endpoint}')
+        if hasattr(context, 'param_list') and endpoint in context.param_list:
+            body = endpoint_obj.generate_data()
+
+        response = method(body=body)
+        context.resource_list[endpoint].append(response['json'][f'{endpoint}id'])
+
+    if hasattr(context, 'param_id'):
+        method = getattr(endpoint_obj, f'specific_{endpoint}')
+        endpoint_id = context.param_id
+        response = method(endpoint_id)
+    else:
+        method = getattr(endpoint_obj, f'all_{endpoint}s')
+        response = method()
 
 
 @when('I call to "{endpoint}" endpoint using "POST" method and with body')
@@ -86,14 +124,17 @@ def call_put_endpoint(context, endpoint):
 
     endpoint_name = getattr(context, endpoint)
     method = getattr(endpoint_name, f'update_{endpoint}')
-    endpoint_id = context.param_id
+    endpoint_id = context.param_list[endpoint]
 
     body = (
         endpoint_name.generate_data()
-        if endpoint == 'room'
+        if endpoint != 'booking'
         else endpoint_name.generate_data(context.room_id)
     )
-    response = method(endpoint_id, body)
+    if endpoint_id is None:
+        response = method(body=body)
+    else:
+        response = method(endpoint_id, body)
 
     context.response = response
     context.endpoint = endpoint

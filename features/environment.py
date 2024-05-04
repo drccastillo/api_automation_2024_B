@@ -57,42 +57,68 @@ def before_scenario(context, scenario):
     LOGGER.info('BEFORE SCENARIO: %s', scenario.name)
     LOGGER.debug('Scenario tags: %s', scenario.tags)
 
+    context.param_list = {
+        'room': None,
+        'booking': None,
+        'message': None,
+        'report': None,
+        'branding': None,
+    }
+
     if 'room_id' in scenario.effective_tags:
         room = context.room.create_room()
         context.room_id = room['json']['roomid']
         context.resource_list['room'].append(context.room_id)
-        context.param_id = context.room_id
+        context.param_list['room'] = context.room_id
 
         LOGGER.debug('Room ID created in before scenario : %s', context.room_id)
 
     elif 'booking_id' in scenario.effective_tags:
         room = context.room.create_room()
         context.room_id = room['json']['roomid']
+        context.param_list['room'] = context.room_id
         booking = context.booking.create_booking(room_id=context.room_id)
         context.booking_id = booking['json']['bookingid']
-        context.param_id = context.booking_id
+        context.param_list['booking'] = context.booking_id
 
-        context.resource_list['room'].append(context.room_id)
-        context.resource_list['booking'].append(context.booking_id)
-        LOGGER.debug('Room ID created in before scenario : %s', context.room_id)
-        LOGGER.debug('Booking ID created in before scenario : %s', context.booking_id)
+        context.resource_list['room'].append(context.param_list['room'])
+        context.resource_list['booking'].append(context.param_list['booking'])
+        LOGGER.debug(
+            'Room ID created in before scenario : %s',
+            context.param_list['room'],
+        )
+        LOGGER.debug(
+            'Booking ID created in before scenario : %s',
+            context.param_list['booking'],
+        )
 
     elif 'message_id' in scenario.effective_tags:
         message = context.message.create_message()
         context.message_id = message['json']['messageid']
         context.resource_list['message'].append(context.message_id)
-        context.param_id = context.message_id
+        context.param_list['message'] = context.message_id
 
-        LOGGER.debug('Message ID created in before scenario : %s', context.message_id)
+        LOGGER.debug(
+            'Message ID created in before scenario : %s',
+            context.param_list['message'],
+        )
 
 
-def after_scenario(_context, scenario):
+def after_scenario(context, scenario):
     """
     Teardown scenario
     :param context: context instance
     :param scenario: Scenario instance
     """
     LOGGER.info('AFTER SCENARIO: %s', scenario.name)
+
+    context.param_list = {
+        'room': None,
+        'booking': None,
+        'message': None,
+        'report': None,
+        'branding': None,
+    }
 
 
 def after_feature(context, feature):

@@ -171,5 +171,7 @@ cython_debug/
 /reports/html/*
 /reports/junitxml/*
 /reports/markdown/*
+/.jenkins_data/*
+.jenkins_data/*
 
 !.gitkeep

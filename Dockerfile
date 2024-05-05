@@ -1,6 +1,14 @@
 FROM jenkins/jenkins:latest
 
 USER root
+
+# Instalar wget
+RUN apt-get update && \
+    apt-get install -y wget && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Instalar Python
 RUN apt-get update && \
     apt-get install -y python3 && \
     apt-get clean && \

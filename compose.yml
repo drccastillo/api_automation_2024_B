@@ -9,6 +9,8 @@ services:
     environment:
       - PYTHONUNBUFFERED=1  # Desactiva el búfer de salida para mostrar los logs inmediatamente
     command: bash
+    ports:
+      - "9999:9999"
     networks:
         rbp-test:
             aliases:

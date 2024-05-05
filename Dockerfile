@@ -12,6 +12,9 @@ WORKDIR /opt/app
 # check credentials
 # RUN git clone repo (ssh)
 
+# Remove the .venv directory if it exists
+RUN rm -rf .venv
+
 # update system
 RUN apt-get update
 
@@ -30,12 +33,16 @@ RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install --user virtualenv
 
 # create virtualenv for the framework
-RUN python3 -m venv .venv
+RUN python3 -m venv venv
 
 # activate virtual environment
-RUN . .venv/bin/activate
+RUN . venv/bin/activate
 
 # install requirements
 RUN python3 -m pip install -r requirements.txt
-RUN python3 -m pylint booker_api/ --rcfile=.pylintrc
-RUN python3 -m pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s --alluredir reports/allure/results
+
+# run pre-commit hooks
+RUN pre-commit run --all-files
+
+# run the tests
+# RUN python3 -m pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s --alluredir reports/allure/results

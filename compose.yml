@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: auto_framework
+    volumes:
+      - .:/opt/app
+    environment:
+      - PYTHONUNBUFFERED=1  # Desactiva el búfer de salida para mostrar los logs inmediatamente
+    command: bash
+    networks:
+        rbp-test:
+            aliases:
+            - app     
+
+networks:
+    rbp-test:
+        name: rbp-test
+        driver: bridge
+        external: true

@@ -1,0 +1,37 @@
+stages:          # List of stages for jobs, and their order of execution
+  - test
+  - test_pytest
+
+# python version image
+image: python:3
+
+before_script:
+  - apt-get update
+  - echo "*** install requirements ***"
+  - python3 --version
+  - echo "Upgrade pip"
+  - pip install --upgrade pip
+  - pip install pipenv
+  - echo "Clean cache pipenv"
+  - pipenv run pipenv-resolver --clear
+  - echo "Install requirements"
+  - pipenv install -r requirements.txt
+  - echo "Set PYTHONPATH"
+  - export PYTHONPATH=$PWD
+  - echo "*** finish install requirements ***"
+  - echo "*** installing java ***"
+  - apt-get install default-jre default-jdk -y
+  - java -version
+
+linterns:   # This job also runs in the test stage.
+  stage: test    # It can run at the same time as unit-test-job (in parallel).
+  script:
+    - echo "Linting code... This will take about 10 seconds."
+    - pipenv run pre-commit run --all-files
+
+test_pytest:      # This job runs in the deploy stage.
+   stage: test_pytest  # It only runs when *both* jobs in the test stage complete successfully.
+   script:
+     - echo "Run Automation test..."
+     - pipenv run pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s
+     - echo "Tests executed succesfully."

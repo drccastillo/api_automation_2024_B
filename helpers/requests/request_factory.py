@@ -1,7 +1,18 @@
-from abc import ABC, abstractmethod
+"""
+Module for RequestFactory class
+"""
+from __future__ import annotations
+
+from abc import ABC
+from abc import abstractmethod
+
 from helpers.rest_client import RestClient
 
+
 class RequestFactory(ABC):
+    """
+    RequestFactory class for handling requests
+    """
 
     def __init__(self, rest_client=None):
         """
@@ -14,4 +25,12 @@ class RequestFactory(ABC):
 
     @abstractmethod
     def execute(self):
-        pass
+        """
+        Execute the request
+        """
+
+    def __str__(self):
+        """
+        Return a string representation of the RequestFactory instance.
+        """
+        return f'RequestFactory(rest_client={self.rest_client})'

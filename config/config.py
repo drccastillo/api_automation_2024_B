@@ -17,7 +17,7 @@ load_dotenv()
 WEB_HOOK = os.getenv('RESTFUL_BOOKER_WEB_HOOK')
 
 # Base URL for the Restful-Booker API
-BASE_URL = os.getenv('RESTFUL_BOOKER_BASE_URL', 'https://restful-booker.herokuapp.com')
+BASE_URL = os.getenv('RESTFUL_BOOKER_BASE_URL')
 
 # Credentials for authentication
 CREDENTIALS = {
@@ -36,4 +36,4 @@ DEFAULT_HEADERS = {
 
 # Add authorization if a token is provided
 if TOKEN:
-    DEFAULT_HEADERS['cookie'] = f'token={TOKEN}'
+    DEFAULT_HEADERS['Cookie'] = f'token={TOKEN}'

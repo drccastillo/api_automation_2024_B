@@ -27,7 +27,7 @@ class TestRestClient(unittest.TestCase):
 
         # Check if all instances are the same
         for i, instance_i in enumerate(instances):
-            for j, instance_j in enumerate(instances[i + 1:], start=i + 1):
+            for j, instance_j in enumerate(instances[i + 1 :], start=i + 1):
                 if instance_i is not instance_j:
                     LOGGER.debug(
                         "The instance %s isn't the same that the instance %s",

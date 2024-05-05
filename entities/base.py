@@ -4,18 +4,26 @@ Module for the Base class which is used for handling requests.
 from __future__ import annotations
 
 import logging
+
+from helpers.rest_client import RestClient
 from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
 class Base:
-    def __init__(self, rest_client, url_base):
+    """
+    Class for Base which is used for handling requests.
+    """
+    def __init__(self, rest_client=None, url_base=''):
         """
         Setup class for Base
         :param rest_client: RestClient instance
         :param url_base: Base URL
         """
-        self.rest_client = rest_client
+        if rest_client is None:
+            self.rest_client = RestClient()
+        else:
+            self.rest_client = rest_client
         self.url_base = url_base
 
     def handle_request(self, http_method, url_path='', request_body=None, resource_id=None):
@@ -26,15 +34,15 @@ class Base:
         :param request_body: Request body
         :param resource_id: Resource ID
         """
-        url = self._build_url(url_path, resource_id)
+        url = self.build_url(url_path, resource_id)
         response = self.rest_client.request(
             method_name=http_method,
             url=url,
             body=request_body,
         )
         return response
-    
-    def _build_url(self, url_path='', resource_id=None):
+
+    def build_url(self, url_path='', resource_id=None):
         """
         Build the URL for the request
         :param url_path: URL path

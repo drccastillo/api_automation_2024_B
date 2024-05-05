@@ -16,6 +16,4 @@ services:
 
 networks:
     rbp-test:
-        name: rbp-test
-        driver: bridge
         external: true

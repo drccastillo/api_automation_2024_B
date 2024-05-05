@@ -1,5 +1,12 @@
 FROM jenkins/jenkins:latest
 
+# label del maintainer
+LABEL maintainer="edwin.taquichiri@jalasoft.com"
+
+# copy the code to /opt/app folder
+COPY . /opt/app
+WORKDIR /opt/app
+
 USER root
 
 # Instalar wget
@@ -10,14 +17,19 @@ RUN apt-get update && \
 
 # Instalar Python
 RUN apt-get update && \
-    apt-get install -y python3 && \
+    apt-get install -y python3 python3-pip python3-venv && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Instalar Allure Command Line
-RUN wget https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.29.0/allure-commandline-2.29.0.zip && \
-    unzip allure-commandline-2.29.0.zip -d /opt && \
-    ln -s /opt/allure-2.29.0/bin/allure /usr/bin/allure && \
-    rm allure-commandline-2.29.0.zip
+# install java always add -y option
+RUN apt-get update && \
+    apt-get install -y wget default-jre-headless && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# install allure
+RUN wget https://github.com/allure-framework/allure2/releases/download/2.29.0/allure_2.29.0-1_all.deb
+RUN dpkg -i allure_2.29.0-1_all.deb
+
 
 USER jenkins

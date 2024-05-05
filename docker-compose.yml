@@ -7,6 +7,7 @@ services:
     ports:
       - "8082:8080"  # Cambiado el puerto del host de 8080 a 8081
       - "50001:50000"  # Cambiado el puerto del host de 50000 a 50001
+    restart: always
     volumes:
       - ${PWD}/.jenkins_data:/var/jenkins_home
     networks:

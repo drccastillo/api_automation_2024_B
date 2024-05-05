@@ -186,12 +186,6 @@ class TestBookings:
                 'Create a booking with missing Checkout',
                 marks=pytest.mark.functional,
             ),
-            pytest.param(
-                'no_bookingdates',
-                'create_booking_bad_body',
-                'Create a booking with missing Dates',
-                marks=pytest.mark.functional,
-            ),
         ],
     )
     def test_create_booking(

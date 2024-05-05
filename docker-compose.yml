@@ -15,31 +15,6 @@ services:
     networks:
       - jenkins_network
 
-  allure:
-    image: "frankescobar/allure-docker-service"
-    environment:
-      CHECK_RESULTS_EVERY_SECONDS: 1
-      KEEP_HISTORY: 1
-    ports:
-      - "5050:5050"
-    volumes:
-      - ${PWD}/reports/allure/results:/app/allure-results
-      - ${PWD}/reports/allure/reports:/app/default-reports
-    restart: always
-    networks:
-      - jenkins_network
-
-  allure-ui:
-    image: "frankescobar/allure-docker-service-ui"
-    environment:
-      ALLURE_DOCKER_PUBLIC_API_URL: "http://localhost:5050"
-      ALLURE_DOCKER_PUBLIC_API_URL_PREFIX: ""
-    ports:
-      - "5252:5252"
-    restart: always
-    networks:
-      - jenkins_network
-
   rbp-booking:
     image: mwinteringham/restfulbookerplatform_booking:1.6.a1fd0e5
     ports:

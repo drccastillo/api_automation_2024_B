@@ -16,7 +16,9 @@ pipeline {
         }
         stage('Run Pre-commit Hooks') {
             steps {
+                withPythonEnv('python3') {
                 sh 'pre-commit run --all-files'
+                }
             }
         }
         stage('Run Python Scripts') {

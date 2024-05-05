@@ -33,10 +33,10 @@ RUN python3 -m pip install --upgrade pip
 RUN python3 -m pip install --user virtualenv
 
 # create virtualenv for the framework
-RUN python3 -m venv venv
+RUN python3 -m venv .venv
 
 # activate virtual environment
-RUN . venv/bin/activate
+RUN . .venv/bin/activate
 
 # install requirements
 RUN python3 -m pip install -r requirements.txt

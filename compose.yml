@@ -12,7 +12,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - app     
+            - app
 
 networks:
     rbp-test:

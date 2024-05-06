@@ -1,6 +1,6 @@
 stages:
-  - unit_test
   - lint
+  - unit_test
   - integration_test
 
 image: python:3

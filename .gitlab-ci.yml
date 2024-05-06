@@ -39,7 +39,7 @@ unit_test:
   stage: unit_test
   script:
     - echo "Running unit tests... This will take about 60 seconds."
-    - pipenv run unittest discover unittests
+    - pipenv run python -m unittest discover unittests
 
 integration_test:
   stage: integration_test

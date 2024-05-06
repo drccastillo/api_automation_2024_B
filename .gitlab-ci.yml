@@ -14,6 +14,7 @@ cache:
     - .m2/repository
     - .gradle/
     - $JAVA_HOME/
+    - /
 
 before_script:
   - apt-get update

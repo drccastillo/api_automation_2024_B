@@ -50,4 +50,4 @@ integration_test:
   script:
     - echo "Running integration tests..."
     - pipenv run pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s
-    - echo "Integration tests executed successfully."
+    - echo "Integration tests executed successfully.."

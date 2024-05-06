@@ -23,6 +23,12 @@ before_script:
   - apt-get install default-jre default-jdk -y
   - java -version
 
+unit-test:   # This job runs in the test stage.
+  stage: test    # It only starts when the job in the build stage completes successfully.
+  script:
+    - echo "Running unit tests... This will take about 60 seconds."
+    - pipenv run unittest discover unittests
+
 linterns:   # This job also runs in the test stage.
   stage: test    # It can run at the same time as unit-test-job (in parallel).
   script:

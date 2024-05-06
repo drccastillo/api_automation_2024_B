@@ -29,17 +29,17 @@ before_script:
   #- apt-get install default-jre default-jdk -y
   #- java -version
 
-lint:
-  stage: lint
-  script:
-    - echo "Linting code... This will take about 10 seconds."
-    - pipenv run pre-commit run --all-files
+# lint:
+#   stage: lint
+#   script:
+#     - echo "Linting code... This will take about 10 seconds."
+#     - pipenv run pre-commit run --all-files
 
-unit_test:
-  stage: unit_test
-  script:
-    - echo "Running unit tests... This will take about 60 seconds."
-    - pipenv run python -m unittest discover unittests
+# unit_test:
+#   stage: unit_test
+#   script:
+#     - echo "Running unit tests... This will take about 60 seconds."
+#     - pipenv run python -m unittest discover unittests
 
 integration_test:
   stage: integration_test

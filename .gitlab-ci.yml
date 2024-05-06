@@ -1,43 +1,49 @@
-stages:          # List of stages for jobs, and their order of execution
-  - test
-  - test_pytest
+stages:
+  - unit_test
+  - lint
+  - integration_test
 
-# python version image
 image: python:3
+
+cache:
+  paths:
+    - .pipenv_cache/
+    - .venv/
+    - /usr/lib/jvm/
 
 before_script:
   - apt-get update
-  - echo "*** install requirements ***"
+  - echo "*** Installing Python requirements ***"
   - python3 --version
-  - echo "Upgrade pip"
+  - echo "Upgrading pip"
   - pip install --upgrade pip
   - pip install pipenv
-  - echo "Clean cache pipenv"
-  - pipenv run pipenv-resolver --clear
-  - echo "Install requirements"
+  - echo "Clearing pipenv cache"
+  - pipenv run pipenv-resolver --clear || true
+  - echo "Installing Python dependencies"
   - pipenv install -r requirements.txt
-  - echo "Set PYTHONPATH"
+  - echo "Setting PYTHONPATH"
   - export PYTHONPATH=$PWD
-  - echo "*** finish install requirements ***"
-  - echo "*** installing java ***"
+  - echo "*** Finish installing Python requirements ***"
+  - echo "*** Installing Java ***"
   - apt-get install default-jre default-jdk -y
   - java -version
 
-unit-test:   # This job runs in the test stage.
-  stage: test    # It only starts when the job in the build stage completes successfully.
+lint:
+  stage: lint
+  script:
+    - echo "Linting code... This will take about 10 seconds."
+    - pipenv run pre-commit run --all-files
+    
+unit_test:
+  stage: unit_test
   script:
     - echo "Running unit tests... This will take about 60 seconds."
     - pipenv run unittest discover unittests
 
-linterns:   # This job also runs in the test stage.
-  stage: test    # It can run at the same time as unit-test-job (in parallel).
+integration_test:
+  stage: integration_test
   script:
-    - echo "Linting code... This will take about 10 seconds."
-    - pipenv run pre-commit run --all-files
-
-test_pytest:      # This job runs in the deploy stage.
-   stage: test_pytest  # It only runs when *both* jobs in the test stage complete successfully.
-   script:
-     - echo "Run Automation test..."
-     - pipenv run pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s
-     - echo "Tests executed succesfully."
+    - echo "Running integration tests..."
+    - pipenv run pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s
+    - echo "Integration tests executed successfully."

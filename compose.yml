@@ -4,6 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: auto_framework
+    container_name: api_automation_2024_b-app-1
     volumes:
       - .:/opt/app
     environment:

@@ -10,10 +10,12 @@ from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
 
+
 class Base:
     """
     Class for Base which is used for handling requests.
     """
+
     def __init__(self, rest_client=None, url_base=''):
         """
         Setup class for Base
@@ -26,7 +28,13 @@ class Base:
             self.rest_client = rest_client
         self.url_base = url_base
 
-    def handle_request(self, http_method, url_path='', request_body=None, resource_id=None):
+    def handle_request(
+        self,
+        http_method,
+        url_path='',
+        request_body=None,
+        resource_id=None,
+    ):
         """
         Handle request endpoint
         :param http_method: HTTP method name

@@ -10,6 +10,7 @@ class GetRequestFactory(RequestFactory):
     """
     GetRequestFactory class for handling GET requests
     """
+
     def create_request(self, url):
         """
         Create the request

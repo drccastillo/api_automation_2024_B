@@ -34,7 +34,7 @@ lint:
   script:
     - echo "Linting code... This will take about 10 seconds."
     - pipenv run pre-commit run --all-files
-    
+
 unit_test:
   stage: unit_test
   script:

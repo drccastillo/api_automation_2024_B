@@ -25,9 +25,9 @@ before_script:
   - echo "Setting PYTHONPATH"
   - export PYTHONPATH=$PWD
   - echo "*** Finish installing Python requirements ***"
-  - echo "*** Installing Java ***"
-  - apt-get install default-jre default-jdk -y
-  - java -version
+  #- echo "*** Installing Java ***"
+  #- apt-get install default-jre default-jdk -y
+  #- java -version
 
 lint:
   stage: lint

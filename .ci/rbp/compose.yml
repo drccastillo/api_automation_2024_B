@@ -1,0 +1,85 @@
+services:
+  rbp-booking:
+    image: mwinteringham/restfulbookerplatform_booking:1.6.a1fd0e5
+    ports:
+      - "3000:3000"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-booking  
+  
+  rbp-room:
+    image: mwinteringham/restfulbookerplatform_room:1.6.a1fd0e5
+    ports:
+      - "3001:3001"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-room  
+
+  rbp-branding:
+    image: mwinteringham/restfulbookerplatform_branding:1.6.a1fd0e5
+    ports:
+      - "3002:3002"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-branding  
+
+  rbp-assets:
+    image: mwinteringham/restfulbookerplatform_assets:1.6.a1fd0e5
+    ports:
+      - "3003:3003"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-assets  
+
+  rbp-auth:
+    image: mwinteringham/restfulbookerplatform_auth:1.6.a1fd0e5
+    ports:
+      - "3004:3004"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-auth  
+
+  rbp-report:
+    image: mwinteringham/restfulbookerplatform_report:1.6.a1fd0e5
+    ports:
+      - "3005:3005"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-report   
+
+  rbp-message:
+    image: mwinteringham/restfulbookerplatform_message:1.6.a1fd0e5
+    ports:
+      - "3006:3006"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-message   
+
+  rbp-proxy:
+    image: mwinteringham/restfulbookerplatform_proxy:latest
+    ports:
+      - "8080:80"
+    restart: always
+    networks:
+        rbp-test:
+            aliases:
+            - rbp-proxy   
+
+networks:
+    rbp-test:
+        name: rbp-test
+        driver: bridge

@@ -1,0 +1,2 @@
+docker run -d --name gitlab-runner-06 --restart always -v /var/run/docker.sock:/var/run/docker.sock -v /.gitlab-runner/config:/etc/gitlab-runner --network=rpb-test gitlab/gitlab-runner:latest	
+docker run --rm -v /.gitlab-runner/config:/etc/gitlab-runner --network=rbp-test gitlab/gitlab-runner register --non-interactive --url "http://172.29.159.180:8929" --token "glrt-8YRrw_s6X1WTgLP--rtC" --executor "docker" --docker-image alpine:latest --description "docker-runner-07"

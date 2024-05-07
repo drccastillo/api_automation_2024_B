@@ -179,3 +179,8 @@ cython_debug/
 
 /.ci/.jenkins/.jenkins_data/*
 .ci/.jenkins/.jenkins_data/*
+
+/.ci/.gitlab/.gitlab/config/*
+/.ci/.gitlab/.gitlab/logs/*
+/.ci/.gitlab/.gitlab/data/*
+/.ci/.gitlab/.gitlab-runner/data/*

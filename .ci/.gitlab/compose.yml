@@ -3,10 +3,10 @@ services:
     image: gitlab/gitlab-ce:latest
     container_name: gitlab
     restart: always
-    hostname: '172.29.159.180'
+    hostname: '172.29.8.249'
     environment:
       GITLAB_OMNIBUS_CONFIG: |
-        external_url 'http://172.29.159.180:8929'
+        external_url 'http://172.29.8.249:8929'
         gitlab_rails['gitlab_shell_ssh_port'] = 2424
     ports:
       - '8929:8929'
@@ -33,7 +33,7 @@ services:
     # command: >
     #   "gitlab-runner register
     #   --non-interactive
-    #   --url 'http://172.29.159.180:8929'
+    #   --url 'http://172.29.8.249:8929'
     #   --token 'glrt-8YRrw_s6X1WTgLP--rtC'
     #   --executor 'docker'
     #   --docker-image 'alpine:latest'

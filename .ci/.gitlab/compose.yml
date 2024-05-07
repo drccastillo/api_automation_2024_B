@@ -1,0 +1,46 @@
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    hostname: '172.29.159.180'
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://172.29.159.180:8929'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+    ports:
+      - '8929:8929'
+      - '443:443'
+      - '2424:2424'
+    volumes:
+      - '${PWD}/.gitlab/config:/etc/gitlab'
+      - '${PWD}/.gitlab/logs:/var/log/gitlab'
+      - '${PWD}/.gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+    networks:
+        rbp-test:
+            aliases:
+            - gitlab  
+
+  gitlab-runner:
+    image: gitlab/gitlab-runner:latest
+    restart: always
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '${PWD}/.gitlab-runner/config:/etc/gitlab-runner'
+    environment:
+      - RUNNER_NAME=my-runner
+      - CI_SERVER_URL=http://172.29.159.180:8929
+      - RUNNER_EXECUTOR=docker
+      - DOCKER_IMAGE=docker:stable
+      - RUNNER_TOKEN=glrt-uuT4p2i8kpL3N7zZ5yuR
+      - DOCKER_TLS_CERTDIR=/certs
+    command: register --non-interactive --locked=false --name=my-runner --registration-token=glrt-uuT4p2i8kpL3N7zZ5yuR --url=http://172.29.159.180:8929 --executor=docker --docker-image=docker:stable
+    networks:
+        rbp-test:
+            aliases:
+            - gitlab-runner  
+
+networks:
+  rbp-test:
+    external: true

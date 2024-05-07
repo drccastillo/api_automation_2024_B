@@ -22,20 +22,22 @@ services:
             aliases:
             - gitlab  
 
-  gitlab-runner:
+  gitlab-runner-01:
     image: gitlab/gitlab-runner:latest
+    container_name: gitlab-runner-01
     restart: always
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - '${PWD}/.gitlab-runner/config:/etc/gitlab-runner'
-    environment:
-      - RUNNER_NAME=my-runner
-      - CI_SERVER_URL=http://172.29.159.180:8929
-      - RUNNER_EXECUTOR=docker
-      - DOCKER_IMAGE=docker:stable
-      - RUNNER_TOKEN=glrt-uuT4p2i8kpL3N7zZ5yuR
-      - DOCKER_TLS_CERTDIR=/certs
-    command: register --non-interactive --locked=false --name=my-runner --registration-token=glrt-uuT4p2i8kpL3N7zZ5yuR --url=http://172.29.159.180:8929 --executor=docker --docker-image=docker:stable
+    entrypoint: /bin/sh -c
+    # command: >
+    #   "gitlab-runner register
+    #   --non-interactive
+    #   --url 'http://172.29.159.180:8929'
+    #   --token 'glrt-8YRrw_s6X1WTgLP--rtC'
+    #   --executor 'docker'
+    #   --docker-image 'alpine:latest'
+    #   --description 'gitlab-runner-01'"    
     networks:
         rbp-test:
             aliases:

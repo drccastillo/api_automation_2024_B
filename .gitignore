@@ -175,3 +175,7 @@ cython_debug/
 .jenkins_data/*
 
 !.gitkeep
+
+
+/.ci/.jenkins/.jenkins_data/*
+.ci/.jenkins/.jenkins_data/*

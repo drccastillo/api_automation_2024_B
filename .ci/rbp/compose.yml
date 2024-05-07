@@ -7,8 +7,8 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-booking  
-  
+            - rbp-booking
+
   rbp-room:
     image: mwinteringham/restfulbookerplatform_room:1.6.a1fd0e5
     ports:
@@ -17,7 +17,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-room  
+            - rbp-room
 
   rbp-branding:
     image: mwinteringham/restfulbookerplatform_branding:1.6.a1fd0e5
@@ -27,7 +27,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-branding  
+            - rbp-branding
 
   rbp-assets:
     image: mwinteringham/restfulbookerplatform_assets:1.6.a1fd0e5
@@ -37,7 +37,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-assets  
+            - rbp-assets
 
   rbp-auth:
     image: mwinteringham/restfulbookerplatform_auth:1.6.a1fd0e5
@@ -47,7 +47,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-auth  
+            - rbp-auth
 
   rbp-report:
     image: mwinteringham/restfulbookerplatform_report:1.6.a1fd0e5
@@ -57,7 +57,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-report   
+            - rbp-report
 
   rbp-message:
     image: mwinteringham/restfulbookerplatform_message:1.6.a1fd0e5
@@ -67,7 +67,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-message   
+            - rbp-message
 
   rbp-proxy:
     image: mwinteringham/restfulbookerplatform_proxy:latest
@@ -77,7 +77,7 @@ services:
     networks:
         rbp-test:
             aliases:
-            - rbp-proxy   
+            - rbp-proxy
 
 networks:
     rbp-test:

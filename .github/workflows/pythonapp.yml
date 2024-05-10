@@ -7,11 +7,11 @@ jobs:
 
     runs-on: ubuntu-latest
     env:
+      COMPOSE_CONVERT_WINDOWS_PATHS: ${{secrets.COMPOSE_CONVERT_WINDOWS_PATHS}}
       RESTFUL_BOOKER_BASE_URL: ${{secrets.RESTFUL_BOOKER_BASE_URL}}
       RESTFUL_BOOKER_USERNAME: ${{secrets.RESTFUL_BOOKER_USERNAME}}
       RESTFUL_BOOKER_PASSWORD: ${{secrets.RESTFUL_BOOKER_PASSWORD}}
       RESTFUL_BOOKER_TOKEN: ${{secrets.RESTFUL_BOOKER_TOKEN}}
-      
 
     services:
       docker:

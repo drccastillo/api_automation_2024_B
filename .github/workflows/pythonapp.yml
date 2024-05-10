@@ -39,4 +39,5 @@ jobs:
         python3 -m unittest discover unittests
     - name: Integration Test
       run: |
+        python3 -m pytest booker_api/auths/test_auths.py
         python3 -m pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s

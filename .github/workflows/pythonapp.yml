@@ -6,6 +6,12 @@ jobs:
   build-and-deploy:
 
     runs-on: ubuntu-latest
+    env:
+      RESTFUL_BOOKER_BASE_URL: ${{secrets.RESTFUL_BOOKER_BASE_URL}}
+      RESTFUL_BOOKER_USERNAME: ${{secrets.RESTFUL_BOOKER_USERNAME}}
+      RESTFUL_BOOKER_PASSWORD: ${{secrets.RESTFUL_BOOKER_PASSWORD}}
+      RESTFUL_BOOKER_TOKEN: ${{secrets.RESTFUL_BOOKER_TOKEN}}
+      
 
     services:
       docker:

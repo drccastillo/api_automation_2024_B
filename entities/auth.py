@@ -16,6 +16,7 @@ from utils.logger import get_logger
 LOGGER = get_logger(__name__, logging.DEBUG)
 TOKEN = None
 
+
 class Auth:
     """
     This class provides methods for handling authentication.

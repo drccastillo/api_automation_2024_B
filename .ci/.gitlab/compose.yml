@@ -37,11 +37,11 @@ services:
     #   --token 'glrt-8YRrw_s6X1WTgLP--rtC'
     #   --executor 'docker'
     #   --docker-image 'alpine:latest'
-    #   --description 'gitlab-runner-01'"    
+    #   --description 'gitlab-runner-01'"
     networks:
         rbp-test:
             aliases:
-            - gitlab-runner  
+            - gitlab-runner
 
 networks:
   rbp-test:

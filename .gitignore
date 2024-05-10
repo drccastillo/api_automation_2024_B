@@ -186,4 +186,3 @@ cython_debug/
 .ci/selenium/tmp/*
 /.ci/.gitlab/.gitlab/*
 /.ci/.gitlab/.gitlab-runner/*
-

@@ -5,13 +5,16 @@ from __future__ import annotations
 
 import logging
 
+from dotenv import dotenv_values
+
+from config.config import abs_path
 from config.config import BASE_URL
 from config.config import CREDENTIALS
 from helpers.rest_client import RestClient
 from utils.logger import get_logger
 
 LOGGER = get_logger(__name__, logging.DEBUG)
-
+TOKEN = None
 
 class Auth:
     """
@@ -46,6 +49,11 @@ class Auth:
             url=url_auth_login,
             body=CREDENTIALS,
         )
+        env_vars = dotenv_values(f'{abs_path}/.env')
+        env_vars['RESTFUL_BOOKER_TOKEN'] = response['cookies']['token']
+        with open(f'{abs_path}/.env', 'w', encoding='utf-8') as f:
+            for key, value in env_vars.items():
+                f.write(f'{key}={value}\n')
         return response
 
     def validate_token(self, token):

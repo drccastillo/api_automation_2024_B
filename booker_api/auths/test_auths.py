@@ -34,23 +34,6 @@ class TestAuths:
         cls.validate = ValidateResponse()
         cls.list_tokens = []
 
-    @allure.title('Create a token')
-    @allure.tag('Auth', 'Create')
-    @pytest.mark.acceptance
-    def test_create_token(self, _log_test_names):
-        """
-        Test create token
-        """
-        LOGGER.info('Test create token')
-        response = self.auth.create_token()
-        self.validate.validate_response(
-            actual_response=response,
-            endpoint='auth',
-            file_name='create_token',
-        )
-        self.list_tokens.append(response['cookies']['token'])
-        LOGGER.debug('Cookie token: %s', response['cookies']['token'])
-
     @allure.title('Validate a token')
     @allure.tag('Auth', 'Validate')
     @pytest.mark.acceptance
@@ -97,6 +80,23 @@ class TestAuths:
             endpoint='auth',
             file_name='get_health_check',
         )
+
+    @allure.title('Create a token')
+    @allure.tag('Auth', 'Create')
+    @pytest.mark.acceptance
+    def test_create_token(self, _log_test_names):
+        """
+        Test create token
+        """
+        LOGGER.info('Test create token')
+        response = self.auth.create_token()
+        self.validate.validate_response(
+            actual_response=response,
+            endpoint='auth',
+            file_name='create_token',
+        )
+        # self.list_tokens.append(response['cookies']['token'])
+        LOGGER.debug('Cookie token: %s', response['cookies']['token'])
 
     @classmethod
     def teardown_class(cls):

@@ -3,25 +3,40 @@ name: Python application test with Github Actions
 on: [push]
 
 jobs:
-  build:
+  build-and-deploy:
 
     runs-on: ubuntu-latest
 
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+
     steps:
     - uses: actions/checkout@v4
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
     - name: Set up Python 3.9
       uses: actions/setup-python@v5
       with:
         python-version: '3.9'
+        cache: 'pip'
     - name: Install dependencies
       run: |
-        make install
+        apt-get update && \
+        apt-get install -y python3 -m pip install --upgrade pip
+        if [ -f requirements.txt]; then pip install -r requirements.txt; fi
+    - name: Deploy application
+      run: |
+        git clone https://github.com/mwinteringham/restful-booker-platform
+        cd restful-booker-platform
+        docker compose up -d
     - name: Lint with pylint
       run: |
-        make lint
-    - name: Test with pytest
+        pre-commit run --all-files
+    - name: Unit test
       run: |
-        make test-all
-    - name: Format code
+        python3 -m unittest discover unittests
+    - name: Integration Test
       run: |
-        make format
+        python3 -m pytest booker_api/rooms/test_rooms.py booker_api/bookings/test_bookings.py booker_api/brandings/test_brandings.py booker_api/messages/test_messages.py booker_api/reports/test_reports.py -v -s

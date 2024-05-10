@@ -1,0 +1,79 @@
+services:
+  chrome:
+    image: selenium/node-chrome:latest
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "7900:7900"
+
+  edge:
+    image: selenium/node-edge:latest
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "7901:7900"
+
+  firefox:
+    image: selenium/node-firefox:latest
+    shm_size: 2gb
+    depends_on:
+      - selenium-hub
+    environment:
+      - SE_EVENT_BUS_HOST=selenium-hub
+      - SE_EVENT_BUS_PUBLISH_PORT=4442
+      - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
+    ports:
+      - "7902:7900"
+
+  chrome_video:
+    image: selenium/video:ffmpeg-6.1.1-20240505
+    volumes:
+      - ${PWD}/tmp/videos:/videos
+    depends_on:
+      - chrome
+    environment:
+      - DISPLAY_CONTAINER_NAME=chrome
+      - SE_NODE_GRID_URL=http://localhost:7900
+      - FILE_NAME=chrome_video.mp4
+      - SE_VIDEO_FILE_NAME=auto
+
+  edge_video:
+    image: selenium/video:ffmpeg-6.1.1-20240505
+    volumes:
+      - ${PWD}/tmp/videos:/videos
+    depends_on:
+      - edge
+    environment:
+      - DISPLAY_CONTAINER_NAME=edge
+      - SE_NODE_GRID_URL=http://selenium-hub:4444
+#      - FILE_NAME=edge_video.mp4
+      - SE_VIDEO_FILE_NAME=auto
+
+  firefox_video:
+    image: selenium/video:ffmpeg-6.1.1-20240505
+    volumes:
+      - ${PWD}/tmp/videos:/videos
+    depends_on:
+      - firefox
+    environment:
+      - DISPLAY_CONTAINER_NAME=firefox
+      - SE_NODE_GRID_URL=http://selenium-hub:4444
+#      - FILE_NAME=firefox_video.mp4
+      - SE_VIDEO_FILE_NAME=auto
+
+  selenium-hub:
+    image: selenium/hub:latest
+    ports:
+      - "4442:4442"
+      - "4443:4443"
+      - "4444:4444"

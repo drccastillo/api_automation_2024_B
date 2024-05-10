@@ -174,13 +174,16 @@ cython_debug/
 /.jenkins_data/*
 .jenkins_data/*
 
+
 !.gitkeep
 
 
 /.ci/.jenkins/.jenkins_data/*
 .ci/.jenkins/.jenkins_data/*
 
-/.ci/.gitlab/.gitlab/config/*
-/.ci/.gitlab/.gitlab/logs/*
-/.ci/.gitlab/.gitlab/data/*
-/.ci/.gitlab/.gitlab-runner/data/*
+
+/.ci/selenium/tmp/*
+.ci/selenium/tmp/*
+/.ci/.gitlab/.gitlab/*
+/.ci/.gitlab/.gitlab-runner/*
+

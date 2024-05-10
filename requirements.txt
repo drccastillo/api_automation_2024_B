@@ -18,8 +18,11 @@ pytest-html==4.1.1
 pytest-md-report==0.5.1
 pytest-retry==1.6.2
 pytest-runner==6.0.1
+pytest-selenium==4.1.0
 python-dotenv==1.0.1
 pyyaml==6.0.1
 requests==2.31.0
+selenium==4.19.0
 wcwidth==0.1.8
+webdriver-manager==4.0.1
 zipp==3.0.0

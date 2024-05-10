@@ -33,15 +33,15 @@ services:
     # command: >
     #   "gitlab-runner register
     #   --non-interactive
-    #   --url 'http://172.29.8.249:8929'
+    #   --url 'http://172.29.159.180:8929'
     #   --token 'glrt-8YRrw_s6X1WTgLP--rtC'
     #   --executor 'docker'
     #   --docker-image 'alpine:latest'
-    #   --description 'gitlab-runner-01'"
+    #   --description 'gitlab-runner-01'"    
     networks:
         rbp-test:
             aliases:
-            - gitlab-runner
+            - gitlab-runner  
 
 networks:
   rbp-test:

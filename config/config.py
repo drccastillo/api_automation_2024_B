@@ -37,3 +37,16 @@ DEFAULT_HEADERS = {
 # Add authorization if a token is provided
 if TOKEN:
     DEFAULT_HEADERS['Cookie'] = f'token={TOKEN}'
+
+
+CONFIGURATION = {
+    'browser': {
+        'name': 'chrome',
+        'headless': False,
+        'resolution': {
+            'width': 800,
+            'height': 600,
+        },
+    },
+}
+GRID_URL = os.getenv('RESTFUL_BOOKER_GRID_URL')

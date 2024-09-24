@@ -1,5 +1,5 @@
 # Python base image
-FROM python:3
+FROM python:3.13.0rc1-slim
 
 # Maintainer label
 LABEL maintainer="darwin.castillo@jalasoft.com"

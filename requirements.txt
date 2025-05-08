@@ -26,3 +26,4 @@ selenium==4.19.0
 wcwidth==0.1.8
 webdriver-manager==4.0.1
 zipp==3.0.0
+setuptools>=78.1.1 # not directly required, pinned by Snyk to avoid a vulnerability

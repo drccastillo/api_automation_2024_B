@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:latest
 
 # label del maintainer
-LABEL maintainer="darwin.castillo@jalasoft.com"
+LABEL maintainer="darwin.castillo.rc@gmail.com"
 
 # copy the code to /opt/app folder
 COPY . /opt/app

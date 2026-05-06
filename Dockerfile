@@ -2,7 +2,7 @@
 FROM python:3.13.0rc1-slim
 
 # Maintainer label
-LABEL maintainer="darwin.castillo@jalasoft.com"
+LABEL maintainer="darwin.castillo.rc@gmail.com"
 
 # Copy code to /opt/app folder
 COPY . /opt/app

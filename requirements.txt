@@ -21,8 +21,11 @@ pytest-runner==6.0.1
 pytest-selenium==4.1.0
 python-dotenv==1.0.1
 pyyaml==6.0.1
-requests==2.31.0
+requests==2.32.2
 selenium==4.19.0
 wcwidth==0.1.8
 webdriver-manager==4.0.1
-zipp==3.0.0
+zipp==3.19.1
+numpy>=1.22.2 # not directly required, pinned by Snyk to avoid a vulnerability
+setuptools>=70.0.0 # not directly required, pinned by Snyk to avoid a vulnerability
+urllib3>=2.2.2 # not directly required, pinned by Snyk to avoid a vulnerability

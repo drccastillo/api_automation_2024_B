@@ -1,5 +1,5 @@
 # Python base image
-FROM python:3.13.0rc1-slim
+FROM python:3.14.0rc2-slim
 
 # Maintainer label
 LABEL maintainer="darwin.castillo.rc@gmail.com"
